@@ -72,7 +72,7 @@ IMGS = {'introBG'     : _imgPath + 'blue_big.png',
 
 #To add a new video:
 #  WARNING: For me, adding video in Ubuntu 10 crashed the app and the OS, so I warn against adding video if you're running the game in Linux.
-#  WARNING #2: Pygame documentation says video does not work in Windows, though I had issue.
+#  WARNING #2: Pygame documentation says video does not work in Windows, though I had no issues.
 #
 #  1) Please note that Pygame can unfortunately only handle "basic encoded MPEG1 video files" (from the documentation).
 #  2) Place video in /res/video/
