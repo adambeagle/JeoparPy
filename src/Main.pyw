@@ -19,7 +19,7 @@ from Credits import DoCredits
 from Congrats import DoCongrats
 from ShowVideo import PlayVideo
 from Utility import BlitToScreen
-from Config import SCREEN_SIZE, JEOP_BLUE, SOUNDS
+from Config import SCREEN_SIZE, JEOP_BLUE, SOUNDS, FULLSCREEN, FPS_LIMIT
 
 ########################################################################
 def BlitSfcToScreen(screen, background, sfc, pos=(0, 0)):
@@ -61,7 +61,7 @@ def Main():
     #Initialization
     pygame.init()
     
-    screen = pygame.display.set_mode(SCREEN_SIZE, pygame.FULLSCREEN)
+    screen = pygame.display.set_mode(SCREEN_SIZE, pygame.FULLSCREEN if FULLSCREEN else 0)
     pygame.display.set_caption('JeoparPy!')
     background = pygame.Surface(SCREEN_SIZE)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
@@ -102,8 +102,8 @@ def Main():
                 return
                 
             if event.type == KEYDOWN and event.key == K_q:
-            	if pygame.key.get_mods() & KMOD_SHIFT:
-            		return
+                if pygame.key.get_mods() & KMOD_SHIFT:
+                    return
                 
             if event.type == KEYDOWN and event.key == K_q:
             	gameDone = True
@@ -139,8 +139,10 @@ def Main():
         #Clean up before loop restart
         gameScn.ClearBuzzedIn()
         pygame.event.pump()
-        clock.tick_busy_loop(50)
-    
+        clock.tick_busy_loop(100)
+
+
+    #Post game
     pygame.mouse.set_visible(0)
     music = pygame.mixer.Sound(SOUNDS['end'])
     applause = pygame.mixer.Sound(SOUNDS['applause'])
@@ -161,6 +163,8 @@ def Main():
     music.play()
     DoCredits(screen, background)
     music.stop()
+
+    return
     
 
     

@@ -11,18 +11,18 @@ import pygame
 from pygame.locals import *
 from ShadowText import ShadowText
 from Utility import CreateText, CenterSurface, BlitToScreen
-from Config import JEOP_BLUE, CATEGORIES, FONTS, SCREEN_H
+from Config import JEOP_BLUE, CATEGORIES, FONTS, SCREEN_H, FPS_LIMIT
 
 ########################################################################
 def DoScroll(screen, background):
     """Draws scroll animation through all CATEGORIES to screen"""
     w = background.get_width()
-    step = int(SCREEN_H * (-10 / 768.0))
+    step = int(SCREEN_H * (-12 / 768.0))
     holdTime = 2500
     bgSize = background.get_size()
     borderWidth = int(SCREEN_H * (30 / 768.0))
     lastBox = None
-    #clock = pygame.time.Clock()
+    clock = pygame.time.Clock()
 
     stop = len(CATEGORIES) - 1
     
@@ -53,7 +53,7 @@ def DoScroll(screen, background):
 		x2 += step
 
 		BlitToScreen(screen, background)
-		#clock.tick_busy_loop(100)
+		clock.tick(FPS_LIMIT)
 
 
     #draw last box and wait

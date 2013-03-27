@@ -59,7 +59,8 @@ Presley 'Chadwick' Madill
 	centerX = background.get_rect().centerx
 	names = names.splitlines()
 	positions = positions.splitlines()
-	move = 3
+	move = 2
+	fpsLimit = 63
 	
 	s = "CREDITS"
 	topLine = CreditLine(s, 40)
@@ -88,7 +89,7 @@ Presley 'Chadwick' Madill
 				background.blit(posLines[i].Surface, posLines[i].SfcRect)
 			
 		BlitToScreen(screen, background)
-		clock.tick_busy_loop(45)
+		clock.tick(fpsLimit)
 		
 		
 	#init final lines
@@ -117,7 +118,7 @@ Brought to you by
 		background.blit(img, imgRect)
 	
 		BlitToScreen(screen, background)
-		clock.tick_busy_loop(45)
+		clock.tick(fpsLimit)
 		
 	text, textPos, font = CreateText('Thanks for playing!', 'credits', 40)
 	textPos = CenterSurface(text, background)

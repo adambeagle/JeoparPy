@@ -47,8 +47,8 @@ SUBTITLE = 'Sample Edition'
 CATEGORIES = ["SAMPLE CATEGORY",
               "EXAMPLE CATEGORY",
               "MODEL CATEGORY",
-              "CATEGORY SAMPLE",
-              "CATEGORY EXAMPLE"
+              "TEST CATEGORY",
+              "...CATEGORY"
               ]
 
 #These are the amounts that each row of questions are worth (in order)
@@ -145,6 +145,8 @@ elif sys.platform.startswith('win32'):
 CLUES_PATH = os.path.join(_rootPath, 'res', 'misc', _fName)
 
 JEOP_BLUE = (16, 26, 124)
+
+FPS_LIMIT = 100
 
 SOUNDS = {'intro'     : _sndPath + 'intro.ogg',
           'fill'      : _sndPath + 'fill.ogg',

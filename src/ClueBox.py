@@ -37,7 +37,7 @@ class ClueBox:
         
         self._bg = pygame.Surface(size).convert()
         
-        frameGoal = 30
+        frameGoal = 50
         self._posSteps = self._GetPosSteps(frameGoal)
         self._scaleSteps = self._GetScaleSteps(frameGoal)
         
