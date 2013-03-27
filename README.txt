@@ -17,8 +17,27 @@ Warning:
 **********************
 * ~~ GENERAL INFO ~~ *
 **********************
-JeoparPy is a game similar, but legally distinguishable,
-from a certain TV game show.
+
+~~~ WHAT JEOPARPY IS ~~~
+
+JeoparPy allows users to customize and host a game 
+that includes all the sights, sounds, and excitement
+of a TV quiz show! (...that is legally distinguishable 
+from any such show).
+
+It is ideal for use in a classroom setting,
+and has even been known to make a great wedding shower game.
+
+~~ WHAT JEOPARPY IS NOT ~~
+
+JeoparPy does NOT include any pre-made sets of categories and clues,
+except for placeholders to aid in formatting your own.
+It is instead only designed to be used to host a custom game that the user creates.
+The user can, however, create and play as many games of Jeoparpy,
+with as many different sets of categories, clues, and answers, as he or she would like!
+
+
+~~~~~~ DESCRIPTION ~~~~~~
 
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
@@ -26,16 +45,14 @@ Generally, the questions posed to the teams are phrased
 as 'answers,' to which the team must provide the correct
 'question,' using terminology such as "What is ___?" or "Who is ___?" 
 
-Users can customize category names and clues.
-A video can be used to comprise an entire 
-clue (Windows only), or an image can be
-used to accompany a clue.
+Users can customize category names, clues, and dollar amounts.
+A video can be used to comprise an entire clue (Windows only), 
+or an image can be used to accompany a clue.
 
-By mapping controllers to the buzz-in keys, 
-teams can buzz in themselves. For example, 
-the author used Bluetooth to sync Wiimotes 
-to the PC. Doing this is up to the user, as 
-instructions to do so are beyond the scope of this document.
+By mapping controllers to the buzz-in keys, teams can buzz-in themselves.
+ For example, the author used Bluetooth to sync Wiimotes 
+to the PC. Doing this is up to the user, as instructions to 
+do so are beyond the scope of this document.
 
 
 
