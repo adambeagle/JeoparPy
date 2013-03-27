@@ -32,7 +32,7 @@ Executive in
 Executive in Charge of
 ~Chocolate Dipped Peanuts
 Video/Photo Test Model
-Assistant to Ms. Trebek
+Assistant to Ms. Madill
 Assistant to Mr. Madill
 """
 
