@@ -19,8 +19,7 @@ from Config import JEOP_BLUE, IMGS
 
 def DoCredits(screen, background):
         #declarations
-	positions = """Alex Trebek
-Programmer/Designer
+	positions = """Programmer/Designer
 Research
 Research Assistant
 Writer
@@ -37,8 +36,7 @@ Assistant to Ms. Trebek
 Assistant to Mr. Madill
 """
 
-	names = """Claire Madill
-Adam Beagle
+	names = """Adam Beagle
 Claire Madill
 Starla 'Kitty Kitty' Warla
 Adam Beagle

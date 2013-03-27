@@ -19,7 +19,7 @@ from Credits import DoCredits
 from Congrats import DoCongrats
 from ShowVideo import PlayVideo
 from Utility import BlitToScreen
-from Constants import SCREEN_SIZE, JEOP_BLUE, SOUNDS
+from Config import SCREEN_SIZE, JEOP_BLUE, SOUNDS
 
 ########################################################################
 def BlitSfcToScreen(screen, background, sfc, pos=(0, 0)):
