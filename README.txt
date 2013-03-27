@@ -188,6 +188,8 @@ However, should development resume, I would like to implement the following, in 
 
   * Better support for in-game videos (may not be possible due to limitations of Pygame).
 
+  * Easily customizable team/player names
+
 
 
 **********************
