@@ -113,6 +113,8 @@ If no one answers correctly and time runs out, press 'End' to close a clue and r
     -Please note there is no timer implemented in the game at this point. A clue will not close until one of the preceding keys is pressed.
     -'End' can also be pressed while a team is buzzed in. This will close a clue completely and award no points. There shouldn't be a reason to do this in normal gameplay, but it's mentioned here for completeness and as a warning.
 
+If all teams answer incorrectly, the clue will close automatically.
+
 Any clue previously opened can be reopened. 
 So, if a clue is clicked by mistake, press 'End.' Its dollar amount will be cleared off the board, but it can be reopened and a team can win its amount as normal. This method can be used to correct mistakes in scoring, though money can not be subtracted from a team's total at this point.
 
@@ -190,19 +192,23 @@ However, should development resume, I would like to implement the following, in 
 
   * Easily customizable team/player names
 
+  * General refactoring and optimization of code.
+    (This was my first Pygame project, and it was made with a short deadline; There are no doubt some less than ideal coding practices at times)
+
 
 
 **********************
 * ~~~~~~ LEGAL ~~~~~ *
 **********************
 
-All code in the contained folders 
+All code contained in this package
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 
 You may use, distribute, and modify this code under the 
 terms of the GNU General Public License, 
-readable at http://opensource.org/licenses/GPL-3.0
+viewable at http://opensource.org/licenses/GPL-3.0
 
-No copyright infringement is intended with the use any sound files, 
-images, or fonts used in this program.
-Any infringing file will gladly be removed upon request.
+No copyright infringement is intended with the use of any file contained within this package.
+The use of any copyrighted works in this program was done under the Fair Use doctrine, however any infringing file will gladly be removed and replaced upon request.
+This program is non-commercial and was created for educational purposes.
+
