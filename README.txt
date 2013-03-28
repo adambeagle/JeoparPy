@@ -3,16 +3,6 @@
                Written by Adam Beagle 
 #######################################################
 
--------------------------------------------------------
-Warning: 
-  This program is provided as-is. It was 
-  created for personal use, and thus has not 
-  been extensively tested, nor was a large 
-  focus placed on ease of setup, use, or customization.
-  I have provided instructions to the best of
-  my ability to explain its use.
--------------------------------------------------------
-
 
 **********************
 * ~~ GENERAL INFO ~~ *
@@ -53,6 +43,17 @@ By mapping controllers to the buzz-in keys, teams can buzz-in themselves.
  For example, the author used Bluetooth to sync Wiimotes 
 to the PC. Doing this is up to the user, as instructions to 
 do so are beyond the scope of this document.
+
+
+-------------------------------------------------------
+Warning: 
+  This program is provided as-is. It was 
+  created for personal use, and thus has not 
+  been extensively tested, nor was a large 
+  focus placed on ease of setup, use, or customization.
+  I have provided instructions to the best of
+  my ability to explain its use.
+-------------------------------------------------------
 
 
 
