@@ -44,8 +44,7 @@ class ClueBox:
         self._centerx = self._pos[0] + (self._w / 2)
         self._centery = self._pos[1] + (self._h / 2)
         
-        path = pygame.font.match_font(FONTS['clue'])
-        self._font = pygame.font.Font(path, size[1] / 15)
+        self._font = pygame.font.Font(FONTS['clue'], size[1] / 15)
 
         self._bg.fill(JEOP_BLUE)
 

@@ -31,6 +31,7 @@ while not _rootPath[-1] == os.sep:
 _sndPath = os.path.join(_rootPath, 'res', 'sounds', '')
 _imgPath = os.path.join(_rootPath, 'res', 'images', '')
 _vidPath = os.path.join(_rootPath, 'res', 'video', '')
+_fontPath = os.path.join(_rootPath, 'res', 'fonts', '')
 ################################################################################
 
 #*******************************************************************************
@@ -38,6 +39,7 @@ _vidPath = os.path.join(_rootPath, 'res', 'video', '')
 
 #Subtitle goes here, between the quotes.
 #  This will appear during the intro sequence, underneath the Jeoparpy! name.
+#  For no subtitle, use SUBTITLE = ''
 SUBTITLE = 'Sample Edition'
 
 #Put category names here
@@ -48,7 +50,7 @@ CATEGORIES = ["SAMPLE CATEGORY",
               "EXAMPLE CATEGORY",
               "MODEL CATEGORY",
               "TEST CATEGORY",
-              "...CATEGORY"
+              "CATEGORY"
               ]
 
 #These are the amounts that each row of questions are worth (in order)
@@ -157,27 +159,15 @@ SOUNDS = {'intro'     : _sndPath + 'intro.ogg',
           'applause'  : _sndPath + 'applause.wav'
           }
 
-#init non-OS-dependent fonts
-FONTS = {'title'    : 'gyparody',
-         'category' : 'impact',
-         'amount'   : 'impact',
-         'team3'    : 'mistral',
-         'congrats' : 'gyparody'
+FONTS = {'title'    : _fontPath + 'gyparody.ttf',
+         'category' : _fontPath + 'impact.ttf',
+         'amount'   : _fontPath + 'impact.ttf',
+         'congrats' : _fontPath + 'gyparody.ttf',
+         'team1'    : _fontPath + 'team1.ttf',
+         'team2'    : _fontPath + 'team2.ttf',
+         'team3'    : _fontPath + 'team3.ttf',
+         'score'    : _fontPath + 'korinna-extrabold.ttf',
+         'clue'     : _fontPath + 'korinab.ttf',
+         'subtitle' : _fontPath + 'impact.ttf',
+         'credits'  : _fontPath + 'korinab.ttf'
          }
-
-#init OS-dependent fonts
-#  if adding fonts, check name from pygame.font.get_fonts()
-if sys.platform.startswith('win32'):
-    FONTS['team1']    = 'freestyle script'
-    FONTS['team2']    = 'bradley hand itc'
-    FONTS['score']    = 'korinna-extrabold'
-    FONTS['clue']     = 'korinna'
-    FONTS['subtitle'] = 'lucida sans unicode'
-elif sys.platform.startswith('linux'):
-    FONTS['team1']     = 'freestylescript'
-    FONTS['team2']     = 'bradleyhanditc'
-    FONTS['score']     = 'korinnaextrabold'
-    FONTS['clue']      = 'korinna'
-    FONTS['subititle'] = 'lucidasansunicode'
-    FONTS['credits']   = 'korinna'
-    

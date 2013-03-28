@@ -69,13 +69,9 @@ Please note that the game has only been tested with:
   Python 2.7.3 32-bit
   Pygame 1.9.2 32-bit
 
-...On the following platforms:
+JeoparPy has been tested on the following platforms:
   Windows 7 64-bit
   Ubuntu 10.10
-
-The fonts used in the game are all provided in /res/fonts.
-To install in Windows, double click each file in that folder, and click 'Install' on the window that appears.
-Most Windows installations should already have some of these fonts installed.
 
 
 

@@ -32,8 +32,7 @@ def CreateText(textStr, fontName, size, color=(255, 255, 255), bgColor=None, bol
     	size = int(SCREEN_H * (size / 768.0))
     
     if fontName in FONTS:
-        path = pygame.font.match_font(FONTS[fontName])
-        font = pygame.font.Font(path, size)
+        font = pygame.font.Font(FONTS[fontName], size)
     else:
         path = pygame.font.match_font(fontName)
         font = pygame.font.Font(path, size)
