@@ -1,0 +1,34 @@
+THE FOLLOWING ARE INSTRUCTIONS TO WRITE YOUR OWN CLUES, CATEGORIES, AND SUBTITLE:
+
+CLUES:
+  * Clues must be written in 'clues.txt,' located in the folder containing these instructions.
+
+  * Clues must be separated in these files by one or more blank lines.
+      -This means there cannot be any blank lines within a single clue.
+      -For easiest viewing, separate clues in the same category by one line, and categories by several.
+  
+  * There are sample clues already in 'clues.txt' to guide you. 
+    To create your own clues, replace the sample data with your own text, taking note of the following:
+      
+      -Clues are written starting from the top left clue box, then by column.
+         ~Example: On a 5x5 board, the first 5 clues will be the clues for the leftmost category, starting at the top. The next 5 will be for the column to the right, starting at the top.
+      
+      -The line breaks in the text file dictate where the line breaks will be when the clue is printed.
+         ~So, a long clue written on a single line will not display properly.
+         ~There is a long example clue in the file that serves as a guide for how to format multi-line clues
+
+CATEGORIES:
+  * Categories must be written in 'categories.txt,' located in the folder containing these instructions.
+
+  * Each non-empty line in 'categories.txt' is treated as a category. Replace the sample categories with your own.
+
+  * The capitalization used in 'categories.txt' will be used in the game (all caps is recommended).
+
+  * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
+
+SUBTITLE:
+  * Subtitle must be written in 'subtitle.txt,' located in the folder containing these instructions.
+
+  * The first line in 'subtitle.txt' containing any non-whitespace text is treated as the subtitle.
+
+  * If no subtitle is desired, make 'subtitle.txt' empty (do not delete it, however).

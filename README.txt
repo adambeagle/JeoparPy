@@ -1,14 +1,12 @@
-#######################################################
-    	              JEOPARPY!
-               Written by Adam Beagle 
-#######################################################
+JEOPARPY!
+=========
+#### Written by Adam Beagle ####
 
 
-**********************
-* ~~ GENERAL INFO ~~ *
-**********************
 
-~~~ WHAT JEOPARPY IS ~~~
+## GENERAL INFO ##
+
+### WHAT JEOPARPY IS ###
 
 JeoparPy allows users to customize and host a game 
 that includes all the sights, sounds, and excitement
@@ -18,7 +16,7 @@ from any such show).
 It is ideal for use in a classroom setting,
 and has even been known to make a great wedding shower game.
 
-~~ WHAT JEOPARPY IS NOT ~~
+### WHAT JEOPARPY IS NOT ###
 
 JeoparPy does NOT include any pre-made sets of categories and clues,
 except for placeholders to aid in formatting your own.
@@ -27,7 +25,7 @@ The user can, however, create and play as many games of Jeoparpy,
 with as many different sets of categories, clues, and answers, as he or she would like!
 
 
-~~~~~~ DESCRIPTION ~~~~~~
+### DESCRIPTION ###
 
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
@@ -45,21 +43,8 @@ to the PC. Doing this is up to the user, as instructions to
 do so are beyond the scope of this document.
 
 
--------------------------------------------------------
-Warning: 
-  This program is provided as-is. It was 
-  created for personal use, and thus has not 
-  been extensively tested, nor was a large 
-  focus placed on ease of setup, use, or customization.
-  I have provided instructions to the best of
-  my ability to explain its use.
--------------------------------------------------------
 
-
-
-*********************
-* ~~~~~ SETUP ~~~~~ *
-*********************
+## SETUP ##
 
 The following are required to run JeoparPy:
   -Python (http://www.python.org/download/)
@@ -75,9 +60,7 @@ JeoparPy has been tested on the following platforms:
 
 
 
-**********************
-* ~~~~ CONTROLS ~~~~ *
-**********************
+## CONTROLS ##
 
 For more detailed instructions on how/when to use these controls, 
 see the Instructions section below.
@@ -92,14 +75,9 @@ SHIFT+Q:    Press to close the game immediately, only while the game board is sh
 
 
 
-**********************
-* ~~ INSTRUCTIONS ~~ *
-**********************
+## INSTRUCTIONS ##
 
-----------------------------------------------------------------
-HOW TO PLAY:
-----------------------------------------------------------------
-
+### HOW TO PLAY ###
 To start game, double-click 'Main.pyw' in '/src' folder
 
 Upon starting, an introduction will be played. 
@@ -141,79 +119,24 @@ The game will close automatically after the credits.
 
 
 
-
-***********************
-* ~~ CUSTOMIZATION ~~ *
-***********************
+## CUSTOMIZATION ##
 
 Note: It is recommended that the game be run once as-is 
 to view the example data, and ensure the game runs without issue. 
 
-Clues:
-  * The text for the clues is located in /res/misc/
-  * There are two text files with sample data included in the above folder, choose the one applicable to your platform.
-  * Clues must be separated in these files by one or more blank lines
-  * To create your own clues, replace the sample data with your own text, taking note of the following:
-      -Clues are written starting from the top left clue box, then by column.
-         ~Example: On a 5x5 board, the first 5 clues will be the clues for the leftmost category, starting at the top. The next 5 will be for the column to the right, starting at the top.
-      -The line breaks in the text file dictate where the line breaks will be when the clue is printed.
-         ~So, a long clue written on a single line will not display properly.
-         ~There is a long example clue in the file that serves as a guide for how to format multi-line clues.
-
-
-All other customization:
-  *A file in /src/ called Config.py contains detailed instructions for customizing the following:
-    -Category names
-    -Dollar amounts for each row
-    -Images/video to accompany clues
-    -Subtitle that appears under game title in intro sequence
-    -Screen resolution/fullscreen vs. windowed
-
-  *Manipulating this file requires changing/adding Python code, but I have tried to write the instructions in Config.py in such a way that knowledge of Python is not needed. 
-   The example data is included so it can be replaced, and its format followed.
+Clues/Categories/Edition Title:
+  * The files for these are all located in /res/text/
+  * Each file has sample data included.
+  * Instructions for each can be found in /res/text/
     
 
+## KNOWN ISSUES ##
 
-**********************
-* ~~ KNOWN ISSUES ~~ *
-**********************
-
-  1. Until the main game board is shown, it is recommended not to press any keys or click the mouse unless prompted. 
-     Doing so, during the category scroll for example, may freeze the display for a brief time.
-     A similar problem may occur during the end-of-game animations.
-
-  2. On the Linux machine tested (Ubuntu 10.10) attempting to open a video clue crashed the program, and occasionally the OS.
+  1. On the Linux machine tested (Ubuntu 10.10) attempting to open a video clue crashed the program, and occasionally the OS. This is a known limitation of Pygame.
+  2. Currently, categories can not be longer than 2 words.
 
 
-
-**************************
-* ~ FUTURE DEVELOPMENT ~ *
-**************************
-
-This project is on hold, and is provided as-is. 
-However, should development resume, I would like to implement the following, in no particular order:
-  
-  * Ability to choose to use a timer (with a customizable timeout) on clues
-
-  * A better way to change team scores, in case of a mistake or disagreement.
-    Currently money cannot be subtracted from a team.
-
-  * Simpler customization of clues/categories/media
-
-  * Better support for different display resolutions (at least a 4:3 mode)
-
-  * Better support for in-game videos (may not be possible due to limitations of Pygame).
-
-  * Easily customizable team/player names
-
-  * General refactoring and optimization of code.
-    (This was my first Pygame project, and it was made with a short deadline; There are no doubt some less than ideal coding practices at times)
-
-
-
-**********************
-* ~~~~~~ LEGAL ~~~~~ *
-**********************
+## LEGAL ##
 
 All code contained in this package
 Copyright (C) 2013 Adam Beagle - All Rights Reserved

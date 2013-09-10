@@ -1,0 +1,45 @@
+This file is designed as a supplement to the information available via git.
+The primary purpose is to explain reasoning for changes and make special
+note of particularly volatile changes (deletes, renames, etc).
+Minor changes visible by looking at commit history need not be mentioned.
+
+
+2013/09/09
+==================================
+* Began complete rebuild. All code will be rewritten. The original code was hugely lacking in abstraction and separation of concerns.
+ 
+* All code will follow PEP 8 (style guide), with very slight personal-preference differences.
+
+* Clues now contained in only one file, 'clues.txt.' 
+  User is now responsible for formatting EOL characters properly based on their platform.
+
+* 'game' sub-package created to contain core game logic and data to enhance 
+  separation of concerns, which was sorely lacking previously.
+	New Modules in this package include:
+		* GameData
+			-Clues and categories now stored here.
+		* GameState
+		* JeopPlayer
+		* config
+		* Unit test suite for all of the above.
+
+* 'ui' sub-package created to contain all view-related modules.
+	New module in this package:
+		*config
+
+	Completed modules in this package include:
+		*Intro
+		*CategoryScroll
+
+* There are now separate config.py files for the /src root, the game package, and the ui package.
+  This was done both to relieve the bloated look of the original Config.py, and for SoC.
+
+* Directory containing clues.txt renamed 'text' (previously '/res/misc')
+
+* Categories now contained in categories.txt, in the same directory as clues.txt, to avoid confusion.
+
+* Similar to above, subtitle now contained in 'subtitle.txt' in 'text' directory.
+
+
+2013/09/10
+==================================
