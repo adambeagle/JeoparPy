@@ -1,5 +1,5 @@
 """
-GameData.py
+gamedata.py
 Author: Adam Beagle
 
 DESCRIPTION:

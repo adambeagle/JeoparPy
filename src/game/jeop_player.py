@@ -1,5 +1,5 @@
 """
-JeopPlayer.py
+jeop_player.py
 Author: Adam Beagle
 
 DESCRIPTION:

@@ -1,5 +1,5 @@
 """
-GameState.py
+gamestate.py
 Author: Adam Beagle
 
 DESCRIPTION:
