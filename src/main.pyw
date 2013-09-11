@@ -23,7 +23,7 @@ from pygame.locals import *
 
 from config import SCREEN_SIZE, FULLSCREEN
 from game import GameData, GameState
-from ui import do_intro, do_scroll
+from ui import Controller, do_intro, do_scroll
 
 ###############################################################################
 def main():
@@ -45,6 +45,8 @@ def main():
     do_scroll(screen, clock, gameData.categories)
 
     #Prep for primary loop
+    gs.state = gs.WAIT_CHOOSE_CLUE
+    controller = Controller(screen)
     pygame.event.set_allowed(None)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
 
@@ -56,9 +58,11 @@ def main():
             return
 
         #Update
-        
+        controller.update(gs, gameData)
+        transition_state(gs)
 
         #Draw
+        controller.draw(screen)
 
         #Cleanup
         pygame.event.pump()
@@ -84,6 +88,25 @@ def handle_key_event(gameState, event):
             gs.state = gs.QUIT
         else:
             gs.state = gs.GAME_END
+
+    if gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
+        p = event.key - K_1
+        gs.state = (gs.BUZZ_IN, p)
+
+    if event.key == K_SPACE:
+        gs.state = (gs.ANSWER_CORRECT, gs.arg)
+    if event.key == K_BACKSPACE:
+        gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+    if event.key == K_END:
+        gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
+
+def transition_state(gameState):
+    gs = gameState
+    if gs.state == gs.BUZZ_IN:
+        gs.state = (gs.WAIT_ANSWER, gs.arg)
+
+    if gs.state in gs.ANSWER:
+        gs.state = gs.WAIT_PICK_CLUE
     
 ###############################################################################
 if __name__ == '__main__':

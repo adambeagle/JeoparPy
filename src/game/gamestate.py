@@ -45,19 +45,21 @@ class GameState(object):
         self._numStates = 0
 
         #TODO define all states
-        self.QUIT = self._addstate()
-        self.GAME_END = self._addstate()
-        self.WAIT = self._addstate()
+        self.WAIT_CHOOSE_CLUE = self._addstate()
         self.CLUE_OPEN = self._addstate()
+        self.WAIT_BUZZ_IN = self._addstate()
         self.BUZZ_IN = self._addstate()
+        self.WAIT_ANSWER = self._addstate()
         self.ANSWER_CORRECT = self._addstate()
         self.ANSWER_INCORRECT = self._addstate()
         self.ANSWER_TIMEOUT = self._addstate()
+        self.GAME_END = self._addstate()
+        self.QUIT = self._addstate()
 
         #State ranges
         self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_TIMEOUT + 1)
        
-        self._state = self.WAIT
+        self._state = -1
         self.arg = None
 
     def _addstate(self):
@@ -69,6 +71,12 @@ class GameState(object):
         self._numStates += 1
 
         return self._numStates - 1
+
+    def __repr__(self):
+        if self.arg is None:
+            return repr(self.state)
+        else:
+            return repr((self.state, self.arg))
         
     @property
     def state(self):
