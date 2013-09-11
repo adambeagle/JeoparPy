@@ -1,2 +1,2 @@
-from GameData import GameData
-from GameState import GameState
+from gamedata import GameData
+from gamestate import GameState

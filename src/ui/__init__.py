@@ -1,2 +1,2 @@
-from CategoryScroll import doScroll
-from Intro import doIntro
+from categoryscroll import do_scroll
+from intro import do_intro

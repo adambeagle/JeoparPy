@@ -17,8 +17,9 @@ of source code from this file.
 
 import unittest
 
-from JeopPlayer import JeopPlayer, ScoreError
-from GameState import GameState, GameData, StateError
+from jeop_player import JeopPlayer, ScoreError
+from gamedata import GameData
+from gamestate import GameState, StateError
 
 ###############################################################################
 class TestJeopPlayer(unittest.TestCase):
@@ -34,29 +35,29 @@ class TestJeopPlayer(unittest.TestCase):
         self.assertRaises(TypeError, JeopPlayer, ('n', 'a', 'm', 'e'))
             
     def test_initialAttrs(self):
-        self.assertEqual(self.p.Name, self.pName)
-        self.assertEqual(self.p.Score, 0)
-        self.assertEqual(self.p.Scoref, '$0')
+        self.assertEqual(self.p.name, self.pName)
+        self.assertEqual(self.p.score, 0)
+        self.assertEqual(self.p.scoref, '$0')
 
     def test_setScore(self):
-        self.p.Score = 10
-        self.assertEqual(self.p.Score, 10)
+        self.p.score = 10
+        self.assertEqual(self.p.score, 10)
 
-        self.p.Score = '100'
-        self.assertEqual(self.p.Score, 100)
+        self.p.score = '100'
+        self.assertEqual(self.p.score, 100)
 
-        self.p.Score += 50.0
-        self.assertEqual(type(self.p.Score), int)
-        self.assertEqual(self.p.Score, 150)
-        self.assertEqual(self.p.Scoref, '$150')
+        self.p.score += 50.0
+        self.assertEqual(type(self.p.score), int)
+        self.assertEqual(self.p.score, 150)
+        self.assertEqual(self.p.scoref, '$150')
 
-        self.p.Score -= 200
-        self.assertEqual(self.p.Score, -50)
-        self.assertEqual(self.p.Scoref, '-$50')
+        self.p.score -= 200
+        self.assertEqual(self.p.score, -50)
+        self.assertEqual(self.p.scoref, '-$50')
 
     def test_badScoreType(self):
         with self.assertRaises(ScoreError):
-            self.p.Score = [2]
+            self.p.score = [2]
         
 ###############################################################################
 class TestGameState(unittest.TestCase):
@@ -65,29 +66,29 @@ class TestGameState(unittest.TestCase):
 
     def test_outOfRangeState(self):
         with self.assertRaises(StateError):
-            self.gs.State = -1
+            self.gs.state = -1
 
         with self.assertRaises(StateError):
-            self.gs.State = self.gs._numStates
+            self.gs.state = self.gs._numStates
 
     def test_badStateType(self):
         with self.assertRaises(StateError):
-            self.gs.State = 'g'
+            self.gs.state = 'g'
 
     def test_setState(self):
         #Assumes at least 2 defined states exist,
         #and assumes a QUIT state exists.
         s = 0
-        self.gs.State = s
-        self.assertEqual(self.gs.State, s)
+        self.gs.state = s
+        self.assertEqual(self.gs.state, s)
 
         s = 1
-        self.gs.State = str(s)
-        self.assertEqual(self.gs.State, s)
+        self.gs.state = str(s)
+        self.assertEqual(self.gs.state, s)
 
         s = self.gs.QUIT
-        self.gs.State = s
-        self.assertEqual(self.gs.State, s)
+        self.gs.state = s
+        self.assertEqual(self.gs.state, s)
 
 ###############################################################################
 class TestGameData(unittest.TestCase):

@@ -21,9 +21,9 @@ class JeopPlayer(object):
     Defines a Jeoparpy player (or team).
 
     ATTRIBUTES:
-      * Name
-      * Score
-      * Scoref (score as formatted string, e.g. '-$1000')
+      * name
+      * score
+      * scoref (score as formatted string, e.g. '-$1000')
     """
     def __init__(self, name):
         if not isinstance(name, basestring):
@@ -33,24 +33,24 @@ class JeopPlayer(object):
         self._score = 0
 
     @property
-    def Name(self):
+    def name(self):
         return self._name
 
     @property
-    def Score(self):
+    def score(self):
         return self._score
 
-    @Score.setter
-    def Score(self, score):
+    @score.setter
+    def score(self, val):
         try:
-            self._score = int(score)
+            self._score = int(val)
         except (ValueError, TypeError):
-            raise ScoreError(self.Name, score)
+            raise ScoreError(self.name, val)
 
     @property
-    def Scoref(self):
-        neg = '-' * int(self.Score < 0)
-        return "%s$%d" % (neg, abs(self.Score))
+    def scoref(self):
+        neg = '-' * int(self.score < 0)
+        return "%s$%d" % (neg, abs(self.score))
 
 ###############################################################################
 class ScoreError(Exception):

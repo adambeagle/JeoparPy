@@ -23,7 +23,7 @@ from pygame.locals import *
 
 from config import SCREEN_SIZE, FULLSCREEN
 from game import GameData, GameState
-from ui import doIntro, doScroll
+from ui import do_intro, do_scroll
 
 ###############################################################################
 def main():
@@ -41,18 +41,18 @@ def main():
     clock = pygame.time.Clock()
 
     #Intro sequence (control passed completely to functions)
-    doIntro(screen, clock)
-    doScroll(screen, clock, gameData.Categories)
+    do_intro(screen, clock)
+    do_scroll(screen, clock, gameData.categories)
 
     #Prep for primary loop
     pygame.event.set_allowed(None)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
 
     #Primary loop
-    while not gs.State == gs.GAME_END:
+    while not gs.state == gs.GAME_END:
         #Events
         handle_events(gs)
-        if gs.State == gs.QUIT:
+        if gs.state == gs.QUIT:
             return
 
         #Update
@@ -71,7 +71,7 @@ def handle_events(gameState):
     gs = gameState
     for event in pygame.event.get():
         if event.type == QUIT:
-            gs.State = gs.QUIT
+            gs.state = gs.QUIT
 
         elif event.type == KEYDOWN:
             handle_key_event(gs, event)
@@ -81,9 +81,9 @@ def handle_key_event(gameState, event):
     
     if event.key == K_q:
         if pygame.key.get_mods() & KMOD_SHIFT:
-            gs.State = gs.QUIT
+            gs.state = gs.QUIT
         else:
-            gs.State = gs.GAME_END
+            gs.state = gs.GAME_END
     
 ###############################################################################
 if __name__ == '__main__':
