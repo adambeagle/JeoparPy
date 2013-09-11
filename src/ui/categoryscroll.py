@@ -32,7 +32,6 @@ def do_scroll(screen, clock, categories):
     scrSize = screen.get_size()
     boxes = tuple(_build_box(scrSize, c) for c in categories)
     step = int(7 * (scrSize[1] / 768.0))
-    
 
     #Hold on each box, then scroll
     for box, nextBox in chunker(boxes, 2, True):

@@ -23,23 +23,32 @@ from podiapanel import PodiaPanel
 
 class Controller(object):
     """ """
-    def __init__(self, screen):
+    def __init__(self, screen, gameData):
         w, h  = size = screen.get_size()
-        self._board = GameBoard((.75*w, h))
-        self._podia = PodiaPanel((.25*w, h))
+        self._board = GameBoard((.75*w, h), gameData)
+        self._podia = PodiaPanel((.25*w, h), gameData)
         self._podia.rect.left = .75*w
-        self._draw_all(screen)
 
     def draw(self, screen):
+        dirtyRects = []
+        
         if self._podia.dirty:
             print 'draw podia' #debug
             screen.blit(self._podia, self._podia.rect)
-            pygame.display.flip()
+            dirtyRects.append(self._podia.rect)
+
+        if self._board.dirty:
+            screen.blit(self._board, self._board.rect)
+            dirtyRects.append(self._board.rect)
+
+        pygame.display.update(dirtyRects)
+
+    def draw_all(self, screen):
+        screen.blit(self._board, self._board.rect)
+        screen.blit(self._podia, self._podia.rect)
+        pygame.display.flip()
         
     def update(self, gameState, gameData):
         self._podia.update(gameState, gameData)
 
-    def _draw_all(self, screen):
-        screen.blit(self._board, self._board.rect)
-        screen.blit(self._podia, self._podia.rect)
-        pygame.display.flip()
+    

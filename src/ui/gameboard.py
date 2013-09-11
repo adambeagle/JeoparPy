@@ -22,9 +22,12 @@ from config import JEOP_BLUE
 
 class GameBoard(Surface):
     """ """
-    def __init__(self, size):
+    def __init__(self, size, gameData):
         super(GameBoard, self).__init__(size)
-        self.rect = self.get_rect()
-        
         self.fill(JEOP_BLUE)
+        
+        self.rect = self.get_rect()
+        self.dirty = 1
+        
+        
         

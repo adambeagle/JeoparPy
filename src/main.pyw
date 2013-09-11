@@ -38,17 +38,20 @@ def main():
     #Declarations
     gameData = GameData()
     gs = GameState()
+    controller = Controller(screen, gameData)
     clock = pygame.time.Clock()
 
     #Intro sequence (control passed completely to functions)
+    pygame.mouse.set_visible(False)
     do_intro(screen, clock)
     do_scroll(screen, clock, gameData.categories)
+    pygame.mouse.set_visible(True)
 
     #Prep for primary loop
     gs.state = gs.WAIT_CHOOSE_CLUE
-    controller = Controller(screen)
     pygame.event.set_allowed(None)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
+    controller.draw_all(screen)
 
     #Primary loop
     while not gs.state == gs.GAME_END:

@@ -35,14 +35,17 @@ class PodiaPanel(pygame.Surface):
       *size
       
     """
-    def __init__(self, size):
+    def __init__(self, size, gameData):
         super(PodiaPanel, self).__init__(size)
         self.size = self.get_size()
         self.rect = self.get_rect()
         self.dirty = True
 
-        self._init_background()
+        scalar = self._init_background()
         self._podiaRects = self._draw_podia(self._init_podia())
+
+        self._draw_player_names([p.name for p in gameData.players],
+                                132, scalar)
 
         self._blankPanel = self.copy()
 
@@ -99,12 +102,31 @@ class PodiaPanel(pygame.Surface):
             rect.top += rect.h + padding
 
         return tuple(rects)
+
+    def _draw_player_names(self, names, yOffset, scalar):
+        fonts = (('team1', 42), ('team2', 33), ('team3', 40))
+        fonts = tuple((FONTS[n], int(scalar*s)) for n,s in fonts)
+        yOffset = int(yOffset*scalar)
+        print scalar
+
+        for i, pr in enumerate(self._podiaRects):
+            font = pygame.font.Font(*fonts[i])
+            text = font.render(names[i], 1, (255, 255, 255))
+            rect = text.get_rect()
+
+            rect.centerx = pr.centerx
+            rect.y = pr.y + yOffset
+
+            self.blit(text, rect)
+            
         
     def _init_background(self):
         img = pygame.image.load(IMAGES['rPanelBG']).convert()
-        sizeScalar = float(img.get_size()[1]) / self.size[1]
+        sizeScalar = float(self.size[1]) / img.get_size()[1]
         img = pygame.transform.smoothscale(img, self.size)
         self.blit(img, (0, 0))
+
+        return sizeScalar
 
 
     def _init_podia(self):
