@@ -50,6 +50,12 @@ class GameState(object):
         self.WAIT = self._addstate()
         self.CLUE_OPEN = self._addstate()
         self.BUZZ_IN = self._addstate()
+        self.ANSWER_CORRECT = self._addstate()
+        self.ANSWER_INCORRECT = self._addstate()
+        self.ANSWER_TIMEOUT = self._addstate()
+
+        #State ranges
+        self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_TIMEOUT + 1)
        
         self._state = self.WAIT
         self.arg = None
@@ -70,27 +76,31 @@ class GameState(object):
 
     @state.setter
     def state(self, val):
+        self.arg = None
+        
         #If val is a container, 
         if hasattr(val, '__iter__'):
             try:
                 self.arg = val[1]
             except IndexError:
                 raise StateError("State must be an int or a 2-tuple " +
-                                 "containing (state as int, arg)", val)
+                                 "containing (state as int, arg).", val)
 
             val = val[0]
-        
+
+        #Attempt cast to int
         try:
             val = int(val)
         except (ValueError, TypeError):
             raise StateError("'State' expects integer, not %s." %
                              type(val).__name__, val)
 
+        #Verify state within valid range of defined states
         if val in xrange(self._numStates):
             self._state = val
         else:
-            raise StateError("Set of 'State' attempted with invalid value.",
-                             val)
+            raise StateError("Set of 'State' attempted with value " +
+                             "that has no assigned state.", val)
 
 ##############################################################################
 class StateError(Exception):
