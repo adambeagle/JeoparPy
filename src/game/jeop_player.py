@@ -59,15 +59,15 @@ class ScoreError(Exception):
     """
     def __init__(self, player, errVal, msg=None):
         """If msg is None, a default message will be used."""
-        self.Player = player
-        self.ErrVal = errVal
+        self.player = player
+        self.errval = errVal
 
         if msg == None:
-            self.Msg = ("An error occured setting the score for player " + 
+            self.msg = ("An error occured setting the score for player " + 
                         "'%s.' Scores must be int or castable to int." %
-                        self.Player)
+                        self.player)
         else:
-            self.Msg == msg
+            self.msg == msg
 
     def __str__(self):
-            return self.Msg + " Bad value: %r" % self.ErrVal
+            return self.msg + " Bad value: %r" % self.errval

@@ -73,22 +73,42 @@ class TestGameState(unittest.TestCase):
 
     def test_badStateType(self):
         with self.assertRaises(StateError):
-            self.gs.state = 'g'
+            self.gs.state = 'gg'
 
-    def test_setState(self):
+        with self.assertRaises(StateError):
+            self.gs.state = None
+
+    def test_badStateTuple(self):
+        with self.assertRaises(StateError):
+            self.gs.state = ('arg', 0)
+
+        with self.assertRaises(StateError):
+            self.gs.state = (0, )
+
+    def test_setStateInt(self):
         #Assumes at least 2 defined states exist,
         #and assumes a QUIT state exists.
-        s = 0
+        self._onetest_setint(0)
+        self._onetest_setint(1)
+        self._onetest_setint(self.gs.QUIT)
+
+    def test_setStateTuple(self):
+        #Assumes at least 2 defined states exist,
+        #and assumes a QUIT state exists.
+        self._onetest_settuple(0, 'arg')
+        self._onetest_settuple(1, 5)
+        self._onetest_settuple(self.gs.QUIT, [3, 4])
+
+    def _onetest_setint(self, s):
         self.gs.state = s
         self.assertEqual(self.gs.state, s)
 
-        s = 1
-        self.gs.state = str(s)
+    def _onetest_settuple(self, s, arg):
+        self.gs.state = (s, arg)
         self.assertEqual(self.gs.state, s)
-
-        s = self.gs.QUIT
-        self.gs.state = s
-        self.assertEqual(self.gs.state, s)
+        self.assertEqual(self.gs.arg, arg)
+        self.assertEqual(type(self.gs.arg), type(arg))
+        
 
 ###############################################################################
 class TestGameData(unittest.TestCase):

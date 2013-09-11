@@ -27,8 +27,18 @@ class GameState(object):
     This also serves as a centralized means of communication
     between main and the UI modules.
 
+    An optional 'arg' can be set to provide additional
+    information about the state.
+
     ATTRIBUTES:
-      *State
+      *state
+      *arg
+
+    'arg' can be set in two ways:
+      * Directly, i.e. gamestate.arg = "arg"
+      * As 2nd element of an interable when setting 'state'
+        ex: gamestate.state = (gamestate.QUIT, "arg")
+        
     """
     def __init__(self):
         """Constructor."""
@@ -39,8 +49,10 @@ class GameState(object):
         self.GAME_END = self._addstate()
         self.WAIT = self._addstate()
         self.CLUE_OPEN = self._addstate()
+        self.BUZZ_IN = self._addstate()
        
         self._state = self.WAIT
+        self.arg = None
 
     def _addstate(self):
         """
@@ -58,6 +70,16 @@ class GameState(object):
 
     @state.setter
     def state(self, val):
+        #If val is a container, 
+        if hasattr(val, '__iter__'):
+            try:
+                self.arg = val[1]
+            except IndexError:
+                raise StateError("State must be an int or a 2-tuple " +
+                                 "containing (state as int, arg)", val)
+
+            val = val[0]
+        
         try:
             val = int(val)
         except (ValueError, TypeError):
@@ -77,16 +99,16 @@ class StateError(Exception):
     """
     def __init__(self, msg='', errVal=None):
         if msg:
-            self.Msg = msg
+            self.msg = msg
         else:
-            self.Msg = "An error occured when trying to set 'State.'"
+            self.msg = "An error occured when trying to set 'State.'"
 
-        self.ErrVal = errVal
+        self.errval = errVal
 
     def __str__(self):
         addendum = (" It is recommended to use the named constants " +
                     "defined in %s to set State." % __file__)
-        if not self.ErrVal == None:
-            addendum += " Bad value: %r" % self.ErrVal
+        if not self.errval == None:
+            addendum += " Bad value: %r" % self.errval
 
-        return self.Msg + addendum
+        return self.msg + addendum
