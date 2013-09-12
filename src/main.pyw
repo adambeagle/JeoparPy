@@ -56,13 +56,13 @@ def main():
     #Primary loop
     while not gs.state == gs.GAME_END:
         #Events
-        handle_events(gs)
+        handle_events(gs, gameData)
         if gs.state == gs.QUIT:
             return
 
         #Update
         controller.update(gs, gameData)
-        transition_state(gs)
+        transition_state(gs, gameData)
 
         #Draw
         controller.draw(screen)
@@ -74,16 +74,16 @@ def main():
     return
     
 ###############################################################################
-def handle_events(gameState):
+def handle_events(gameState, gameData):
     gs = gameState
     for event in pygame.event.get():
         if event.type == QUIT:
             gs.state = gs.QUIT
 
         elif event.type == KEYDOWN:
-            handle_key_event(gs, event)
+            handle_key_event(event, gameState, gameData)
         
-def handle_key_event(gameState, event):
+def handle_key_event(event, gameState, gameData):
     gs = gameState
     
     if event.key == K_q:
@@ -94,22 +94,33 @@ def handle_key_event(gameState, event):
 
     if gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
         p = event.key - K_1
-        gs.state = (gs.BUZZ_IN, p)
+        if not gameData.players[p].hasAnswered:
+            gs.state = (gs.BUZZ_IN, p)
 
-    if event.key == K_SPACE:
-        gs.state = (gs.ANSWER_CORRECT, gs.arg)
-    if event.key == K_BACKSPACE:
-        gs.state = (gs.ANSWER_INCORRECT, gs.arg)
-    if event.key == K_END:
-        gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
+    if gs.state == gs.WAIT_ANSWER:
+        if event.key == K_SPACE:
+            gs.state = (gs.ANSWER_CORRECT, gs.arg)
+        elif event.key == K_BACKSPACE:
+            gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+        elif event.key == K_END:
+            gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
 
-def transition_state(gameState):
+def transition_state(gameState, gameData):
     gs = gameState
     if gs.state == gs.BUZZ_IN:
         gs.state = (gs.WAIT_ANSWER, gs.arg)
 
-    if gs.state in gs.ANSWER:
-        gs.state = gs.WAIT_PICK_CLUE
+    elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT):
+        gameData.clear_players_answered()
+        gs.state = gs.WAIT_CHOOSE_CLUE
+
+    elif gs.state == gs.ANSWER_INCORRECT:
+        gameData.players[gs.arg].hasAnswered = True
+        
+        if gameData.allPlayersAnswered:
+            gs.state = gs.WAIT_CHOOSE_CLUE
+        else:
+            gs.state = gs.WAIT_BUZZ_IN
     
 ###############################################################################
 if __name__ == '__main__':
