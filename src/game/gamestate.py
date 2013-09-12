@@ -58,6 +58,7 @@ class GameState(object):
 
         #State ranges
         self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_TIMEOUT + 1)
+        self.CLICKABLE = (self.WAIT_CHOOSE_CLUE,)
        
         self._state = -1
         self.arg = None
@@ -109,6 +110,9 @@ class GameState(object):
         else:
             raise StateError("Set of 'State' attempted with value " +
                              "that has no assigned state.", val)
+
+        if __debug__:
+            print "State change: %s" % self.state
 
 ##############################################################################
 class StateError(Exception):
