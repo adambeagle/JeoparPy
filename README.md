@@ -65,13 +65,13 @@ JeoparPy has been tested on the following platforms:
 For more detailed instructions on how/when to use these controls, 
 see the Instructions section below.
 
-LEFT-CLICK: Opens a clue if a clue box is clicked on the main game board.
-1/2/3:      These keys are used to buzz in the corresponding team.
-SPACEBAR:   Press when a clue is answered correctly
-BACKSPACE:  Press when a clue is answered incorrectly
-END:        Press when time runs out on a clue to close it
-Q:          Press to trigger the end of the game and the credits, only while the game board is showing
-SHIFT+Q:    Press to close the game immediately, only while the game board is showing
+* LEFT-CLICK: Opens a clue if a clue box is clicked on the main game board.
+* 1/2/3:      These keys are used to buzz in the corresponding team.
+* SPACEBAR:   Press when a clue is answered correctly
+* BACKSPACE:  Press when a clue is answered incorrectly
+* END:        Press when time runs out on a clue to close it
+* Q:          Press to trigger the end of the game and the credits, only while the game board is showing
+* SHIFT+Q:    Press to close the game immediately, only while the game board is showing
 
 
 

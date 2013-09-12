@@ -1,10 +1,8 @@
 # Todo #
-###### Last updated 11:15 AM 9/12/2013 ######
+###### Last updated 3:13PM 9/12/2013 ######
 
 ### Immediate ###
-* Documentation in today's (9/11) new modules. 
 * Abstract text-drawing functions out of BorderedBox
-* Make functions from adam package local to project.
 
 ### High priority ###
 * Major priority currently is complete rebuild (see changelist).
