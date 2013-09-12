@@ -22,7 +22,7 @@ of source code from this file..
 """
 
 import pygame
-from pygame.locals import KEYDOWN
+from pygame.locals import KEYDOWN, QUIT
 
 from resmaps import FONTS, IMAGES, SOUNDS, SUBTITLE
 from util import shadow_text, wait_for_keypress
@@ -54,7 +54,7 @@ def do_intro(screen, clock, audioplayer):
 
     #Draw subtitle and wait for keypress
     _blit_subtitle(background, bgRect, titleRect)
-    pygame.event.set_allowed([KEYDOWN])
+    pygame.event.set_allowed([KEYDOWN, QUIT])
     _update_and_wait_for_keypress(screen, background)
     
     #Draw rules and wait for keypress

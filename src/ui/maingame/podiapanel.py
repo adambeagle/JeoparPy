@@ -125,7 +125,6 @@ class PodiaPanel(JeopGameSurface):
         fonts = (('team1', 42), ('team2', 33), ('team3', 40))
         fonts = tuple((FONTS[n], int(scalar*s)) for n,s in fonts)
         yOffset = int(yOffset*scalar)
-        print scalar
 
         for i, pr in enumerate(self._podiaRects):
             font = pygame.font.Font(*fonts[i])

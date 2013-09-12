@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 from pygame.locals import *
 
@@ -30,7 +32,6 @@ def get_size_textblock(lines, font, spacing):
         w, h = font.size(line)
         blockW = max(blockW, w)
         blockH += h + spacing
-        
 
     return (blockW, blockH)
 
