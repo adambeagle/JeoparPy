@@ -43,15 +43,20 @@ def main():
 
     #Intro sequence (control passed completely to functions)
     pygame.mouse.set_visible(False)
-    do_intro(screen, clock)
+    do_intro(screen, clock, controller.audioplayer)
     do_scroll(screen, clock, gameData.categories)
     pygame.mouse.set_visible(True)
 
     #Prep for primary loop
-    gs.state = gs.WAIT_CHOOSE_CLUE
     pygame.event.set_allowed(None)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
     controller.draw_all(screen)
+
+    #TODO Remove once clue opening functionality completed
+    if __debug__:
+        gs.state = gs.WAIT_BUZZ_IN
+    else:
+        gs.state = gs.WAIT_CHOOSE_CLUE
 
     #Primary loop
     while not gs.state == gs.GAME_END:
@@ -92,18 +97,19 @@ def handle_key_event(event, gameState, gameData):
         else:
             gs.state = gs.GAME_END
 
-    if gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
+    elif gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
         p = event.key - K_1
         if not gameData.players[p].hasAnswered:
             gs.state = (gs.BUZZ_IN, p)
+            
+    elif gs.state == gs.WAIT_BUZZ_IN and event.key == K_END:
+        gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
 
-    if gs.state == gs.WAIT_ANSWER:
+    elif gs.state == gs.WAIT_ANSWER:
         if event.key == K_SPACE:
             gs.state = (gs.ANSWER_CORRECT, gs.arg)
         elif event.key == K_BACKSPACE:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
-        elif event.key == K_END:
-            gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
 
 def transition_state(gameState, gameData):
     gs = gameState

@@ -45,6 +45,7 @@ class GameState(object):
         self._numStates = 0
 
         #TODO define all states
+        self.BOARD_FILL = self._addstate()
         self.WAIT_CHOOSE_CLUE = self._addstate()
         self.CLUE_OPEN = self._addstate()
         self.WAIT_BUZZ_IN = self._addstate()
@@ -57,7 +58,7 @@ class GameState(object):
         self.QUIT = self._addstate()
 
         #State ranges
-        self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_TIMEOUT + 1)
+        self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
         self.CLICKABLE = (self.WAIT_CHOOSE_CLUE,)
        
         self._state = -1

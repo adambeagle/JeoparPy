@@ -17,6 +17,7 @@ of source code from this file.
 
 import pygame
 
+from audioplayer import JeopAudioPlayer
 from maingame import GameBoard, PodiaPanel
 
 class Controller(object):
@@ -24,6 +25,9 @@ class Controller(object):
     This class serves as the single interface between main and the
     ui modules. Main should call update() and draw() once every frame,
     in that order.
+
+    ATTRIBUTES:
+      * audioplayer
 
     METHODS:
       * draw
@@ -38,6 +42,7 @@ class Controller(object):
         podia.rect.left = .75*w
 
         self._sfcs = (board, podia)
+        self.audioplayer = JeopAudioPlayer()
 
     def draw(self, screen):
         """
@@ -71,5 +76,18 @@ class Controller(object):
         for sfc in self._sfcs:
             sfc.update(gameState, gameData)
 
+        self._play_update_sounds(gameState)
+
+    def _play_update_sounds(self, gameState):
+        gs = gameState
+
+        if gs.state == gs.BOARD_FILL:
+            self.audioplayer.play('fill')
+        if gs.state == gs.BUZZ_IN:
+            self.audioplayer.play('buzz')
+        elif gs.state == gs.ANSWER_INCORRECT:
+            self.audioplayer.play('wrong')
+        elif gs.state == gs.ANSWER_TIMEOUT:
+            self.audioplayer.play('outoftime')
 
     

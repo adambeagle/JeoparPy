@@ -28,15 +28,15 @@ from resmaps import FONTS, IMAGES, SOUNDS, SUBTITLE
 from util import shadow_text, wait_for_keypress
 
 ###############################################################################
-def do_intro(screen, clock):
+def do_intro(screen, clock, audioplayer):
     """
     Draws JeoparPy title animation to screen.
     Note control of application passed completely to this function from main.
     """
     #Declarations
     scrSize = screen.get_size()
-    music = pygame.mixer.Sound(SOUNDS['intro'])
     bannerColor = (0, 0, 50)
+    music = audioplayer.sounds['intro']
 
     background, bgRect = _build_background(scrSize)
     background.blit(*_build_banner(bgRect, bannerColor))
