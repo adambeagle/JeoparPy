@@ -1,16 +1,16 @@
 # Todo #
-#### Last updated 12:14 PM 9/10/2013 ####
+###### Last updated 11:15 AM 9/12/2013 ######
 
-## Immediate ##
+### Immediate ###
 * Documentation in today's (9/11) new modules. 
 * Abstract text-drawing functions out of BorderedBox
 * Make functions from adam package local to project.
 
-## High priority ##
+### High priority ###
 * Major priority currently is complete rebuild (see changelist).
 * Functions from my custom library (import adam.*) need to be made available on Github
 
-## Low priority ##
+### Low priority ###
 * Add ability to use audio as clue media, like can be done with images/video.
 * Logging
 * Allow arbitrary-length categories (within reason).
@@ -19,12 +19,12 @@
 	possible, but the font size must be manually set. Hope to
 	automatically calculate font size soon.
 
-## Down the Road ##
+### Down the Road ###
 * Add ability to have recorded clue readings for certain clues or every clue.
 * Customizable timeout on clues
 * 'Undo' key command to negate last points given, in case of mistake or disagreement.
 * Accelerate/decelerate category scroll to make it smoother.
 * Final JeoparPy
 
-## Blue Sky ##
+### Blue Sky ###
 * 4:3 mode
