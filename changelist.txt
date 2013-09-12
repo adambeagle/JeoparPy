@@ -43,3 +43,22 @@ Minor changes visible by looking at commit history need not be mentioned.
 
 2013/09/10
 ==================================
+* Intro sequence (intro.py and categoryscroll.py) in completed working order.
+
+
+2013/09/11
+==================================
+* All formatting now much more consistent with PEP8. All names follow its recommendations.
+
+* resmaps.py created in ui package to place all maps to external file paths in one place, rather than being part of config.py.
+
+* Modules added to ui:
+	-podiapanel
+	-gameboard
+	-controller
+	-util
+
+* State at end of day: 
+	-Intro sequence completed (improved from yesterday)
+	-Right panel (podia) completed
+	-Game board: grid drawn, category names drawn. Missing amounts, animation, etc.

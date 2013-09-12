@@ -1,6 +1,10 @@
 # Todo #
 #### Last updated 12:14 PM 9/10/2013 ####
 
+## Immediate ##
+* Documentation in today's (9/11) new modules. 
+* Abstract text-drawing functions out of BorderedBox
+
 ## High priority ##
 * Major priority currently is complete rebuild (see changelist).
 * Functions from my custom library (import adam.*) need to be made available on Github
