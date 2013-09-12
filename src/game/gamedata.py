@@ -25,12 +25,21 @@ class GameData(object):
     Holds core data about the game. This and GameState are the primary
     interfaces between the main module and the game logic.
 
-    Attributes:
-      *players
-      *clues
-      *categories
-      *amounts
-      *winners
+    The attributes in this class should not need to be changed during a
+    single game after being initialized (attribute's attributes, like player
+    scores, can be changed).
+
+    ATTRIBUTES:
+      * allPlayersAnswered
+      * players
+      * clues
+      * categories
+      * amounts
+      * winners
+
+    METHODS:
+      * clear_players_answered
+      
     """
     def __init__(self):
         """
@@ -44,6 +53,11 @@ class GameData(object):
         self.clues = self._build_clues_from_file(CLUES_PATH,
                                                  len(self.categories))
         self.amounts = AMOUNTS
+
+    def clear_players_answered(self):
+        """Sets all players' hasAnswered attribute to False."""
+        for p in self.players:
+            p.hasAnswered = False
 
     def _build_categories_from_file(self, path):
         """
@@ -88,6 +102,14 @@ class GameData(object):
             mapped.append(tuple(clues[start:start + numPerCat]))
 
         return tuple(mapped)
+
+    @property
+    def allPlayersAnswered(self):
+        for p in self.players:
+            if not p.hasAnswered:
+                return False
+
+        return True
 
     @property
     def winners(self):

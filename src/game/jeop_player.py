@@ -21,17 +21,16 @@ class JeopPlayer(object):
     Defines a Jeoparpy player (or team).
 
     ATTRIBUTES:
-      * name
+      * hasAnswered
+      * name (read-only)
       * score
-      * scoref (score as formatted string, e.g. '-$1000')
+      * scoref (score as formatted string, e.g. '-$1000'. Read-only.)
     """
     def __init__(self, name):
-        if not isinstance(name, basestring):
-            raise TypeError("'name' attribute requires string, got %s: %r"
-                            % (type(name), name))
-        self._name = name
+        self._name = str(name)
         self._score = 0
-
+        self.hasAnswered = False
+        
     @property
     def name(self):
         return self._name
