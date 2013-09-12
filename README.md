@@ -124,16 +124,19 @@ The game will close automatically after the credits.
 Note: It is recommended that the game be run once as-is 
 to view the example data, and ensure the game runs without issue. 
 
-Clues/Categories/Edition Title:
+#### Display settings: ####
+  * Located in /src/config.py are settings for screen resolution and toggling 
+    fullscreen display.
+
+#### Clues/Categories/Edition Title: ####
   * The files for these are all located in /res/text/
   * Each file has sample data included.
-  * Instructions for each can be found in /res/text/
+  * Instructions for each are found in /res/text/INSTRUCTIONS.txt
     
 
 ## KNOWN ISSUES ##
 
   1. On the Linux machine tested (Ubuntu 10.10) attempting to open a video clue crashed the program, and occasionally the OS. This is a known limitation of Pygame.
-  2. Currently, categories can not be longer than 2 words.
 
 
 ## LEGAL ##
