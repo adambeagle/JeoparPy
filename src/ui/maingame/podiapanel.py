@@ -3,7 +3,8 @@ podiapanel.py
 Author: Adam Beagle
 
 DESCRIPTION:
-
+    Contains the PodiaPanel class and its utility classes
+    Score and Highlight, each described in detail below.
 
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
@@ -18,28 +19,39 @@ of source code from this file.
 
 import pygame
 
-from adam.game.pygame_util import shadow_text
-
-from config import JEOP_BLUE
-from resmaps import FONTS, IMAGES
+from jeopgamesfc import JeopGameSurface
+from ..config import JEOP_BLUE
+from ..resmaps import FONTS, IMAGES
+from ..util import shadow_text
 
 ###############################################################################
-class PodiaPanel(pygame.Surface):
+class PodiaPanel(JeopGameSurface):
     """
-    Methods:
-      *update
+    The JeoparPy panel containing the three player podiums.
+    When initialized, a background image, and the three podia
+    with player names and $0 are drawn.
+    A 'highlight' ability exists for when players buzz in.
 
-    Attributes:
-      *dirty
-      *rect
-      *size
+    Calling the update() function on every frame with a GameState and
+    GameData object will automatically update the surface as needed.
+
+    INHERITED ATTRIBUTES:
+      * baseImg
+      * dirty
+      * rect
+      * size
+
+    METHODS:
+      * update
       
     """
     def __init__(self, size, gameData):
+        """
+        Constructor. Initializes the panel with a background
+        and the three podia with team names and scores of '$0'
+        
+        """
         super(PodiaPanel, self).__init__(size)
-        self.size = self.get_size()
-        self.rect = self.get_rect()
-        self.dirty = True
 
         scalar = self._init_background()
         self._podiaRects = self._draw_podia(self._init_podia())
@@ -47,7 +59,7 @@ class PodiaPanel(pygame.Surface):
         self._draw_player_names([p.name for p in gameData.players],
                                 132, scalar)
 
-        self._blankPanel = self.copy()
+        self.baseImg = self.copy()
 
         self._highlight = pygame.sprite.GroupSingle(
             Highlight(self._podiaRects[0].size))
@@ -55,29 +67,34 @@ class PodiaPanel(pygame.Surface):
         self._scores = self._init_scores()
         self._scores.draw(self)
 
-
     def update(self, gameState, gameData):
-        self.dirty = False
+        """
+        Draws necessary changes to the panel. Makes changes only as needed
+        based on gameState, so it is safely efficient to call this
+        on every frame. 'dirty' attribute set to True if panel
+        was changed and required redraw by caller.
         
+        """
         if gameState.state == gameState.BUZZ_IN:
             self._draw_highlight(gameState.arg)
             self.dirty = True
-        
+
+        #For any type of answer clear highlight.
         if gameState.state in gameState.ANSWER:
             self._clear_highlight()
-            score = [spr for spr in self._scores.sprites() if spr.ID == gameState.arg][0]
+            score = self._get_score_sprite(gameState.arg)
             score.dirty = 1
             self._scores.draw(self)
             self.dirty = True
 
+        #Correct answer; update and draw scores.
         if gameState.state == gameState.ANSWER_CORRECT:
             self._scores.update(gameData)
             self._scores.draw(self)
             self.dirty = True
             
-
     def _clear_highlight(self):
-        self._highlight.clear(self, self._blankPanel)
+        self._highlight.clear(self, self.baseImg)
 
     def _draw_highlight(self, playerI):
         self._highlight.sprite.rect = self._podiaRects[playerI].copy()
@@ -87,6 +104,7 @@ class PodiaPanel(pygame.Surface):
         """
         Draws the 3 podia to the panel.
         Returns tuple containing the rects of the podia drawn.
+        
         """
         rect = podiumSfc.get_rect()
         padding = (self.size[1] - 3*rect.h) / 4
@@ -118,6 +136,17 @@ class PodiaPanel(pygame.Surface):
             rect.y = pr.y + yOffset
 
             self.blit(text, rect)
+
+    def _get_score_sprite(self, id_):
+        """
+        Returns pygame.sprite.Sprite object from self._scores whose
+        ID attribute matches passed id_, or None if not found.
+        
+        """
+        try:
+            return [spr for spr in self._scores.sprites() if spr.ID == id_][0]
+        except IndexError:
+            return None
             
         
     def _init_background(self):
@@ -133,6 +162,7 @@ class PodiaPanel(pygame.Surface):
         """
         Returns the surface of a single podium, correctly
         scaled for the height of the panel.
+        
         """
         img = pygame.image.load(IMAGES['podium']).convert_alpha()
         origSize = img.get_size()
@@ -210,30 +240,3 @@ class Score(pygame.sprite.DirtySprite):
     @property
     def ID(self):
         return self._id
-
-        
-
-###############################################################################
-if __name__ == '__main__':
-    #Test run
-    pygame.init()
-    screen = pygame.display.set_mode((800, 450))
-
-    screen.fill((0, 0, 0))
-    rp = PodiaPanel((.25*800, 450))
-    
-    screen.blit(rp, (0, 0))
-    pygame.display.update()
-    pygame.time.delay(1000)
-    
-    rp._draw_highlight(2)
-    screen.blit(rp, (0, 0))
-    pygame.display.update()
-    pygame.time.delay(2000)
-
-    rp._clear_highlight()
-    rp._scores[2].dirty = 1
-    rp._scores.draw(rp)
-    screen.blit(rp, (0, 0))
-    pygame.display.update()
-    pygame.time.delay(2000)

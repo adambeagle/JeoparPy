@@ -3,8 +3,7 @@ controller.py
 Author: Adam Beagle
 
 DESCRIPTION:
-
-
+    Contains Controller class, described below.
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -18,37 +17,59 @@ of source code from this file.
 
 import pygame
 
-from gameboard import GameBoard
-from podiapanel import PodiaPanel
+from maingame import GameBoard, PodiaPanel
 
 class Controller(object):
-    """ """
+    """
+    This class serves as the single interface between main and the
+    ui modules. Main should call update() and draw() once every frame,
+    in that order.
+
+    METHODS:
+      * draw
+      * draw_all
+      * update
+      
+    """
     def __init__(self, screen, gameData):
         w, h  = size = screen.get_size()
-        self._board = GameBoard((.75*w, h), gameData)
-        self._podia = PodiaPanel((.25*w, h), gameData)
-        self._podia.rect.left = .75*w
+        board = GameBoard((.75*w, h), gameData)
+        podia = PodiaPanel((.25*w, h), gameData)
+        podia.rect.left = .75*w
+
+        self._sfcs = (board, podia)
 
     def draw(self, screen):
+        """
+        Redraws any surface which requires it, and updates
+        the screen.
+        """
         dirtyRects = []
-        
-        if self._podia.dirty:
-            print 'draw podia' #debug
-            screen.blit(self._podia, self._podia.rect)
-            dirtyRects.append(self._podia.rect)
 
-        if self._board.dirty:
-            screen.blit(self._board, self._board.rect)
-            dirtyRects.append(self._board.rect)
+        for sfc in self._sfcs:
+            if sfc.dirty:
+                if __debug__:
+                    print 'draw %s' % type(sfc).__name__
+                    
+                screen.blit(sfc, sfc.rect)
+                dirtyRects.append(sfc.rect)
+                sfc.dirty = False
 
         pygame.display.update(dirtyRects)
 
     def draw_all(self, screen):
-        screen.blit(self._board, self._board.rect)
-        screen.blit(self._podia, self._podia.rect)
+        """
+        Draws all surfaces, regardless of their 'dirty' attribute.
+        """
+        for sfc in self._sfcs:
+            screen.blit(sfc, sfc.rect)
+
         pygame.display.flip()
         
     def update(self, gameState, gameData):
-        self._podia.update(gameState, gameData)
+        """Updates the ui modules based on game state and data."""
+        for sfc in self._sfcs:
+            sfc.update(gameState, gameData)
+
 
     

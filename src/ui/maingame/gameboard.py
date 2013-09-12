@@ -3,7 +3,7 @@ gameboard.py
 Author: Adam Beagle
 
 DESCRIPTION:
-
+    Contains the GameBoard class, described below.
 
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
@@ -18,29 +18,35 @@ of source code from this file.
 
 import pygame
 
-from config import JEOP_BLUE
-from resmaps import FONTS
-from util import BorderedBox, shadow_text
+from jeopgamesfc import JeopGameSurface
+from ..config import JEOP_BLUE
+from ..resmaps import FONTS
+from ..util import BorderedBox, shadow_text
 
 ###############################################################################
-class GameBoard(pygame.Surface):
+class GameBoard(JeopGameSurface):
     """
-    ATTRIBUTES:
+    The primary JeoparPy game board: categories and clue amounts on a grid.
+    
+    INHERITED ATTRIBUTES:
+        * baseImg
         * dirty
         * rect
     """
     def __init__(self, size, gameData):
         super(GameBoard, self).__init__(size)
         self.fill((0, 0, 0))
-        
-        self.rect = self.get_rect()
-        self.dirty = 1
 
         self._boxes = self._init_boxes(len(gameData.categories),
                                          len(gameData.amounts) + 1)
 
         self._blit_categories(gameData.categories)
         self._draw_all_boxes()
+        
+        self.baseImg = self.copy()
+
+    def update(self, gameState, gameData):
+        pass
 
     def _blit_categories(self, categories):
         font = pygame.font.Font(FONTS['category'], self._scale(32))
