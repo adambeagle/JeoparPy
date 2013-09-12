@@ -24,9 +24,8 @@ of source code from this file..
 import pygame
 from pygame.locals import KEYDOWN
 
-from adam.game.pygame_util import shadow_text, wait_for_keypress
-
 from resmaps import FONTS, IMAGES, SOUNDS, SUBTITLE
+from util import shadow_text, wait_for_keypress
 
 ###############################################################################
 def do_intro(screen, clock):

@@ -26,12 +26,13 @@ from adam.util.sequence_util import chunker
 
 from config import CATEGORY_HOLD_TIME, JEOP_BLUE
 from resmaps import FONTS
+from util import BorderedBox
 
 ###############################################################################
 def do_scroll(screen, clock, categories):
     scrSize = screen.get_size()
     boxes = tuple(_build_box(scrSize, c) for c in categories)
-    step = int(7 * (scrSize[1] / 768.0))
+    step = _scale(6, scrSize[1])
 
     #Hold on each box, then scroll
     for box, nextBox in chunker(boxes, 2, True):
@@ -68,20 +69,6 @@ def _animate_scroll(screen, scrSize, clock, box1, box2, step):
         offset += step
         clock.tick_busy_loop(250) 
 
-def _blit_category_name(sfc, category, fontSize):
-    sfcRect = sfc.get_rect()
-    
-    font = pygame.font.Font(FONTS['category'], fontSize)
-    text = font.render(category, 1, (255, 255, 255))
-
-    rect = text.get_rect()
-    rect.center = sfc.get_rect().center
-
-    shadow, shadRect = shadow_text(category, rect, font, 5)
-
-    sfc.blit(shadow, shadRect)
-    sfc.blit(text, rect)
-
 def _blit_to_screen_and_update(screen, sfc):
     screen.blit(sfc, (0, 0))
     pygame.display.update()
@@ -91,25 +78,25 @@ def _build_box(size, category):
     Returns surface containing centered category text and a black border.
     'size' is size of surface to create.
     """
-    outer = pygame.Surface(size)
-    outer.fill((0, 0, 0))
+    borderW = _scale(33, size[1])
+    box = BorderedBox(size, JEOP_BLUE, borderW, (0, 0, 0))
+    
+    font = pygame.font.Font(FONTS['category'], _scale(150, size[1]))
 
-    borderW = int(35 * (size[1] / 768.0))
-    inner = pygame.Surface((size[0] - 2*borderW, size[1] - 2*borderW))
-    inner.fill(JEOP_BLUE)
-    _blit_category_name(inner, category,
-                      int(140 * (size[1] / 768.0)))
+    box.draw_centered_textblock(category.split(' '), font,
+                                (255, 255, 255), 0, _scale(7, size[1]))
 
-    outer.blit(inner, (borderW, borderW))
+    return box
 
-    return outer
+def _scale(n, rel):
+    return  int(n * (rel / 720.0))
 
 ###############################################################################
 if __name__ == '__main__':
     #Test run
     pygame.init()
     categories=('cat 1', 'cat 2', 'cat 3')
-    screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1280, 720))
     clock = pygame.time.Clock()
 
     screen.fill((0, 0, 0))
