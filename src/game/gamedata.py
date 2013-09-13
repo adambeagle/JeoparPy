@@ -83,16 +83,21 @@ class GameData(object):
         'Path' is the path (including name) to the file containing the clues.
         Ex: returnedClues[2][4] would return the 5th clue in the 3rd category.
         """
-        clues = ['']
+        clues = []
+        clue = ''
 
         #Read all clues from file into clues
         with open(path, 'r') as f:
             for line in f:
-                if not line == "\n":
-                    clues[-1] += line
-                else:
-                    if not clues[-1] == '':
-                        clues.append('')
+                if not len(line.strip()) == 0:
+                    clue += line
+                elif clue:
+                    clues.append(clue.split('\n')[:-1])
+                    clue = ''
+
+        #Last clue could be leftover beacuse EOF reached
+        if clue:
+            clues.append(clue.split('\n')[:-1])
 
         #Map clues to format (("Cat 1 clue", ...), ("Cat 2 clue", ...), ...)
         mapped = []
