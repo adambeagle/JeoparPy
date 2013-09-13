@@ -31,10 +31,10 @@ class GameData(object):
 
     ATTRIBUTES:
       * allPlayersAnswered
-      * players
-      * clues
-      * categories
       * amounts
+      * categories
+      * clues
+      * players
       * winners
 
     METHODS:

@@ -76,13 +76,13 @@ class PodiaPanel(JeopGameSurface):
         
         """
         if gameState.state == gameState.BUZZ_IN:
-            self._draw_highlight(gameState.arg)
+            self._draw_highlight(gameState.arg[0])
             self.dirty = True
 
         #For any type of answer clear highlight.
         if gameState.state in gameState.ANSWER:
             self._clear_highlight()
-            score = self._get_score_sprite(gameState.arg)
+            score = self._get_score_sprite(gameState.arg[0])
             score.dirty = 1
             self._scores.draw(self)
             self.dirty = True

@@ -45,8 +45,24 @@ class GameBoard(JeopGameSurface):
         
         self.baseImg = self.copy()
 
+    def get_clicked_clue(self, clickPos):
+        """
+        Returns 2-tuple (row, column) of clicked clue
+        if the click position is inside a clue's rect,
+        otherwise returns None.
+        """
+        for c, col in enumerate(self._boxes):
+            for r, box in enumerate(col[1:]):
+                if box.rect.collidepoint(clickPos):
+                    return (c, r)
+
+        return None
+
     def update(self, gameState, gameData):
-        pass
+        gs = gameState
+
+        if gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
+            self.dirty = True
 
     def _blit_categories(self, categories):
         font = pygame.font.Font(FONTS['category'], self._scale(32))
@@ -54,12 +70,12 @@ class GameBoard(JeopGameSurface):
         
         for i, c in enumerate(categories):
             lines = c.split(' ')
-            draw_centered_textblock(self._boxes[0][i], lines, font,
+            draw_centered_textblock(self._boxes[i][0], lines, font,
                                     (255, 255, 255), 0, shadowOffset)
 
     def _draw_all_boxes(self):
-        for row in self._boxes:
-            for box in row:
+        for col in self._boxes:
+            for box in col:
                 self.blit(box, box.rect)
 
     def _init_boxes(self, nCols, nRows):
@@ -93,9 +109,6 @@ class GameBoard(JeopGameSurface):
                 colBoxes.append(clueBox.copy())
 
             boxes.append(tuple(colBoxes))
-
-        #Transpose boxes into format ((row), (row), ...)
-        boxes = zip(*boxes[::1])
         
         return tuple(boxes)
 

@@ -47,6 +47,7 @@ class GameState(object):
         #TODO define all states
         self.BOARD_FILL = self._addstate()
         self.WAIT_CHOOSE_CLUE = self._addstate()
+        self.CLICK_CLUE = self._addstate()
         self.CLUE_OPEN = self._addstate()
         self.WAIT_BUZZ_IN = self._addstate()
         self.BUZZ_IN = self._addstate()
@@ -54,6 +55,7 @@ class GameState(object):
         self.ANSWER_CORRECT = self._addstate()
         self.ANSWER_INCORRECT = self._addstate()
         self.ANSWER_TIMEOUT = self._addstate()
+        self.ANSWER_NONE = self._addstate()
         self.GAME_END = self._addstate()
         self.QUIT = self._addstate()
 

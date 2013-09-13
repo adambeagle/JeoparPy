@@ -18,7 +18,7 @@ of source code from this file.
 import pygame
 
 from audioplayer import JeopAudioPlayer
-from maingame import GameBoard, PodiaPanel
+from maingame import Clue, GameBoard, PodiaPanel
 
 class Controller(object):
     """
@@ -37,12 +37,17 @@ class Controller(object):
     """
     def __init__(self, screen, gameData):
         w, h  = size = screen.get_size()
+        
         board = GameBoard((.75*w, h), gameData)
         podia = PodiaPanel((.25*w, h), gameData)
         podia.rect.left = .75*w
+        clue = Clue((.75*w, h))
 
-        self._sfcs = (board, podia)
+        self._sfcs = (board, podia, clue)
         self.audioplayer = JeopAudioPlayer()
+
+    def get_clicked_clue(self, clickPos):
+        return self._sfcs[0].get_clicked_clue(clickPos)
 
     def draw(self, screen):
         """
@@ -89,5 +94,16 @@ class Controller(object):
             self.audioplayer.play('wrong')
         elif gs.state == gs.ANSWER_TIMEOUT:
             self.audioplayer.play('outoftime')
+            self._wait_until_sound_end()
+        elif gs.state == gs.ANSWER_NONE:
+            self._wait_until_sound_end()
+
+    #TODO find a better way to accomplish this.
+    #This version is very inconsistent
+    def _wait_until_sound_end(self):
+        while pygame.mixer.get_busy():
+            pass
+
+        pygame.time.wait(350)
 
     

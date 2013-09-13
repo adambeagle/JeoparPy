@@ -38,39 +38,35 @@ def main():
     #Declarations
     gameData = GameData()
     gs = GameState()
-    controller = Controller(screen, gameData)
+    uicontroller = Controller(screen, gameData)
     clock = pygame.time.Clock()
 
     #Intro sequence (control passed completely to functions)
     pygame.mouse.set_visible(False)
-    do_intro(screen, clock, controller.audioplayer)
+    do_intro(screen, clock, uicontroller.audioplayer)
     do_scroll(screen, clock, gameData.categories)
     pygame.mouse.set_visible(True)
 
     #Prep for primary loop
     pygame.event.set_allowed(None)
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
-    controller.draw_all(screen)
+    uicontroller.draw_all(screen)
 
-    #TODO Remove once clue opening functionality completed
-    if __debug__:
-        gs.state = gs.WAIT_BUZZ_IN
-    else:
-        gs.state = gs.WAIT_CHOOSE_CLUE
+    gs.state = gs.WAIT_CHOOSE_CLUE
 
     #Primary loop
     while not gs.state == gs.GAME_END:
         #Events
-        handle_events(gs, gameData)
+        handle_events(gs, gameData, uicontroller)
         if gs.state == gs.QUIT:
             return
 
         #Update
-        controller.update(gs, gameData)
-        transition_state(gs, gameData)
+        uicontroller.update(gs, gameData)
+        transition_state(gs, gameData, uicontroller)
 
         #Draw
-        controller.draw(screen)
+        uicontroller.draw(screen)
 
         #Cleanup
         pygame.event.pump()
@@ -79,7 +75,7 @@ def main():
     return
     
 ###############################################################################
-def handle_events(gameState, gameData):
+def handle_events(gameState, gameData, uicontroller):
     gs = gameState
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -87,6 +83,9 @@ def handle_events(gameState, gameData):
 
         elif event.type == KEYDOWN:
             handle_key_event(event, gameState, gameData)
+
+        elif event.type == MOUSEBUTTONDOWN:
+            handle_mousebuttondown_event(event, gameState, uicontroller)
         
 def handle_key_event(event, gameState, gameData):
     gs = gameState
@@ -100,33 +99,53 @@ def handle_key_event(event, gameState, gameData):
     elif gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
         p = event.key - K_1
         if not gameData.players[p].hasAnswered:
-            gs.state = (gs.BUZZ_IN, p)
+            gs.state = (gs.BUZZ_IN, (p, gs.arg))
             
     elif gs.state == gs.WAIT_BUZZ_IN and event.key == K_END:
-        gs.state = (gs.ANSWER_TIMEOUT, gs.arg)
+        gs.state = gs.ANSWER_TIMEOUT
 
     elif gs.state == gs.WAIT_ANSWER:
         if event.key == K_SPACE:
             gs.state = (gs.ANSWER_CORRECT, gs.arg)
+            gameData.players[gs.arg[0]].score += gs.arg[1]
         elif event.key == K_BACKSPACE:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
 
-def transition_state(gameState, gameData):
+def handle_mousebuttondown_event(event, gameState, uicontroller):
     gs = gameState
-    if gs.state == gs.BUZZ_IN:
+
+    if gs.state == gs.WAIT_CHOOSE_CLUE and event.button == 1:
+        clueCoords = uicontroller.get_clicked_clue(event.pos)
+
+        if clueCoords:
+            gs.state = (gs.CLICK_CLUE, clueCoords)
+
+def transition_state(gameState, gameData, uicontroller):
+    gs = gameState
+
+    if gs.state == gs.WAIT_CHOOSE_CLUE:
+        pass
+
+    elif gs.state == gs.CLICK_CLUE:
+        gs.state = (gs.CLUE_OPEN, gs.arg)
+        
+    elif gs.state == gs.CLUE_OPEN:
+        gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+        
+    elif gs.state == gs.BUZZ_IN:
         gs.state = (gs.WAIT_ANSWER, gs.arg)
 
-    elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT):
+    elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
         gameData.clear_players_answered()
         gs.state = gs.WAIT_CHOOSE_CLUE
 
     elif gs.state == gs.ANSWER_INCORRECT:
-        gameData.players[gs.arg].hasAnswered = True
-        
+        gameData.players[gs.arg[0]].hasAnswered = True
+
         if gameData.allPlayersAnswered:
-            gs.state = gs.WAIT_CHOOSE_CLUE
+            gs.state = gs.ANSWER_NONE
         else:
-            gs.state = gs.WAIT_BUZZ_IN
+            gs.state = (gs.WAIT_BUZZ_IN, gs.arg[1])
     
 ###############################################################################
 if __name__ == '__main__':
