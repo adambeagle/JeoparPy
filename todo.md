@@ -2,7 +2,6 @@
 ###### Last updated 3:13PM 9/12/2013 ######
 
 ### Immediate ###
-* Abstract text-drawing functions out of BorderedBox
 
 ### High priority ###
 * Major priority currently is complete rebuild (see changelist).

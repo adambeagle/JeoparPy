@@ -6,20 +6,37 @@ from pygame.locals import *
 from adam.util.types_util import to_numeric
 
 ###############################################################################
-def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
-    """
-    Returns surface and rect of shadowed text.
-    Shadow is positioned 'offset' pixels right and down from srcRect.
-    'msg' is string to shadow.
-    """
-    shadText = font.render(msg, 1, color)
-    rect = shadText.get_rect()
+def draw_centered_textblock(sfc, lines, font, color, 
+                            spacing=0, shadowOffset=None):
+    """ """
+    blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
+    blockRect.center = sfc.get_rect().center
+    lineH = font.get_linesize()
 
-    rect.x = srcRect.x + offset
-    rect.y = srcRect.y + offset
+    for i, line in enumerate(lines):
+        rect = pygame.Rect((0, 0), font.size(line))
+        rect.centerx = blockRect.centerx
+        rect.y = blockRect.y + lineH*i
+
+        draw_textline(sfc, line, font, color, rect, shadowOffset)
+        
+            
+def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
+    rect = pygame.Rect((0, 0), font.size(text))
+    rect.center = sfc.get_rect().center
+    self.draw_textline(sfc, text, font, color, rect, shadowOffset)
+
+def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
+    s = text
+    doShadow = shadowOffset is not None
+    text = font.render(s, 1, color)
+
+    if doShadow:
+        shadow, shadRect = shadow_text(s, rect, font, shadowOffset)
+        sfc.blit(shadow, shadRect)
+
+    sfc.blit(text, rect)
     
-    return shadText, rect
-
 def get_size_textblock(lines, font, spacing):
     """
     Returns dimensions needed to render 'lines' of text
@@ -34,6 +51,20 @@ def get_size_textblock(lines, font, spacing):
         blockH += h + spacing
 
     return (blockW, blockH)
+
+def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
+    """
+    Returns surface and rect of shadowed text.
+    Shadow is positioned 'offset' pixels right and down from srcRect.
+    'msg' is string to shadow.
+    """
+    shadText = font.render(msg, 1, color)
+    rect = shadText.get_rect()
+
+    rect.x = srcRect.x + offset
+    rect.y = srcRect.y + offset
+    
+    return shadText, rect
 
 def wait_for_keypress(key=None):
     """
@@ -94,39 +125,6 @@ class BorderedBox(pygame.Surface):
         b.rect = self.rect.copy()
         
         return b
-
-# TODO 9/12 The three text-drawing functions below should be abstracted
-#   into generic utility functions. 
-    def draw_centered_textblock(self, lines, font, color, 
-                                spacing=0, shadowOffset=None):
-        """ """
-        blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
-        blockRect.center = pygame.Rect((0, 0), self.size).center
-        lineH = font.get_linesize()
-
-        for i, line in enumerate(lines):
-            rect = pygame.Rect((0, 0), font.size(line))
-            rect.centerx = blockRect.centerx
-            rect.y = blockRect.y + lineH*i
-
-            self.draw_textline(line, font, color, rect, shadowOffset)
-            
-                
-    def draw_centered_text(self, text, font, color, shadowOffset=None):
-        rect = pygame.Rect((0, 0), font.size(text))
-        rect.center = self.get_rect().center
-        self.draw_textline(text, font, color, rect, shadowOffset)
-
-    def draw_textline(self, text, font, color, rect, shadowOffset=None):
-        s = text
-        doShadow = shadowOffset is not None
-        text = font.render(s, 1, color)
-
-        if doShadow:
-            shadow, shadRect = shadow_text(s, rect, font, shadowOffset)
-            self.blit(shadow, shadRect)
-
-        self.blit(text, rect)
 
     def redraw(self):
         """

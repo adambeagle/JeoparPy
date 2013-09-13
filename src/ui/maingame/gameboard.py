@@ -21,7 +21,7 @@ import pygame
 from jeopgamesfc import JeopGameSurface
 from ..config import JEOP_BLUE
 from ..resmaps import FONTS
-from ..util import BorderedBox, shadow_text
+from ..util import BorderedBox, draw_centered_textblock, shadow_text
 
 ###############################################################################
 class GameBoard(JeopGameSurface):
@@ -54,9 +54,8 @@ class GameBoard(JeopGameSurface):
         
         for i, c in enumerate(categories):
             lines = c.split(' ')
-            self._boxes[0][i].draw_centered_textblock(lines, font,
-                                                      (255, 255, 255), 0,
-                                                      shadowOffset)
+            draw_centered_textblock(self._boxes[0][i], lines, font,
+                                    (255, 255, 255), 0, shadowOffset)
 
     def _draw_all_boxes(self):
         for row in self._boxes:

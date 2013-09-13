@@ -26,7 +26,7 @@ from adam.util.sequence_util import chunker
 
 from config import CATEGORY_HOLD_TIME, JEOP_BLUE
 from resmaps import FONTS
-from util import BorderedBox
+from util import BorderedBox, draw_centered_textblock
 
 ###############################################################################
 def do_scroll(screen, clock, categories):
@@ -83,8 +83,8 @@ def _build_box(size, category):
     
     font = pygame.font.Font(FONTS['category'], _scale(150, size[1]))
 
-    box.draw_centered_textblock(category.split(' '), font,
-                                (255, 255, 255), 0, _scale(7, size[1]))
+    draw_centered_textblock(box, category.split(' '), font,
+                            (255, 255, 255), 0, _scale(7, size[1]))
 
     return box
 
