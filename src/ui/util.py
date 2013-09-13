@@ -52,6 +52,10 @@ def get_size_textblock(lines, font, spacing):
 
     return (blockW, blockH)
 
+def scale(n, rel, comp):
+    """ """
+    return int(n * (rel / float(comp)))
+
 def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
     """
     Returns surface and rect of shadowed text.
