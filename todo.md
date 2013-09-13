@@ -1,5 +1,4 @@
 # Todo #
-###### Last updated 3:13PM 9/12/2013 ######
 
 ### Immediate ###
 
