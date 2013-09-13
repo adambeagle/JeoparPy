@@ -1,6 +1,6 @@
 JEOPARPY!
 =========
-#### Written by Adam Beagle ####
+###### Written by Adam Beagle ######
 
 
 
