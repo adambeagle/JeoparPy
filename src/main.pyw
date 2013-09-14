@@ -52,7 +52,7 @@ def main():
     pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN, ANIMATIONEND])
     uicontroller.draw(screen)
 
-    gs.state = gs.WAIT_CHOOSE_CLUE
+    gs.state = gs.BOARD_FILL
 
     #Primary loop
     while not gs.state == gs.GAME_END:
@@ -93,7 +93,10 @@ def handle_events(gameState, gameData, uicontroller):
 def handle_event_animationend(event, gameState):
     gs = gameState
 
-    if gs.state == gs.WAIT_CLUE_OPEN:
+    if gs.state == gs.WAIT_BOARD_FILL:
+        gs.state = gs.WAIT_CHOOSE_CLUE
+
+    elif gs.state == gs.WAIT_CLUE_OPEN:
         gs.state = (gs.CLUE_OPEN, gs.arg)
         
 def handle_event_key(event, gameState, gameData):
@@ -132,8 +135,8 @@ def handle_event_mousebuttondown(event, gameState, uicontroller):
 def transition_state(gameState, gameData, uicontroller):
     gs = gameState
 
-    if gs.state == gs.WAIT_CHOOSE_CLUE:
-        pass
+    if gs.state == gs.BOARD_FILL:
+        gs.state = gs.WAIT_BOARD_FILL
 
     elif gs.state == gs.CLICK_CLUE:
         gs.state = (gs.WAIT_CLUE_OPEN, gs.arg)

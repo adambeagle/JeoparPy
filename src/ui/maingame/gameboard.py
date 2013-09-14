@@ -16,12 +16,15 @@ of source code from this file.
 
 """
 
+from random import shuffle
+
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..config import JEOP_BLUE
+from ..config import ANIMATIONEND, JEOP_BLUE
 from ..resmaps import FONTS
-from ..util import BorderedBox, draw_centered_textblock, scale
+from ..util import (BorderedBox, draw_centered_textblock,
+                    draw_centered_textline, scale)
 
 ###############################################################################
 class GameBoard(JeopGameSurface):
@@ -61,8 +64,36 @@ class GameBoard(JeopGameSurface):
     def update(self, gameState, gameData):
         gs = gameState
 
-        if gs.state in (gs.DELAY, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
+        if gs.state == gs.BOARD_FILL:
+            self._amtFont = pygame.font.Font(FONTS['amount'], self._scale(48))
+            self._coordsStack = [(c, r) for c in xrange(len(self._boxes))
+                                for r in xrange(len(self._boxes[0]) - 1)]
+            shuffle(self._coordsStack)
+            
+        elif gs.state == gs.WAIT_BOARD_FILL:
+            if self._coordsStack:
+                c, r = self._coordsStack.pop()
+                box = self._boxes[c][r + 1]
+                
+                self._blit_amount(box, gameData.amounts[r])
+                self.blit(box, box.rect)
+                self.dirty = True
+                pygame.time.wait(135)
+            else:
+                pygame.event.post(pygame.event.Event(ANIMATIONEND))
+
+        elif gs.state == gs.CLUE_OPEN:
+            c, r = gs.arg
+            box = self._boxes[c][r + 1]
+            box.redraw()
+            self.blit(box, box.rect)
+            
+        elif gs.state in (gs.DELAY, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
             self.dirty = True
+
+    def _blit_amount(self, box, amount):
+        draw_centered_textline(box, '$' + str(amount),
+                               self._amtFont, (217, 164, 31), 3)
 
     def _blit_categories(self, categories):
         font = pygame.font.Font(FONTS['category'], self._scale(32))
