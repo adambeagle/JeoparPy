@@ -22,7 +22,7 @@ import pygame
 from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SCREEN_SIZE
-from game import GameData, GameState
+from game import GameData, JeopGameState
 from ui import ANIMATIONEND, Controller, do_intro, do_scroll
 
 ###############################################################################
@@ -37,7 +37,7 @@ def main():
 
     #Declarations
     gameData = GameData()
-    gs = GameState()
+    gs = JeopGameState()
     uicontroller = Controller(screen, gameData, FPS_LIMIT)
     clock = pygame.time.Clock()
 
@@ -146,7 +146,11 @@ def transition_state(gameState, gameData, uicontroller):
 
     elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
         gameData.clear_players_answered()
-        gs.state = gs.WAIT_CHOOSE_CLUE
+        
+        if gs.state == gs.ANSWER_CORRECT:
+            gs.state = gs.DELAY
+        else:
+            gs.state = gs.WAIT_CHOOSE_CLUE
 
     elif gs.state == gs.ANSWER_INCORRECT:
         gameData.players[gs.arg[0]].hasAnswered = True
@@ -155,6 +159,9 @@ def transition_state(gameState, gameData, uicontroller):
             gs.state = gs.ANSWER_NONE
         else:
             gs.state = (gs.WAIT_BUZZ_IN, gs.arg[1])
+
+    elif gs.state == gs.DELAY:
+        gs.state = gs.WAIT_CHOOSE_CLUE
     
 ###############################################################################
 if __name__ == '__main__':

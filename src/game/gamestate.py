@@ -3,7 +3,7 @@ gamestate.py
 Author: Adam Beagle
 
 DESCRIPTION:
-  Inclues GameState and StateError classes, described below.
+  Inclues JeopGameState, GameState and StateError classes, described below.
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -18,21 +18,18 @@ of source code from this file.
 ##############################################################################
 class GameState(object):
     """
-    The state of the game can be accessed and set from this object.
+    The state of a game can be accessed and set from this object.
     Only one state is allowed at any time.
-
-    This and GameData are the primary interfaces
-    between the main module and the game logic.
-
-    This also serves as a centralized means of communication
-    between main and the UI modules.
 
     An optional 'arg' can be set to provide additional
     information about the state.
 
+    Inheriting classes should create states by calling _addstate().
+
     ATTRIBUTES:
-      *state
-      *arg
+      * arg
+      * previous (read-only)
+      * state
 
     'arg' can be set in two ways:
       * Directly, i.e. gamestate.arg = "arg"
@@ -43,29 +40,8 @@ class GameState(object):
     def __init__(self):
         """Constructor."""
         self._numStates = 0
-
-        #TODO define all states
-        self.BOARD_FILL = self._addstate()
-        self.WAIT_BOARD_FILL = self._addstate()
-        self.WAIT_CHOOSE_CLUE = self._addstate()
-        self.CLICK_CLUE = self._addstate()
-        self.WAIT_CLUE_OPEN = self._addstate()
-        self.CLUE_OPEN = self._addstate()
-        self.WAIT_BUZZ_IN = self._addstate()
-        self.BUZZ_IN = self._addstate()
-        self.WAIT_ANSWER = self._addstate()
-        self.ANSWER_CORRECT = self._addstate()
-        self.ANSWER_INCORRECT = self._addstate()
-        self.ANSWER_TIMEOUT = self._addstate()
-        self.ANSWER_NONE = self._addstate()
-        self.GAME_END = self._addstate()
-        self.QUIT = self._addstate()
-
-        #State ranges
-        self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
-        self.CLICKABLE = (self.WAIT_CHOOSE_CLUE,)
-       
         self._state = -1
+        self._previous = -1
         self.arg = None
 
     def _addstate(self):
@@ -83,6 +59,10 @@ class GameState(object):
             return repr(self.state)
         else:
             return repr((self.state, self.arg))
+
+    @property
+    def previous(self):
+        return self._previous
         
     @property
     def state(self):
@@ -111,6 +91,7 @@ class GameState(object):
 
         #Verify state within valid range of defined states
         if val in xrange(self._numStates):
+            self._previous = self._state
             self._state = val
         else:
             raise StateError("Set of 'State' attempted with value " +
@@ -119,6 +100,42 @@ class GameState(object):
         if __debug__:
             print "State change: %s" % self.state
 
+##############################################################################
+class JeopGameState(GameState):
+    """
+    Defines the states for a JeoparPy game.
+
+    This and GameData are the primary interfaces
+    between the main module and the game logic.
+
+    This also serves as a centralized means of communication
+    between main and the UI modules.
+    """
+    def __init__(self):
+        super(JeopGameState, self).__init__()
+        
+        #TODO define all states
+        self.BOARD_FILL = self._addstate()
+        self.WAIT_BOARD_FILL = self._addstate()
+        self.WAIT_CHOOSE_CLUE = self._addstate()
+        self.CLICK_CLUE = self._addstate()
+        self.WAIT_CLUE_OPEN = self._addstate()
+        self.CLUE_OPEN = self._addstate()
+        self.WAIT_BUZZ_IN = self._addstate()
+        self.BUZZ_IN = self._addstate()
+        self.WAIT_ANSWER = self._addstate()
+        self.ANSWER_CORRECT = self._addstate()
+        self.ANSWER_INCORRECT = self._addstate()
+        self.ANSWER_TIMEOUT = self._addstate()
+        self.ANSWER_NONE = self._addstate()
+        self.DELAY = self._addstate()
+        self.GAME_END = self._addstate()
+        self.QUIT = self._addstate()
+
+        #State ranges
+        self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
+        self.CLICKABLE = (self.WAIT_CHOOSE_CLUE,)
+        
 ##############################################################################
 class StateError(Exception):
     """
