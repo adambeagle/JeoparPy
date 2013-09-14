@@ -7,7 +7,6 @@
 
 ### High priority ###
 * Major priority currently is complete rebuild (see changelist).
-* Functions from my custom library (import adam.*) need to be made available on Github
 
 ### Low priority ###
 * Add ability to use audio as clue media, like can be done with images/video.

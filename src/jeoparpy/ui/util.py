@@ -8,7 +8,10 @@ from ..util import to_numeric
 ###############################################################################
 def draw_centered_textblock(sfc, lines, font, color, 
                             spacing=0, shadowOffset=None):
-    """ """
+    """
+    Blits lines of text in 'lines' argument centered onto surface 'sfc.'
+    Returns pygame.Rect of drawn block relative to sfc.
+    """
     blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
     blockRect.center = sfc.get_rect().center
     lineH = font.get_linesize()
@@ -19,14 +22,26 @@ def draw_centered_textblock(sfc, lines, font, color,
         rect.y = blockRect.y + lineH*i
 
         draw_textline(sfc, line, font, color, rect, shadowOffset)
+
+    return blockRect
         
             
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
+    """
+    Blits line of text in 'text' argument centered onto surface 'sfc.'
+    Returns pygame.Rect of drawn line relative to sfc.
+    """
     rect = pygame.Rect((0, 0), font.size(text))
     rect.center = sfc.get_rect().center
     draw_textline(sfc, text, font, color, rect, shadowOffset)
 
+    return rect
+
 def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
+    """
+    Blits text in 'text' onto surface 'sfc.'
+    Uses position of 'rect' (top left) to position blit.
+    """
     s = text
     doShadow = shadowOffset is not None
     text = font.render(s, 1, color)
