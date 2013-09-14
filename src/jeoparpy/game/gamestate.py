@@ -114,7 +114,6 @@ class JeopGameState(GameState):
     def __init__(self):
         super(JeopGameState, self).__init__()
         
-        #TODO define all states
         self.BOARD_FILL = self._addstate()
         self.WAIT_BOARD_FILL = self._addstate()
         self.WAIT_CHOOSE_CLUE = self._addstate()
