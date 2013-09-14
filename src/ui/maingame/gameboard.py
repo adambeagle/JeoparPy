@@ -84,20 +84,24 @@ class GameBoard(JeopGameSurface):
         boxW = size[0] / nCols
         boxH = size[1] / nRows
         borderW = max(self._scale(2), 1)
+        catBottomBorder = 3*borderW
+        rightEdgeBorder = 3*borderW
 
         clueBox = BorderedBox((boxW, boxH), JEOP_BLUE,
                           borderW, (0, 0, 0))
 
         catBox = BorderedBox((boxW, boxH), JEOP_BLUE,
-                             (borderW, borderW, borderW*3, borderW),
+                             (borderW, borderW, catBottomBorder, borderW),
                              (0, 0, 0))
 
         for col in xrange(nCols):
             colBoxes = []
 
             if col == nCols - 1:
-                clueBox.borderWidths = (borderW, 4*borderW, borderW, borderW)
-                catBox.borderWidths = (borderW, 4*borderW, 3*borderW, borderW)
+                clueBox.borderWidths = (borderW, rightEdgeBorder,
+                                        borderW, borderW)
+                catBox.borderWidths = (borderW, rightEdgeBorder,
+                                       catBottomBorder, borderW)
                 clueBox.redraw()
                 catBox.redraw()
 
