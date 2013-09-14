@@ -118,6 +118,7 @@ class GameBoard(JeopGameSurface):
 
     def _scale(self, n):
         return int(n * self.rect.height / 720.0)
-        
-        
-###############################################################################
+
+    @property
+    def boxSize(self):
+        return self._boxes[0][0].size
