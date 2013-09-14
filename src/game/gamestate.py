@@ -46,8 +46,10 @@ class GameState(object):
 
         #TODO define all states
         self.BOARD_FILL = self._addstate()
+        self.WAIT_BOARD_FILL = self._addstate()
         self.WAIT_CHOOSE_CLUE = self._addstate()
         self.CLICK_CLUE = self._addstate()
+        self.WAIT_CLUE_OPEN = self._addstate()
         self.CLUE_OPEN = self._addstate()
         self.WAIT_BUZZ_IN = self._addstate()
         self.BUZZ_IN = self._addstate()
