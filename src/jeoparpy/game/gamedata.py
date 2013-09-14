@@ -14,7 +14,8 @@ This copyright notice must be retained with any use
 of source code from this file.
 
 """
-from config import AMOUNTS, CLUES_PATH, CATEGORIES_PATH, PLAYER_NAMES
+from config import AMOUNTS, PLAYER_NAMES
+from constants import CATEGORIES_PATH, CLUES_PATH
 from jeop_player import JeopPlayer
 from ..util import to_numeric
 

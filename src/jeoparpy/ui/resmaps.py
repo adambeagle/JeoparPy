@@ -19,19 +19,14 @@ of source code from this file.
 
 """
 
-from os import path, pardir
+from os import path
 
-from ..util import get_first_textline
+from ..constants import ROOT_PATH
 
-_rootPath = path.abspath(path.join(path.dirname(__file__), pardir, pardir, pardir))
-
-_fontPath = path.join(_rootPath, 'res', 'fonts', '')
-_imgPath = path.join(_rootPath, 'res', 'images', '')
-_sndPath = path.join(_rootPath, 'res', 'sounds', '')
-_subPath = path.join(_rootPath, 'res', 'text', 'subtitle.txt')
-_vidPath = path.join(_rootPath, 'res', 'video', '')
-
-
+_fontPath = path.join(ROOT_PATH, 'res', 'fonts', '')
+_imgPath = path.join(ROOT_PATH, 'res', 'images', '')
+_sndPath = path.join(ROOT_PATH, 'res', 'sounds', '')
+_vidPath = path.join(ROOT_PATH, 'res', 'video', '')
 
 FONTS = {'title'    : _fontPath + 'gyparody.ttf',
          'category' : _fontPath + 'impact.ttf',
@@ -64,14 +59,5 @@ SOUNDS = {'intro'     : _sndPath + 'intro.ogg',
           'end'       : _sndPath + 'end.ogg',
           'applause'  : _sndPath + 'applause.wav'
           }
-
-#Note 9/11 Though SUBTITLE is not a map to a path like everything else
-# defined here I'm placing it here for the following reasons:
-#   * Paths need only be dealt with in this file
-#   * SUBTITLE only reads from file, not customized within the .py like
-#     the things defined in config.py
-#   * Though SUBTITLE itself is not a map to a resource,
-#     a resource is read to retrieve it, so it arguably fits here.
-SUBTITLE = get_first_textline(_subPath)
 
 VIDEOS = {}

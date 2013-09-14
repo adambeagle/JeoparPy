@@ -21,7 +21,8 @@ of source code from this file.
 
 import pygame
 
-from config import CATEGORY_HOLD_TIME, JEOP_BLUE
+from config import CATEGORY_HOLD_TIME
+from constants import JEOP_BLUE
 from resmaps import FONTS
 from util import BorderedBox, draw_centered_textblock, shadow_text
 from ..util import chunker

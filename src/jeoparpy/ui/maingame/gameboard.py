@@ -21,7 +21,7 @@ from random import shuffle
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..config import ANIMATIONEND, JEOP_BLUE
+from ..constants import ANIMATIONEND, JEOP_BLUE
 from ..resmaps import FONTS
 from ..util import (BorderedBox, draw_centered_textblock,
                     draw_centered_textline, scale)

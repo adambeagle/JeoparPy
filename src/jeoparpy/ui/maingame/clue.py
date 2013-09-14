@@ -1,7 +1,7 @@
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..config import JEOP_BLUE
+from ..constants import JEOP_BLUE
 from ..resmaps import FONTS
 from ..util import draw_centered_textblock, scale
 

@@ -3,9 +3,8 @@ config.py
 Author: Adam Beagle
 
 DESCRIPTION:
-  Defines constants used by multiple ui modules.
-  Anything UI-related that is designed to be user-customizable
-  is placed here.
+  Defines constants used by multiple ui modules and subpackages
+  that are designed to be user-customizable.
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -17,12 +16,10 @@ of source code from this file.
 
 """
 
-from pygame.locals import USEREVENT
+###############################################################################
+#INITIALIZATION: Do not alter or move 
+#====================================
+MEDIA = {}
+###############################################################################
 
-
-ANIMATIONEND = USEREVENT + 1
-JEOP_BLUE = (16, 26, 124) #RGB color
-
-
-# --Everything below is customizable--
 CATEGORY_HOLD_TIME = 2500 #In miliseconds

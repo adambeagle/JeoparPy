@@ -24,7 +24,8 @@ of source code from this file..
 import pygame
 from pygame.locals import KEYDOWN, QUIT
 
-from resmaps import FONTS, IMAGES, SOUNDS, SUBTITLE
+from constants import SUBTITLE
+from resmaps import FONTS, IMAGES, SOUNDS
 from util import shadow_text, wait_for_keypress
 
 ###############################################################################

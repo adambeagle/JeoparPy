@@ -20,7 +20,7 @@ of source code from this file.
 
 import pygame
 
-from ..config import ANIMATIONEND, JEOP_BLUE
+from ..constants import ANIMATIONEND, JEOP_BLUE
 
 ###############################################################################
 class OpenClueAnimation(pygame.sprite.DirtySprite):
