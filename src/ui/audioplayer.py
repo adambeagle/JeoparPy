@@ -99,6 +99,3 @@ class MissingSoundError(Exception):
     def __str__(self):
         return ("Name %r does not refer to an existing sound " % self.errVal +
                 "in this instance of AudioPlayer.sounds." )
-
-pygame.init()
-a = JeopAudioPlayer()
