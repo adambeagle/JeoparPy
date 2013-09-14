@@ -24,7 +24,7 @@ def draw_centered_textblock(sfc, lines, font, color,
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     rect = pygame.Rect((0, 0), font.size(text))
     rect.center = sfc.get_rect().center
-    self.draw_textline(sfc, text, font, color, rect, shadowOffset)
+    draw_textline(sfc, text, font, color, rect, shadowOffset)
 
 def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
     s = text
