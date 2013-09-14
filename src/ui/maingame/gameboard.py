@@ -21,7 +21,7 @@ import pygame
 from jeopgamesfc import JeopGameSurface
 from ..config import JEOP_BLUE
 from ..resmaps import FONTS
-from ..util import BorderedBox, draw_centered_textblock, shadow_text
+from ..util import BorderedBox, draw_centered_textblock, scale, shadow_text
 
 ###############################################################################
 class GameBoard(JeopGameSurface):
@@ -83,7 +83,7 @@ class GameBoard(JeopGameSurface):
         size = self.rect.size
         boxW = size[0] / nCols
         boxH = size[1] / nRows
-        borderW = self._scale(2)
+        borderW = max(self._scale(2), 1)
 
         clueBox = BorderedBox((boxW, boxH), JEOP_BLUE,
                           borderW, (0, 0, 0))
