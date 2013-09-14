@@ -17,7 +17,7 @@ class Clue(JeopGameSurface):
     def draw_clue(self, clueLines):
         self.fill(JEOP_BLUE)
         draw_centered_textblock(self, clueLines, self._font, (255, 255, 255),
-                                0, scale(3, self.size[1], 720))
+                                0, scale(4, self.size[1], 720))
 
     def update(self, gameState, gameData):
         gs = gameState
