@@ -21,9 +21,9 @@ of source code from this file.
 
 from os import path, pardir
 
-from adam.util.file_util import get_first_textline
+from ..util import get_first_textline
 
-_rootPath = path.abspath(path.join(path.dirname(__file__), pardir, pardir))
+_rootPath = path.abspath(path.join(path.dirname(__file__), pardir, pardir, pardir))
 
 _fontPath = path.join(_rootPath, 'res', 'fonts', '')
 _imgPath = path.join(_rootPath, 'res', 'images', '')

@@ -14,10 +14,9 @@ This copyright notice must be retained with any use
 of source code from this file.
 
 """
-from adam.util.types_util import to_numeric
-
 from config import AMOUNTS, CLUES_PATH, CATEGORIES_PATH, PLAYER_NAMES
 from jeop_player import JeopPlayer
+from ..util import to_numeric
 
 ###############################################################################
 class GameData(object):
@@ -58,7 +57,7 @@ class GameData(object):
         """Sets all players' hasAnswered attribute to False."""
         for p in self.players:
             p.hasAnswered = False
-
+            
     def _build_categories_from_file(self, path):
         """
         Returns a tuple of strings, each a category name.

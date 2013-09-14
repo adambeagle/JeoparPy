@@ -3,7 +3,7 @@ import sys
 import pygame
 from pygame.locals import *
 
-from adam.util.types_util import to_numeric
+from ..util import to_numeric
 
 ###############################################################################
 def draw_centered_textblock(sfc, lines, font, color, 

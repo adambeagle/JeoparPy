@@ -19,7 +19,7 @@ of source code from this file.
 from os import pardir, path, sep
 
 #Initialization; do not move or alter
-_rootPath = path.abspath(path.join(path.dirname(__file__), pardir, pardir))
+_rootPath = path.abspath(path.join(path.dirname(__file__), pardir, pardir, pardir))
 _textPath = path.join(_rootPath, 'res', 'text', '')
 
 #Everything below is customizable

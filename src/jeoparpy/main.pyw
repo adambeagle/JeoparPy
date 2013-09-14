@@ -165,7 +165,3 @@ def transition_state(gameState, gameData, uicontroller):
 
     elif gs.state == gs.DELAY:
         gs.state = gs.WAIT_CHOOSE_CLUE
-    
-###############################################################################
-if __name__ == '__main__':
-    main()
