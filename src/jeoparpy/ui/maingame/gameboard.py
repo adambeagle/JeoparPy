@@ -93,7 +93,7 @@ class GameBoard(JeopGameSurface):
 
     def _blit_amount(self, box, amount):
         draw_centered_textline(box, '$' + str(amount),
-                               self._amtFont, (217, 164, 31), 3)
+                               self._amtFont, (217, 164, 31), 4)
 
     def _blit_categories(self, categories):
         font = pygame.font.Font(FONTS['category'], self._scale(32))
