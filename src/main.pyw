@@ -21,9 +21,9 @@ of source code from this file.
 import pygame
 from pygame.locals import *
 
-from config import SCREEN_SIZE, FULLSCREEN
+from config import FPS_LIMIT, FULLSCREEN, SCREEN_SIZE
 from game import GameData, GameState
-from ui import Controller, do_intro, do_scroll
+from ui import ANIMATIONEND, Controller, do_intro, do_scroll
 
 ###############################################################################
 def main():
@@ -38,7 +38,7 @@ def main():
     #Declarations
     gameData = GameData()
     gs = GameState()
-    uicontroller = Controller(screen, gameData)
+    uicontroller = Controller(screen, gameData, FPS_LIMIT)
     clock = pygame.time.Clock()
 
     #Intro sequence (control passed completely to functions)
@@ -49,8 +49,8 @@ def main():
 
     #Prep for primary loop
     pygame.event.set_allowed(None)
-    pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
-    uicontroller.draw_all(screen)
+    pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN, ANIMATIONEND])
+    uicontroller.draw(screen)
 
     gs.state = gs.WAIT_CHOOSE_CLUE
 
@@ -82,12 +82,21 @@ def handle_events(gameState, gameData, uicontroller):
             gs.state = gs.QUIT
 
         elif event.type == KEYDOWN:
-            handle_key_event(event, gameState, gameData)
+            handle_event_key(event, gameState, gameData)
 
         elif event.type == MOUSEBUTTONDOWN:
-            handle_mousebuttondown_event(event, gameState, uicontroller)
+            handle_event_mousebuttondown(event, gameState, uicontroller)
+
+        elif event.type == ANIMATIONEND:
+            handle_event_animationend(event, gameState)
+
+def handle_event_animationend(event, gameState):
+    gs = gameState
+
+    if gs.state == gs.WAIT_CLUE_OPEN:
+        gs.state = (gs.CLUE_OPEN, gs.arg)
         
-def handle_key_event(event, gameState, gameData):
+def handle_event_key(event, gameState, gameData):
     gs = gameState
     
     if event.key == K_q:
@@ -111,7 +120,7 @@ def handle_key_event(event, gameState, gameData):
         elif event.key == K_BACKSPACE:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
 
-def handle_mousebuttondown_event(event, gameState, uicontroller):
+def handle_event_mousebuttondown(event, gameState, uicontroller):
     gs = gameState
 
     if gs.state == gs.WAIT_CHOOSE_CLUE and event.button == 1:
@@ -127,7 +136,7 @@ def transition_state(gameState, gameData, uicontroller):
         pass
 
     elif gs.state == gs.CLICK_CLUE:
-        gs.state = (gs.CLUE_OPEN, gs.arg)
+        gs.state = (gs.WAIT_CLUE_OPEN, gs.arg)
         
     elif gs.state == gs.CLUE_OPEN:
         gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])

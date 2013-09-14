@@ -16,10 +16,14 @@ of source code from this file.
 """
 
 import pygame
+from pygame.locals import USEREVENT
 
 from audioplayer import JeopAudioPlayer
-from maingame import Clue, GameBoard, PodiaPanel
+from maingame import Clue, GameBoard, OpenClueAnimation, PodiaPanel
 
+ANIMATIONEND = USEREVENT + 1
+
+###############################################################################
 class Controller(object):
     """
     This class serves as the single interface between main and the
@@ -35,15 +39,21 @@ class Controller(object):
       * update
       
     """
-    def __init__(self, screen, gameData):
+    def __init__(self, screen, gameData, fpsLimit):
         w, h  = size = screen.get_size()
         
         board = GameBoard((.75*w, h), gameData)
+        board.dirty = True
         podia = PodiaPanel((.25*w, h), gameData)
+        podia.dirty = True
         podia.rect.left = .75*w
         clue = Clue((.75*w, h))
 
-        self._sfcs = (board, podia, clue)
+        spr = OpenClueAnimation(board.boxSize, board.rect.copy(),
+                                ANIMATIONEND, fpsLimit)
+
+        #NOTE Order of self._sfcs is draw order
+        self._sfcs = (board, podia, spr, clue) 
         self.audioplayer = JeopAudioPlayer()
 
     def get_clicked_clue(self, clickPos):
@@ -60,21 +70,16 @@ class Controller(object):
             if sfc.dirty:
                 if __debug__:
                     print 'draw %s' % type(sfc).__name__
+
+                if isinstance(sfc, pygame.Surface):
+                    screen.blit(sfc, sfc.rect)
+                else:
+                    screen.blit(sfc.image, sfc.rect)
                     
-                screen.blit(sfc, sfc.rect)
                 dirtyRects.append(sfc.rect)
                 sfc.dirty = False
 
         pygame.display.update(dirtyRects)
-
-    def draw_all(self, screen):
-        """
-        Draws all surfaces, regardless of their 'dirty' attribute.
-        """
-        for sfc in self._sfcs:
-            screen.blit(sfc, sfc.rect)
-
-        pygame.display.flip()
         
     def update(self, gameState, gameData):
         """Updates the ui modules based on game state and data."""

@@ -15,5 +15,7 @@ of source code from this file.
 
 """
 
-SCREEN_W, SCREEN_H = SCREEN_SIZE = (1280, 720)
+FPS_LIMIT = 100
 FULLSCREEN = True
+SCREEN_W, SCREEN_H = SCREEN_SIZE = (1280, 720)
+
