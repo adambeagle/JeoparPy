@@ -1,6 +1,9 @@
 # Todo #
 
 ### Immediate ###
+* Add attribute to GameData that keeps track of what clues have 
+  been chosen, and a related boolean attribute that says
+  whether no clues remain.
 
 ### High priority ###
 * Major priority currently is complete rebuild (see changelist).
