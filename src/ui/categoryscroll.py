@@ -21,12 +21,11 @@ of source code from this file.
 
 import pygame
 
-from adam.game.pygame_util import shadow_text
 from adam.util.sequence_util import chunker
 
 from config import CATEGORY_HOLD_TIME, JEOP_BLUE
 from resmaps import FONTS
-from util import BorderedBox, draw_centered_textblock
+from util import BorderedBox, draw_centered_textblock, shadow_text
 
 ###############################################################################
 def do_scroll(screen, clock, categories):
