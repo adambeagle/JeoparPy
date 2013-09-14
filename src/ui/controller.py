@@ -71,11 +71,12 @@ class Controller(object):
                 if __debug__:
                     print 'draw %s' % type(sfc).__name__
 
-                if isinstance(sfc, pygame.Surface):
-                    screen.blit(sfc, sfc.rect)
-                else:
+                if isinstance(sfc, pygame.sprite.Sprite):
                     screen.blit(sfc.image, sfc.rect)
-                    
+                else:
+                    #Case: sfc is pygame.Surface
+                    screen.blit(sfc, sfc.rect)
+
                 dirtyRects.append(sfc.rect)
                 sfc.dirty = False
 
