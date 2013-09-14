@@ -47,16 +47,16 @@ do so are beyond the scope of this document.
 ## SETUP ##
 
 The following are required to run JeoparPy:
-  -Python (http://www.python.org/download/)
-  -Pygame (http://www.pygame.org/download.shtml)
+  * Python (http://www.python.org/download/)
+  * Pygame (http://www.pygame.org/download.shtml)
 
 Please note that the game has only been tested with:
-  Python 2.7.3 32-bit
-  Pygame 1.9.2 32-bit
+  * Python 2.7.3 32-bit
+  * Pygame 1.9.2 32-bit
 
 JeoparPy has been tested on the following platforms:
-  Windows 7 64-bit
-  Ubuntu 10.10
+  * Windows 7 64-bit
+  * Ubuntu 10.10
 
 
 
