@@ -61,7 +61,7 @@ class GameBoard(JeopGameSurface):
     def update(self, gameState, gameData):
         gs = gameState
 
-        if gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
+        if gs.state in (gs.DELAY, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
             self.dirty = True
 
     def _blit_categories(self, categories):

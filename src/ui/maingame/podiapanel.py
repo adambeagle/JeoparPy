@@ -91,7 +91,10 @@ class PodiaPanel(JeopGameSurface):
         if gameState.state == gameState.ANSWER_CORRECT:
             self._scores.update(gameData)
             self._scores.draw(self)
-            self.dirty = True
+
+        if gameState.state == gameState.DELAY:
+            print 'delay'
+            pygame.time.delay(500)
             
     def _clear_highlight(self):
         self._highlight.clear(self, self.baseImg)
