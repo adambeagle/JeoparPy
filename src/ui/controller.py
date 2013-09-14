@@ -21,8 +21,6 @@ from pygame.locals import USEREVENT
 from audioplayer import JeopAudioPlayer
 from maingame import Clue, GameBoard, OpenClueAnimation, PodiaPanel
 
-ANIMATIONEND = USEREVENT + 1
-
 ###############################################################################
 class Controller(object):
     """
@@ -49,8 +47,7 @@ class Controller(object):
         podia.rect.left = .75*w
         clue = Clue((.75*w, h))
 
-        spr = OpenClueAnimation(board.boxSize, board.rect.copy(),
-                                ANIMATIONEND, fpsLimit)
+        spr = OpenClueAnimation(board.boxSize, board.rect.copy(), fpsLimit)
 
         #NOTE Order of self._sfcs is draw order
         self._sfcs = (board, podia, spr, clue) 

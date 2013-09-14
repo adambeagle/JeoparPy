@@ -17,9 +17,12 @@ of source code from this file.
 
 """
 
-from os import pardir, path, sep
+from pygame.locals import USEREVENT
+
+
+ANIMATIONEND = USEREVENT + 1
+JEOP_BLUE = (16, 26, 124) #RGB color
+
 
 # --Everything below is customizable--
-
 CATEGORY_HOLD_TIME = 2500 #In miliseconds
-JEOP_BLUE = (16, 26, 124) #RGB color

@@ -20,7 +20,7 @@ of source code from this file.
 
 import pygame
 
-from ..config import JEOP_BLUE
+from ..config import ANIMATIONEND, JEOP_BLUE
 
 ###############################################################################
 class OpenClueAnimation(pygame.sprite.DirtySprite):
@@ -36,7 +36,7 @@ class OpenClueAnimation(pygame.sprite.DirtySprite):
       * update
       
     """
-    def __init__(self, startSize, endRect, eventcode, fps):
+    def __init__(self, startSize, endRect, fps):
         """
         'eventcode' is pygame event type value for an event
         that signals this sprites animation has concluded.
@@ -53,7 +53,7 @@ class OpenClueAnimation(pygame.sprite.DirtySprite):
         self._startRect = None  #See _init_rects()
         self._moveAmts = None   #See _init_rects()
         self._endRect = endRect
-        self._eventCode = eventcode
+        self._eventCode = ANIMATIONEND
         self._frameGoal = self._get_frame_goal(fps, 0.5) #TODO No hardcoded fps
         self._frame = 0
 
