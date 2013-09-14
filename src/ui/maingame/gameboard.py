@@ -21,7 +21,7 @@ import pygame
 from jeopgamesfc import JeopGameSurface
 from ..config import JEOP_BLUE
 from ..resmaps import FONTS
-from ..util import BorderedBox, draw_centered_textblock, scale, shadow_text
+from ..util import BorderedBox, draw_centered_textblock, scale
 
 ###############################################################################
 class GameBoard(JeopGameSurface):
