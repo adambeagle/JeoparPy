@@ -47,8 +47,7 @@ IMAGES = {'introBG'     : _imgPath + 'blue_big.png',
           'highlight'   : _imgPath + 'highlight.png',
           'rules'       : _imgPath + 'rules.png',
           'lamonster'   : _imgPath + 'livvy.png',
-          'uggie'       : _imgPath + 'uggie.jpg',
-          'presley'     : _imgPath + 'presley.jpg',
+          'test'        : _imgPath + 'wivtest.png',
         }
 
 SOUNDS = {'intro'     : _sndPath + 'intro.ogg',

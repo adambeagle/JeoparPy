@@ -14,18 +14,10 @@ def draw_centered_textblock(sfc, lines, font, color,
     """
     blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
     blockRect.center = sfc.get_rect().center
-    lineH = font.get_linesize()
 
-    for i, line in enumerate(lines):
-        rect = pygame.Rect((0, 0), font.size(line))
-        rect.centerx = blockRect.centerx
-        rect.y = blockRect.y + lineH*i
-
-        draw_textline(sfc, line, font, color, rect, shadowOffset)
-
-    return blockRect
+    return draw_textblock(sfc, lines, font, color, blockRect.topleft,
+                          True, spacing, shadowOffset)
         
-            
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     """
     Blits line of text in 'text' argument centered onto surface 'sfc.'
@@ -36,6 +28,27 @@ def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     draw_textline(sfc, text, font, color, rect, shadowOffset)
 
     return rect
+
+def draw_textblock(sfc, lines, font, color, pos, centerx=False,
+                   spacing=0, shadowOffset=None):
+    """
+    Blits lines of text in 'lines' argument centered onto surface 'sfc.'
+    Returns pygame.Rect of drawn block relative to sfc.
+    """
+    blockRect = pygame.Rect(pos, get_size_textblock(lines, font, spacing))
+    lineH = font.get_linesize()
+
+    for i, line in enumerate(lines):
+        rect = pygame.Rect((0, 0), font.size(line))
+        if centerx:
+            rect.centerx = blockRect.centerx
+        else:
+            rect.x = blockRect.x
+        rect.y = blockRect.y + lineH*i
+
+        draw_textline(sfc, line, font, color, rect, shadowOffset)
+
+    return blockRect
 
 def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
     """
