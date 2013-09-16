@@ -23,3 +23,9 @@ MEDIA = {}
 ###############################################################################
 
 CATEGORY_HOLD_TIME = 2500 #In miliseconds
+
+MEDIA[(0, 2)] = 'test_img'
+MEDIA[(1, 2)] = 'test_img'
+MEDIA[(2, 2)] = 'test_img'
+MEDIA[(3, 2)] = 'test_img'
+MEDIA[(4, 2)] = 'test_img'
