@@ -84,20 +84,21 @@ class GameData(object):
         Ex: returnedClues[2][4] would return the 5th clue in the 3rd category.
         """
         clues = []
-        clue = ''
+        clue = []
 
         #Read all clues from file into clues
         with open(path, 'r') as f:
             for line in f:
-                if not len(line.strip()) == 0:
-                    clue += line
+                stripped = line.strip()
+                if stripped:
+                    clue.append(stripped)
                 elif clue:
-                    clues.append(clue.split('\n')[:-1])
-                    clue = ''
+                    clues.append(tuple(clue))
+                    clue = []
 
         #Last clue could be leftover beacuse EOF reached
         if clue:
-            clues.append(clue.split('\n')[:-1])
+            clues.append(tuple(clue))
 
         #Map clues to format (("Cat 1 clue", ...), ("Cat 2 clue", ...), ...)
         mapped = []
