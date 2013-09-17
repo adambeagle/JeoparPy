@@ -120,9 +120,9 @@ class GameData(object):
     @property
     def winners(self):
         """
-        Returns tuple containing names of player(s) with
-        the highest score at the time of calling.
+        Returns tuple containing tuple(s) of (player #, name) for
+        the player(s) with the highest score at the time of calling.
         """
         high = max((p.score for p in self.players))
         
-        return tuple(p.name for p in self.players if p.score == high)
+        return tuple((i, p.name) for i, p in enumerate(self.players) if p.score == high)
