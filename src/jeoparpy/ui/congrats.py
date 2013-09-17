@@ -1,13 +1,13 @@
 """
-outro.py
+congrats.py
 Author: Adam Beagle
 
 DESCRIPTION:
-  Contains the functions that implement the JeoparPy outro sequences,
-  a congraulatory messaage and a credits roll.
+  Contains the functions that implement the congratulatory
+  message part of the JeoparPy outro sequence.
 
 USAGE:
-  Main should call only do_congrats and do_credits.
+  Main should call only do_congrats.
   
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
@@ -19,6 +19,7 @@ This copyright notice must be retained with any use
 of source code from this file..
 
 """
+
 import pygame
 
 from constants import JEOP_BLUE
@@ -115,7 +116,3 @@ def _fade_in_sfc(screen, sfc, clock, time):
         
         pygame.display.update()
         clock.tick_busy_loop(fpsGoal)
-
-###############################################################################
-def do_credits():
-    raise NotImplementedError("Credits are forthcoming.")

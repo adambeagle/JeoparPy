@@ -76,6 +76,7 @@ def main():
     #Post game: Congratulations screen and credits
     pygame.mouse.set_visible(0)
     do_congrats(screen, clock, gameData.winners, uicontroller.audioplayer)
+    do_credits(screen, clock, uicontroller.audioplayer, FPS_LIMIT)
 
     return
     
