@@ -128,13 +128,12 @@ class JeopGameState(GameState):
         self.ANSWER_TIMEOUT = self._addstate()
         self.ANSWER_NONE = self._addstate()
         self.DELAY = self._addstate()
-        self.GAME_END = self._addstate()
+        self.GAME_END = self._addstate()        
         self.QUIT = self._addstate()
 
         #State ranges
         self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
-        self.CLICKABLE = (self.WAIT_CHOOSE_CLUE,)
-        
+
 ##############################################################################
 class StateError(Exception):
     """
