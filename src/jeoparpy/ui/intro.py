@@ -26,7 +26,7 @@ from pygame.locals import KEYDOWN, QUIT
 
 from constants import SUBTITLE
 from resmaps import FONTS, IMAGES, SOUNDS
-from util import shadow_text, wait_for_keypress
+from util import scale, shadow_text, wait_for_keypress
 
 ###############################################################################
 def do_intro(screen, clock, audioplayer):
@@ -109,7 +109,7 @@ def _build_banner(scrRect, color):
     Arguments are a pygame.Rect object the size of the screen,
     and the color of the banner.
     """
-    size = (scrRect.w, int(scrRect.h * (175.0 / 768)))
+    size = (scrRect.w, scale(175, scrRect.h, 768))
     banner = pygame.Surface(size)
     banner.fill(color)
     
