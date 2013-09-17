@@ -222,7 +222,7 @@ def _blit_thanks(screen, text, font, scrRect, lineW):
     thanks = font.render(text, 1, (255, 255, 255))
     rect = thanks.get_rect()
     rect.center = scrRect.center
-    shadow, shadRect = shadow_text(text, rect, font, scale(4, lineW, 1024))
+    shadow, shadRect = shadow_text(text, rect, font, scale(3, lineW, 1024))
     
     screen.blit(shadow, shadRect)
     screen.blit(thanks, rect)

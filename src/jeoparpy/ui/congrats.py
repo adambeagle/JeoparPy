@@ -43,7 +43,7 @@ def do_congrats(screen, clock, winners, audioPlayer):
 
     screen.blit(sfc, (0, 0))
     pygame.display.update(winnersRect)
-    audioPlayer.wait_until_sound_end()
+    audioPlayer.wait_until_sound_end(1000)
     
 def _animate_congrats(screen, sfc):
     """
