@@ -1,9 +1,7 @@
 # Todo #
 
 ### Immediate ###
-* Add attribute to GameData that keeps track of what clues have 
-  been chosen, and a related boolean attribute that says
-  whether no clues remain.
+* Makes rules rendered text rather than an image. ('Press A' is a big problem)
 
 ### High priority ###
 * Major priority currently is complete rebuild (see changelist).
@@ -11,11 +9,14 @@
 ### Low priority ###
 * Add ability to use audio as clue media, like can be done with images/video.
 * Logging
+* Write a generic fade_in_surface function (similar tasks done in intro and outro)
+* Make outro animation (currently do_congrats) more interesting.
 * Allow arbitrary-length categories (within reason).
 	UPDATE 9/12
 	This is partially completed. Arbitrary-length categories are
 	possible, but the font size must be manually set. Hope to
 	automatically calculate font size soon.
+* Allow user choice to take away money on wrong answer or not.
 
 ### Down the Road ###
 * Add ability to have recorded clue readings for certain clues or every clue.
