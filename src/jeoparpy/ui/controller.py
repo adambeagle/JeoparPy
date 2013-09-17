@@ -97,7 +97,7 @@ class Controller(object):
             self.audioplayer.play('wrong')
         elif gs.state == gs.ANSWER_TIMEOUT:
             self.audioplayer.play('outoftime')
-            self._wait_until_sound_end()
+            self.audioplayer.wait_until_sound_end()
         elif gs.state == gs.ANSWER_NONE:
             self.audioplayer.wait_until_sound_end(350)
 
