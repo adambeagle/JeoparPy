@@ -41,8 +41,8 @@ FONTS = {'title'    : _fontPath + 'gyparody.ttf',
          'credits'  : _fontPath + 'korinab.ttf'
         }
 
-IMAGES = {'introBG'     : _imgPath + 'blue_big.png',
-          'rPanelBG'    : _imgPath + 'blue.png',
+IMAGES = {'introBG'     : _imgPath + 'introbg.png',
+          'rPanelBG'    : _imgPath + 'podiabg.png',
           'podium'      : _imgPath + 'podium.png',
           'highlight'   : _imgPath + 'highlight.png',
           'rules'       : _imgPath + 'rules.png',
