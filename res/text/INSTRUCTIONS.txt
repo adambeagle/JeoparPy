@@ -1,4 +1,8 @@
-THE FOLLOWING ARE INSTRUCTIONS TO WRITE YOUR OWN CLUES, CATEGORIES, AND SUBTITLE:
+THE FOLLOWING ARE INSTRUCTIONS TO CREATE YOUR OWN VALUES FOR GAME DATA:
+=======================================================================
+Please note that each respective file has sample data included to aid
+you in writing your own data.
+
 
 CLUES:
   * Clues must be written in 'clues.txt,' located in the folder containing these instructions.
@@ -17,6 +21,7 @@ CLUES:
          ~So, a long clue written on a single line will not display properly.
          ~There is a long example clue in the file that serves as a guide for how to format multi-line clues
 
+
 CATEGORIES:
   * Categories must be written in 'categories.txt,' located in the folder containing these instructions.
 
@@ -26,9 +31,36 @@ CATEGORIES:
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
+
+
+PLAYER NAMES:
+  * Player names are defined in 'players.txt,' located in the folder containing these instructions.
+
+  * Each player/team name must be on a separate line.
+
+  * There is a maximum of 3 players/teams at this time. If more names are provided in the file,
+    they will be ignored, and a warning message printed. If there are fewer than 3 names provided,
+    default names (Player 1, etc...) will be used for missing names.
+
+  * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
+
+
+
+AMOUNTS:
+  * Clue amounts are defined in 'amounts.txt,' located in the folder containing these instructions.
+
+  * Each amount should be on a separate line, and must be only an integer (ex: 200).
+  
+  * Do not include a dollar sign, decimal or any other non-numeric character.
+
+  * Make sure the number of amounts matches the number of clues per category.
+
+
+
 SUBTITLE:
   * Subtitle must be written in 'subtitle.txt,' located in the folder containing these instructions.
 
   * The first line in 'subtitle.txt' containing any non-whitespace text is treated as the subtitle.
 
   * If no subtitle is desired, make 'subtitle.txt' empty (do not delete it, however).
+

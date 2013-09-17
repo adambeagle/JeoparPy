@@ -14,10 +14,11 @@ This copyright notice must be retained with any use
 of source code from this file.
 
 """
-from config import AMOUNTS, PLAYER_NAMES
-from constants import CATEGORIES_PATH, CLUES_PATH
+from sys import stderr
+
+from constants import AMOUNTS_PATH, CATEGORIES_PATH, CLUES_PATH, PLAYERS_PATH
 from jeop_player import JeopPlayer
-from ..util import to_numeric
+from ..util import get_stripped_nonempty_file_lines, to_numeric
 
 ###############################################################################
 class GameData(object):
@@ -30,12 +31,12 @@ class GameData(object):
     scores, can be changed).
 
     ATTRIBUTES:
-      * allPlayersAnswered
+      * allPlayersAnswered (read-only)
       * amounts
       * categories
       * clues
       * players
-      * winners
+      * winners (read-only)
 
     METHODS:
       * clear_players_answered
@@ -43,39 +44,34 @@ class GameData(object):
     """
     def __init__(self):
         """
-        Constructor. Assumes AMOUNTS, CLUES_PATH, CATEGORIES_PATH,
-        and PLAYER_NAMES are set as instructed in the game
-        package's config.py.
+        Constructor.
         """
-        self.players = tuple(JeopPlayer(name) for name in PLAYER_NAMES)
         
-        self.categories = self._build_categories_from_file(CATEGORIES_PATH)
+        
+        self.categories = get_stripped_nonempty_file_lines(CATEGORIES_PATH)
+        
         self.clues = self._build_clues_from_file(CLUES_PATH,
                                                  len(self.categories))
-        self.amounts = AMOUNTS
+        
+        self.amounts = self._build_amounts_from_file(AMOUNTS_PATH)
+
+        self.players = self._build_players_from_file(PLAYERS_PATH)
 
     def clear_players_answered(self):
         """Sets all players' hasAnswered attribute to False."""
         for p in self.players:
             p.hasAnswered = False
-            
-    def _build_categories_from_file(self, path):
-        """
-        Returns a tuple of strings, each a category name.
-        'Path' is the path, including filename, of the
-        file containing the categories.
-        Separate categories are expected to be on separate lines in the file.
-        """
-        categories = []
-        
-        with open(path, 'r') as f:
-            for line in f:
-                stripped = line.strip()
-                if len(stripped) > 0:
-                    categories.append(stripped)
 
-        return tuple(categories)
-                    
+    def _build_amounts_from_file(self, path):
+        """ """
+        try:
+            return tuple(int(a) for a in
+                         get_stripped_nonempty_file_lines(path))
+        except (TypeError, ValueError):
+            raise TypeError("Problem with values in amounts file. " +
+                            "Make sure all lines contain only integers. " +
+                            "Bad file: %s" % path)
+                            
     def _build_clues_from_file(self, path, numCategories):
         """
         Returns a tuple containing tuples of each categories clues,
@@ -100,7 +96,28 @@ class GameData(object):
         if clue:
             clues.append(tuple(clue))
 
-        #Map clues to format (("Cat 1 clue", ...), ("Cat 2 clue", ...), ...)
+        return self._map_clues(clues, numCategories)
+
+    def _build_players_from_file(self, path):
+        playerNames = get_stripped_nonempty_file_lines(path)
+        if len(playerNames) > 3:
+            playerNames = playerNames[:3]
+            print >>stderr, ("WARNING: Too many players provided. " +
+                             "Extraneous player names ignored. " +
+                             "Bad file: %s" % path)
+        elif len(playerNames) < 3:
+            missing = 3 - len(playerNames)
+            playerNames += tuple('Player ' + str(i + 2)
+                                 for i in xrange(missing))
+        
+        return tuple(JeopPlayer(name) for name in playerNames)
+
+    def _map_clues(self, clues, numCategories):
+        """
+        Map clues from format (clue 0, clue 1, clue 2, ...) to format
+        ((Category 1 clues), (Category 2 clues), ...).
+        
+        """
         mapped = []
         numPerCat = len(clues) / numCategories
         for c in xrange(numCategories):

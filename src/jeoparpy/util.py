@@ -27,6 +27,7 @@ def chunker(sequence, size, overlap=False):
     are yielded, otherwise chunks do not overlap.
     If sequence length is not evenly divisible by size and overlap is False,
     extra elements at the end of sequence are ignored.
+    
     """
     if size < 1:
         raise ValueError("'size' must exceed 0. Value passed was %r." % size)
@@ -38,6 +39,22 @@ def chunker(sequence, size, overlap=False):
     while i + size <= len_:
         yield sequence[i:i+size]
         i += step
+
+def get_stripped_nonempty_file_lines(path):
+    """
+    Returns tuple of all nonempty lines in a file after they have been
+    stripped of leading and trailing whitespace.
+    
+    """
+    lines = []
+
+    with open(path, 'r') as f:
+        for line in f:
+            stripped = line.strip()
+            if len(stripped):
+                lines.append(stripped)
+
+    return tuple(lines)
 
 def get_first_textline(path, ignore=None):
     """

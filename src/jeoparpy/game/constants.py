@@ -22,5 +22,7 @@ from ..constants import ROOT_PATH
 
 _textPath = path.join(ROOT_PATH, 'res', 'text', '')
 
+AMOUNTS_PATH = _textPath + 'amounts.txt'
 CLUES_PATH = _textPath + 'clues.txt'
 CATEGORIES_PATH = _textPath + 'categories.txt'
+PLAYERS_PATH = _textPath + 'players.txt'
