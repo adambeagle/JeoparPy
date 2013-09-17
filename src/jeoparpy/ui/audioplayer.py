@@ -18,6 +18,7 @@ class AudioPlayer(object):
       * set_volume
       * stop
       * stop_all
+      * wait_until_sound_end
 
     """
     def __init__(self, namePathMap={}):
@@ -83,6 +84,21 @@ class AudioPlayer(object):
     def stop_all(self):
         """Alias to pygame.mixer.stop()"""
         pygame.mixer.stop()
+
+    #TODO find a better way to accomplish this.
+    #This version is very inconsistent
+    def wait_until_sound_end(self, extraDelay=0):
+        """
+        Returns control when pygame.mixer.get_busy returns False.
+
+        If extraDelay given, pygame.time.wait will be called with
+        extraDelay as the argument.
+        """
+        while pygame.mixer.get_busy():
+            pass
+
+        if extraDelay > 0:
+            pygame.time.wait(extraDelay)
 
 ###############################################################################
 class JeopAudioPlayer(AudioPlayer):

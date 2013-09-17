@@ -99,14 +99,6 @@ class Controller(object):
             self.audioplayer.play('outoftime')
             self._wait_until_sound_end()
         elif gs.state == gs.ANSWER_NONE:
-            self._wait_until_sound_end()
-
-    #TODO find a better way to accomplish this.
-    #This version is very inconsistent
-    def _wait_until_sound_end(self):
-        while pygame.mixer.get_busy():
-            pass
-
-        pygame.time.wait(350)
+            self.audioplayer.wait_until_sound_end(350)
 
     
