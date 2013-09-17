@@ -23,7 +23,8 @@ from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SCREEN_SIZE
 from game import GameData, JeopGameState
-from ui import ANIMATIONEND, Controller, do_intro, do_scroll
+from ui import (ANIMATIONEND, Controller, do_congrats,
+                do_credits, do_intro, do_scroll)
 
 ###############################################################################
 def main():
@@ -71,6 +72,10 @@ def main():
         #Cleanup
         pygame.event.pump()
         clock.tick_busy_loop(100)
+
+    #Post game: Congratulations screen and credits
+    pygame.mouse.set_visible(0)
+    do_congrats(screen, clock, gameData.winners, uicontroller.audioplayer)
 
     return
     
