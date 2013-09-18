@@ -1,7 +1,6 @@
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..config import MEDIA
 from ..constants import JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
 from ..util import (draw_centered_textblock, draw_textblock,
@@ -54,13 +53,11 @@ class Clue(JeopGameSurface):
         
 
     def _get_media(self, coords):
-        if coords in MEDIA:
-            name = MEDIA[coords]
-            if name in IMAGES:
-                img = pygame.image.load(IMAGES[name]).convert()
-                scaledSize = (scale(x, self.size[1], 720)
-                              for x in img.get_size())
-                return pygame.transform.smoothscale(img, tuple(scaledSize))
+        if coords in IMAGES:
+            img = pygame.image.load(IMAGES[coords]).convert()
+            scaledSize = (scale(x, self.size[1], 720)
+                          for x in img.get_size())
+            return pygame.transform.smoothscale(img, tuple(scaledSize))
 
         return None
         

@@ -35,31 +35,44 @@ _cluesPath = path.join(ROOT_PATH, 'res', 'sounds', 'clues', '')
 #=======================================
 # To use your own image file in a clue, it must be added to IMAGES below.
 #
-# 1) Do NOT delete any of the existing IMAGES lines.
-#    The game will not be able to run.
+# 1) Place your image file in the <jeoparpy root>/res/images folder.
 #
-# 2) Place your image file in the <jeoparpy root>/res/images folder.
+# 2) Take note of your image's name and file extension.
+#    Note that .png files are recommended, but several other common formats
+#    are supported.
 #
-# 3) Take note of your image's name and file extension.
+# 3) Add a line inside the brackets of IMAGES below in the following format:
+#        (column, row) : _imgPath + 'filename.ext',
 #
-# 4) Add a line inside the brackets of IMAGES (located immediately below these
-#    instructions) for your image. It should look very similar to the
-#    existing line, and use this format:
-#        'descriptive_name' : _imgPath + 'filename.ext',
+#    3a) (column, row) is the location on the game board of the desired clue.
+#         Note that both are 0-based, so coordinates of the upper-left clue
+#         are (0, 0). See the chart below for a visual example.
 #
-#    4a) Replace 'descriptive_name' with an alphanumeric name of your choosing.
-#        Make sure it is surrounded by single quotes.
+#    3b) Replace 'filename.ext' (don't remove the quotes) with the
+#        filename and extension of your image.
 #
-#    4b) Replace 'filename.ext' with exact filename and extension of the image.
-#        This must also be surrounded by single (or double) quotes.
-#        Only write the filename and extension; include no path information.
+# 4) Make sure to delete the sample lines below
+#    (those that assign 'test_img.png'). 
 #
-# 5) Go to config.py, in the same folder as this file, and follow the
-#    instructions to add your image to a specific clue. Take note of the
-#    descriptive name(s) you used for your file(s) as it/they will be required
-#    in config.py to link your file to a clue.
+#
+# For a 5x5 board, these are the (column, row) values:
+#        CATEGORY | CATEGORY | CATEGORY | CATEGORY | CATEGORY
+#       ----------|----------|----------|----------|----------
+#         (0, 0)  |  (1, 0)  |  (2, 0)  |  (3, 0)  |  (4, 0)
+#         (0, 1)  |  (1, 1)  |  (2, 1)  |  (3, 1)  |  (4, 1)
+#         (0, 2)  |  (1, 2)  |  (2, 2)  |  (3, 2)  |  (4, 2)
+#         (0, 3)  |  (1, 3)  |  (2, 3)  |  (3, 3)  |  (4, 3)
+#         (0, 4)  |  (1, 4)  |  (2, 4)  |  (3, 4)  |  (4, 4)
 
-IMAGES = {'test_img'    : _imgPath + 'wivtest.png',
+
+# WARNING: If creating your own game, delete the sample lines in this
+#          dictionary. If not using clue images, change the line
+#          below to: IMAGES = {}
+IMAGES = {(0, 3)   : _imgPath + 'test_img.png',
+          (1, 3)   : _imgPath + 'test_img.png',
+          (2, 3)   : _imgPath + 'test_img.png',
+          (3, 3)   : _imgPath + 'test_img.png',
+          (4, 3)   : _imgPath + 'test_img.png',
           }
 
 ###############################################################################
@@ -74,26 +87,18 @@ IMAGES = {'test_img'    : _imgPath + 'wivtest.png',
 # 2) Place your audio file(s) in the folder <JeoparPy root>/res/sounds/clues
 #
 # 3) Add a line to CLUE_READS below in the following format:
-#        (column, row) : _cluesPath + 'your_filename.ext',
+#        (column, row) : _cluesPath + 'filename.ext',
 #
 #    3a) (column, row) is the location on the game board of the desired clue.
 #         Note that both are 0-based, so coordinates of the upper-left clue
-#         are (0, 0). See the chart below for a visual example.
+#         are (0, 0). See the chart in the IMAGES instructions above
+#         for help.
 #
-#    3b) Replace 'your_filename.ext' (don't remove the quotes) with the
-#        filename and extension of the clue tat matches (column, row).
+#    3b) Replace 'filename.ext' (don't remove the quotes) with the
+#        filename and extension of your audio file.
 #
 # 4) Make sure to delete the sample lines below
 #    (those that assign 'sample_read.ogg'). 
-#
-# For a 5x5 board, these are the (column, row) values:
-#        CATEGORY | CATEGORY | CATEGORY | CATEGORY | CATEGORY
-#       ----------|----------|----------|----------|----------
-#         (0, 0)  |  (1, 0)  |  (2, 0)  |  (3, 0)  |  (4, 0)
-#         (0, 1)  |  (1, 1)  |  (2, 1)  |  (3, 1)  |  (4, 1)
-#         (0, 2)  |  (1, 2)  |  (2, 2)  |  (3, 2)  |  (4, 2)
-#         (0, 3)  |  (1, 3)  |  (2, 3)  |  (3, 3)  |  (4, 3)
-#         (0, 4)  |  (1, 4)  |  (2, 4)  |  (3, 4)  |  (4, 4)
 #
 
 
