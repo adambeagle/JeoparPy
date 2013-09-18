@@ -24,9 +24,10 @@ of source code from this file..
 import pygame
 from pygame.locals import KEYDOWN, QUIT
 
-from constants import SUBTITLE
-from resmaps import FONTS, IMAGES, SOUNDS
-from util import scale, shadow_text, wait_for_keypress
+from constants import JEOP_BLUE, RULES, SUBTITLE
+from resmaps import FONTS, IMAGES
+from util import (draw_centered_textblock, draw_textline,
+                  scale, shadow_text, wait_for_keypress)
 
 ###############################################################################
 def do_intro(screen, clock, audioplayer):
@@ -119,15 +120,28 @@ def _build_banner(scrRect, color):
     return (banner, rect)
 
 def _build_rules(scrRect):
-    offset = int(50 * (scrRect.h / 768.0))
+    """Returns tuple of fully drawn rules surface and its rect."""
+    header = '--RULES--'
+    offset = scale(50, scrRect.h, 768)
     rect = scrRect.copy()
     rect.inflate_ip(-offset, -offset)
-    
-    rules = pygame.image.load(IMAGES['rules']).convert()
-    rules = pygame.transform.smoothscale(rules, rect.size)
-    rules.set_alpha(240)
+    sfc = pygame.Surface(rect.size)
+    font = pygame.font.Font(FONTS['rules'], scale(80, scrRect.h, 768))
 
-    return rules, rect
+    #Draw header
+    sfc.fill(JEOP_BLUE)
+    headerRect = pygame.Rect((0, int(.05*rect.h)), font.size(header))
+    headerRect.centerx = rect.centerx
+    draw_textline(sfc, header, font, (255, 255, 255),
+                  headerRect, scale(6, scrRect.h, 768))
+
+    #Draw rules
+    font = pygame.font.Font(FONTS['rules'], scale(50, scrRect.h, 768))
+    draw_centered_textblock(sfc, RULES, font, (255, 255, 255), 0,
+                            scale(4, scrRect.h, 768), False)
+    sfc.set_alpha(240)
+
+    return sfc, rect
 
 def _build_title_text(scrRect, bgColor):
     """
@@ -135,6 +149,7 @@ def _build_title_text(scrRect, bgColor):
     and its Rect, already positioned to be drawn.
     Arguments are a pygame.Rect object the size of the screen,
     and the background color of the text.
+    
     """
     size = int(150 * (scrRect.h / 768.0))
     font = pygame.font.Font(FONTS['title'], size)

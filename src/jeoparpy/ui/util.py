@@ -6,8 +6,8 @@ from pygame.locals import *
 from ..util import to_numeric
 
 ###############################################################################
-def draw_centered_textblock(sfc, lines, font, color, 
-                            spacing=0, shadowOffset=None):
+def draw_centered_textblock(sfc, lines, font, color, spacing=0,
+                            shadowOffset=None, textAlignCenter=True):
     """
     Blits lines of text in 'lines' argument centered onto surface 'sfc.'
     Returns pygame.Rect of drawn block relative to sfc.
@@ -16,7 +16,7 @@ def draw_centered_textblock(sfc, lines, font, color,
     blockRect.center = sfc.get_rect().center
 
     return draw_textblock(sfc, lines, font, color, blockRect.topleft,
-                          True, spacing, shadowOffset)
+                          textAlignCenter, spacing, shadowOffset)
         
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     """

@@ -1,12 +1,12 @@
 # Todo #
 
 ### Immediate ###
-* Makes rules rendered text rather than an image. ('Press A' is a big problem)
 
 ### High priority ###
 * Fix fixed font-size issue.
+    Font sizes are currently scaled for the resolution, but not scaled for length of text.
     Badly effects player names, category names, clues.
-	Could, but not likely to, effect subtitle and amounts.
+	Could, but not likely to, effect subtitle amounts, and rules.
 
 ### Low priority ###
 * Add ability to use audio as clue media, like can be done with images.

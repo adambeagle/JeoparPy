@@ -62,7 +62,6 @@ IMAGES = {'introBG'     : _imgPath + 'introbg.png',
           'rPanelBG'    : _imgPath + 'podiabg.png',
           'podium'      : _imgPath + 'podium.png',
           'highlight'   : _imgPath + 'highlight.png',
-          'rules'       : _imgPath + 'rules.png',
           'lamonster'   : _imgPath + 'livvy.png',
           'test_img'    : _imgPath + 'wivtest.png',
         }
@@ -70,6 +69,7 @@ IMAGES = {'introBG'     : _imgPath + 'introbg.png',
 ###############################################################################
 # WARNING: Alter anything below at your own risk.
 FONTS = {'title'    : _fontPath + 'gyparody.ttf',
+         'rules'    : _fontPath + 'korinab.ttf',
          'category' : _fontPath + 'impact.ttf',
          'amount'   : _fontPath + 'impact.ttf',
          'congrats' : _fontPath + 'gyparody.ttf',
