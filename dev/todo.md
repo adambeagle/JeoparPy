@@ -10,9 +10,9 @@
 
 ### Low priority ###
 * Add ability to use audio as clue media, like can be done with images.
-* Add ability to use recorded clue readings, and not allow buzz-in until they finish.
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
+* Make categoryscroll honor global FPS limit
 
 ### Down the Road ###
 * Make intro animation more interesting.
