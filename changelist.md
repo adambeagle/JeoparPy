@@ -1,12 +1,11 @@
 CHANGELIST - JeoparPy
-================
+=====================
 
-### Version 0.1 ###
+### Version 0.81 ###
+* New setting in root config.py that controls whether money is negated on incorrect answers. Negative scores are drawn as red in-game.
+* Rules are now set in /res/text/rules.txt, and drawn as rendered text, rather than taken from an image. This allows customization of rules.
+* Game can be quit during credits by pressing 'Q.'
 
-This was the original version of the game in its completed state.
-The combination of it being my first attempt at writing a game with Pygame, 
-as well as being made with a tight deadline resulted in a bit of a disaster of
-poor coding practices, though it did function as intended.
 
 ### Version 0.8 ###
 
@@ -25,11 +24,10 @@ Under the hood, major changes are:
 * All code is formatted using PEP8 standards.
 * Small changes are too numerous to list here, as every module was rewritten.
 
-### Version 0.81 ###
-* New setting in root config.py that controls whether money is negated on incorrect answers. Negative scores are drawn as red in-game.
-* Rules are now set in /res/text/rules.txt, and drawn as rendered text, rather than taken from an image. This allows customization of rules.
-* Game can be quit during credits by pressing 'Q.'
 
-### Future changes ###
-* See todo.md in the dev/ folder.
+### Version 0.1 ###
 
+This was the original version of the game in its completed state.
+The combination of it being my first attempt at writing a game with Pygame, 
+as well as being made with a tight deadline resulted in a bit of a disaster of
+poor coding practices, though it did function as intended.
