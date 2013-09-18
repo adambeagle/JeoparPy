@@ -1,66 +1,106 @@
-THE FOLLOWING ARE INSTRUCTIONS TO CREATE YOUR OWN VALUES FOR GAME DATA:
-=======================================================================
+========================================================================
+THE FOLLOWING ARE INSTRUCTIONS TO CREATE YOUR OWN VALUES FOR GAME DATA |
+========================================================================
 Please note that each respective file has sample data included to aid
 you in writing your own data.
 
-
-CLUES:
-  * Clues must be written in 'clues.txt,' located in the folder containing these instructions.
+=======
+CLUES |
+=======
+  * Clues must be written in 'clues.txt,' located in the folder containing 
+    these instructions.
 
   * Clues must be separated in these files by one or more blank lines.
       -This means there cannot be any blank lines within a single clue.
-      -For easiest viewing, separate clues in the same category by one line, and categories by several.
+      -For easiest viewing, separate clues in the same category by one line, 
+       and categories by several.
   
   * There are sample clues already in 'clues.txt' to guide you. 
-    To create your own clues, replace the sample data with your own text, taking note of the following:
+    To create your own clues, replace the sample data with your own text, 
+    taking note of the following:
       
       -Clues are written starting from the top left clue box, then by column.
-         ~Example: On a 5x5 board, the first 5 clues will be the clues for the leftmost category, starting at the top. The next 5 will be for the column to the right, starting at the top.
+         ~Example: On a 5x5 board, the first 5 clues will be the clues for 
+          the leftmost category, starting at the top. The next 5 will be for 
+          the column to the right, starting at the top.
       
-      -The line breaks in the text file dictate where the line breaks will be when the clue is printed.
+      -The line breaks in the text file dictate where the line breaks will be 
+       when the clue is printed.
          ~So, a long clue written on a single line will not display properly.
-         ~There is a long example clue in the file that serves as a guide for how to format multi-line clues
+         ~There is a long example clue in the file that serves as a guide for 
+          how to format multi-line clues
 
 
-CATEGORIES:
-  * Categories must be written in 'categories.txt,' located in the folder containing these instructions.
+============
+CATEGORIES |
+============
+  * Categories must be written in 'categories.txt,' located in the folder 
+    containing these instructions.
 
-  * Each non-empty line in 'categories.txt' is treated as a category. Replace the sample categories with your own.
+  * Each non-empty line in 'categories.txt' is treated as a category. 
+    Replace the sample categories with your own.
 
-  * The capitalization used in 'categories.txt' will be used in the game (all caps is recommended).
+  * The capitalization used in 'categories.txt' will be used in the game 
+    (all caps is recommended).
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
 
-
-PLAYER NAMES:
-  * Player names are defined in 'players.txt,' located in the folder containing these instructions.
+==============
+PLAYER NAMES |
+==============
+  * Player names are defined in 'players.txt,' located in the folder 
+    containing these instructions.
 
   * Each player/team name must be on a separate line.
 
-  * There is a maximum of 3 players/teams at this time. If more names are provided in the file,
-    they will be ignored, and a warning message printed. If there are fewer than 3 names provided,
-    default names (Player 1, etc...) will be used for missing names.
+  * There is a maximum of 3 players/teams at this time. If more names 
+    are provided in the file, they will be ignored, and a warning message 
+    printed. If there are fewer than 3 names provided, default names 
+    (Player 1, etc...) will be used for missing names.
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
 
+=========
+AMOUNTS |
+=========
+  * Clue amounts are defined in 'amounts.txt,' located in the folder 
+    containing these instructions.
 
-AMOUNTS:
-  * Clue amounts are defined in 'amounts.txt,' located in the folder containing these instructions.
-
-  * Each amount should be on a separate line, and must be only an integer (ex: 200).
+  * Each amount should be on a separate line, and must be only an integer 
+    (ex: 200).
   
   * Do not include a dollar sign, decimal or any other non-numeric character.
 
   * Make sure the number of amounts matches the number of clues per category.
 
 
+=======
+RULES |
+=======
+  * Rules are defined in 'rules.txt,' located in the folder containing 
+    these instructions.
 
-SUBTITLE:
-  * Subtitle must be written in 'subtitle.txt,' located in the folder containing these instructions.
+  * Rules are displayed after the opening sequence, before the category 
+    scroll.
 
-  * The first line in 'subtitle.txt' containing any non-whitespace text is treated as the subtitle.
+  * Each rule should be on a separate line.
 
-  * If no subtitle is desired, make 'subtitle.txt' empty (do not delete it, however).
+  * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
+  * It is recommended to start each rule with a character such as an 
+    asterisk (*).
+
+
+==========
+SUBTITLE |
+==========
+  * Subtitle must be written in 'subtitle.txt,' located in the folder 
+    containing these instructions.
+
+  * The first line in 'subtitle.txt' containing any non-whitespace text 
+    is treated as the subtitle.
+
+  * If no subtitle is desired, make 'subtitle.txt' empty (do not delete it, 
+    however).

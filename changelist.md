@@ -10,8 +10,6 @@ poor coding practices, though it did function as intended.
 
 ### Version 0.8 ###
 
-The current version of the game in the master branch.
-
 This version is the result of a complete and total rebuild of the game.
 The only feature missing from the old version is the ability to play videos in clues. This was removed as it was an ordeal to convert videos to the proper format, and video use was not cross-platform.
 
@@ -29,6 +27,8 @@ Under the hood, major changes are:
 
 ### Version 0.81 ###
 * New setting in root config.py that controls whether money is negated on incorrect answers. Negative scores are drawn as red in-game.
+* Rules are now set in /res/text/rules.txt, and drawn as rendered text, rather than taken from an image. This allows customization of rules.
+* Game can be quit during credits by pressing 'Q.'
 
 ### Future changes ###
 * See todo.md in the dev/ folder.

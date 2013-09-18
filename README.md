@@ -1,5 +1,5 @@
-JEOPARPY! v0.8
-==============
+JEOPARPY! v0.81
+===============
 ###### Written by Adam Beagle ######
 
 ## GENERAL INFO ##
@@ -111,7 +111,7 @@ When you wish to end the game (usually when all clues have been completed), pres
 This will trigger a 'Congratulations' message to the winner(s), and then display the game credits.
 Alternatively, Shift+Q will quit the game immediately.
 
-No input is necessary once the end-of-game animations are triggered.
+No input is necessary once the end-of-game animations are triggered, but if you wish to quit the game during the credits, you can press 'Q.'
 The game will close automatically after the credits.
 
 
@@ -124,8 +124,11 @@ to view the example data, and ensure the game runs without issue.
 #### Display settings: ####
   * Located in <jeoparpy root>/src/jeoparpy/config.py are settings for screen resolution and toggling 
     fullscreen display.
+	
+#### General settings: ####
+  * These are also located in <jeoparpy root>/src/jeoparpy/config.py.
 
-#### Clues/Categories/Edition Title/Player Names/Clue Amounts: ####
+#### Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules: ####
   * The files for these are all located in <jeoparpy root>/res/text/
   * Each file has sample data included.
   * Instructions for each are found in /res/text/INSTRUCTIONS.txt
