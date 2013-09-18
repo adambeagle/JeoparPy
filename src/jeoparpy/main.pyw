@@ -154,14 +154,14 @@ def transition_state(gameState, gameData, uicontroller):
     elif gs.state == gs.CLUE_OPEN:
         if uicontroller.clue_has_audio_reading(gs.arg):
             gs.state = (gs.WAIT_CLUE_READ, gs.arg)
+            pygame.event.set_allowed(None)
         else:
             gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
 
     elif gs.state == gs.WAIT_CLUE_READ:
-        pygame.event.set_allowed(None)
-        uicontroller.audioplayer.wait_until_sound_end()
-        pygame.event.set_allowed(EVENTS_ALLOWED)
-        gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+        if not pygame.mixer.get_busy():
+            pygame.event.set_allowed(EVENTS_ALLOWED)
+            gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
         
     elif gs.state == gs.BUZZ_IN:
         gs.state = (gs.WAIT_ANSWER, gs.arg)
