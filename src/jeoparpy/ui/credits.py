@@ -22,7 +22,7 @@ of source code from this file..
 from sys import exit as sysexit
 
 import pygame
-from pygame.locals import QUIT
+from pygame.locals import QUIT, KEYDOWN, K_q
 
 from constants import JEOP_BLUE
 from resmaps import FONTS
@@ -185,7 +185,7 @@ names = ('Adam Beagle',
          'Adam Beagle',
          'Claire Madill',
          'Claire Madill',
-         ('Lori Madill', 'Gary Madill'),
+         ('Gary Madill', 'Lori Madill'),
          ('', "Toulouse 'Woosy' Madill"),
          ('', 'Adam Beagle'),
          'Livvy Lamont',
@@ -212,6 +212,7 @@ def do_credits(screen, clock, audioPlayer, fpsLimit):
     
     numFrames, step, fpsLimit = _get_anim_data(33.2, finalLineBottom, fpsLimit)
 
+    pygame.event.clear()
     audioPlayer.play('end')
     _scroll_credits(screen, scrRect, clock, lines, numFrames, step, fpsLimit)
 
@@ -284,5 +285,9 @@ def _scroll_credits(screen, scrRect, clock, lines, numFrames, step, fpsLimit):
         pygame.display.update()
         clock.tick_busy_loop(fpsLimit)
 
-        if pygame.event.get(QUIT):
-            sysexit(1)
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYDOWN and
+                                      event.key == K_q):
+                sysexit(1)
+                
+        pygame.event.pump()
