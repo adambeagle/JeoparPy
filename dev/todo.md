@@ -13,7 +13,6 @@
 * Add ability to use recorded clue readings, and not allow buzz-in until they finish.
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
-* Allow user choice to take away money on wrong answer or not.
 
 ### Down the Road ###
 * Make intro animation more interesting.

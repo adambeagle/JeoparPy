@@ -75,24 +75,20 @@ class PodiaPanel(JeopGameSurface):
         was changed and required redraw by caller.
         
         """
-        if gameState.state == gameState.BUZZ_IN:
-            self._draw_highlight(gameState.arg[0])
+        gs = gameState
+        
+        if gs.state == gs.BUZZ_IN:
+            self._draw_highlight(gs.arg[0])
             self.dirty = True
 
-        #For any type of answer clear highlight.
-        if gameState.state in gameState.ANSWER:
+        #For any type of answer clear highlight, update score, draw.
+        if gs.state in gs.ANSWER:
             self._clear_highlight()
-            score = self._get_score_sprite(gameState.arg[0])
-            score.dirty = 1
-            self._scores.draw(self)
-            self.dirty = True
-
-        #Correct answer; update and draw scores.
-        if gameState.state == gameState.ANSWER_CORRECT:
             self._scores.update(gameData)
             self._scores.draw(self)
-
-        if gameState.state == gameState.DELAY:
+            self.dirty = True
+            
+        if gs.state == gs.DELAY:
             pygame.time.delay(500)
             
     def _clear_highlight(self):
@@ -209,24 +205,27 @@ class Score(pygame.sprite.DirtySprite):
         self.image = pygame.Surface(size)
 
         self._font = pygame.font.Font(FONTS['score'], int(32*scalar))
+        self._posColor = (255, 255, 255)
+        self._negColor = (230, 0, 0)
 
         self._text = '$0'
         self._id = id_
 
-        self._draw_text(self._text)
+        self._draw_text(self._text, self._posColor)
 
     def update(self, gameData):
+        score = gameData.players[self._id].score
         scoref = gameData.players[self._id].scoref
 
         if not scoref == self._text:
+            color = self._posColor if score >= 0 else self._negColor
             self._text = scoref
-            self._draw_text(scoref)
+            self._draw_text(scoref, color)
             self.dirty = 1
             
-
-    def _draw_text(self, text):
+    def _draw_text(self, text, color):
         s = text
-        text = self._font.render(s, 1, (255, 255, 255))
+        text = self._font.render(s, 1, color)
 
         rect = text.get_rect()
         rect.centerx = self.rect.centerx - self.rect.x

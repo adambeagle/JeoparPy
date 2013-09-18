@@ -21,7 +21,7 @@ of source code from this file.
 import pygame
 from pygame.locals import *
 
-from config import FPS_LIMIT, FULLSCREEN, SCREEN_SIZE
+from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
 from game import GameData, JeopGameState
 from ui import (ANIMATIONEND, Controller, do_congrats,
                 do_credits, do_intro, do_scroll)
@@ -128,6 +128,8 @@ def handle_event_key(event, gameState, gameData):
             gameData.players[gs.arg[0]].score += gs.arg[1]
         elif event.key == K_BACKSPACE:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+            if SUBTRACT_ON_INCORRECT:
+                gameData.players[gs.arg[0]].score -= gs.arg[1]
 
 def handle_event_mousebuttondown(event, gameState, uicontroller):
     gs = gameState
