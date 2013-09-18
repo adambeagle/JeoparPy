@@ -26,6 +26,8 @@ from game import GameData, JeopGameState
 from ui import (ANIMATIONEND, Controller, do_congrats,
                 do_credits, do_intro, do_scroll)
 
+EVENTS_ALLOWED = (ANIMATIONEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)
+
 ###############################################################################
 def main():
     """Entry point."""
@@ -44,13 +46,13 @@ def main():
 
     #Intro sequence (control passed completely to functions)
     pygame.mouse.set_visible(False)
-    do_intro(screen, clock, uicontroller.audioplayer)
-    do_scroll(screen, clock, gameData.categories)
+    #do_intro(screen, clock, uicontroller.audioplayer)
+    #do_scroll(screen, clock, gameData.categories)
     pygame.mouse.set_visible(True)
 
     #Prep for primary loop
     pygame.event.set_allowed(None)
-    pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN, ANIMATIONEND])
+    pygame.event.set_allowed(EVENTS_ALLOWED)
     uicontroller.draw(screen)
 
     gs.state = gs.BOARD_FILL
@@ -150,6 +152,15 @@ def transition_state(gameState, gameData, uicontroller):
         gs.state = (gs.WAIT_CLUE_OPEN, gs.arg)
         
     elif gs.state == gs.CLUE_OPEN:
+        if uicontroller.clue_has_audio_reading(gs.arg):
+            gs.state = (gs.WAIT_CLUE_READ, gs.arg)
+        else:
+            gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+
+    elif gs.state == gs.WAIT_CLUE_READ:
+        pygame.event.set_allowed(None)
+        uicontroller.audioplayer.wait_until_sound_end()
+        pygame.event.set_allowed(EVENTS_ALLOWED)
         gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
         
     elif gs.state == gs.BUZZ_IN:

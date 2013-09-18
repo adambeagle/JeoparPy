@@ -1,6 +1,6 @@
 import pygame
 
-from resmaps import SOUNDS
+from resmaps import SOUNDS, CLUE_READS
 
 ###############################################################################
 class AudioPlayer(object):
@@ -102,9 +102,9 @@ class AudioPlayer(object):
 
 ###############################################################################
 class JeopAudioPlayer(AudioPlayer):
-    """ """
+    """An AudioPlayer with JeoparPy sounds initialized."""
     def __init__(self):
-        super(JeopAudioPlayer, self).__init__(SOUNDS)
+        super(JeopAudioPlayer, self).__init__(dict(SOUNDS, **CLUE_READS))
 
         
 ###############################################################################

@@ -120,6 +120,7 @@ class JeopGameState(GameState):
         self.CLICK_CLUE = self._addstate()
         self.WAIT_CLUE_OPEN = self._addstate()
         self.CLUE_OPEN = self._addstate()
+        self.WAIT_CLUE_READ = self._addstate()
         self.WAIT_BUZZ_IN = self._addstate()
         self.BUZZ_IN = self._addstate()
         self.WAIT_ANSWER = self._addstate()

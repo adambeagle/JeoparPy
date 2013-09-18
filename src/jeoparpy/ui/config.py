@@ -22,6 +22,7 @@ of source code from this file.
 MEDIA = {}
 ###############################################################################
 
+
 # This is the time, in miliseconds, that the game holds on each
 # category name during the category scroll at the start of the game.
 CATEGORY_HOLD_TIME = 2500 #In miliseconds
@@ -61,8 +62,8 @@ CATEGORY_HOLD_TIME = 2500 #In miliseconds
 #
 
 # ALL LINES BELOW ARE SAMPLE DATA. DELETE IF CREATING YOUR OWN GAME.
-MEDIA[(0, 2)] = 'test_img'
-MEDIA[(1, 2)] = 'test_img'
-MEDIA[(2, 2)] = 'test_img'
-MEDIA[(3, 2)] = 'test_img'
-MEDIA[(4, 2)] = 'test_img'
+MEDIA[(0, 3)] = 'test_img'
+MEDIA[(1, 3)] = 'test_img'
+MEDIA[(2, 3)] = 'test_img'
+MEDIA[(3, 3)] = 'test_img'
+MEDIA[(4, 3)] = 'test_img'

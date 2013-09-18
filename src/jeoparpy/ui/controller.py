@@ -53,8 +53,8 @@ class Controller(object):
         self._sfcs = (board, podia, spr, clue) 
         self.audioplayer = JeopAudioPlayer()
 
-    def get_clicked_clue(self, clickPos):
-        return self._sfcs[0].get_clicked_clue(clickPos)
+    def clue_has_audio_reading(self, coords):
+        return coords in self.audioplayer.sounds
 
     def draw(self, screen):
         """
@@ -78,6 +78,9 @@ class Controller(object):
                 sfc.dirty = False
 
         pygame.display.update(dirtyRects)
+
+    def get_clicked_clue(self, clickPos):
+        return self._sfcs[0].get_clicked_clue(clickPos)
         
     def update(self, gameState, gameData):
         """Updates the ui modules based on game state and data."""
@@ -91,7 +94,9 @@ class Controller(object):
 
         if gs.state == gs.BOARD_FILL:
             self.audioplayer.play('fill')
-        if gs.state == gs.BUZZ_IN:
+        elif gs.state == gs.CLUE_OPEN and gs.arg in self.audioplayer.sounds:
+            self.audioplayer.play(gs.arg)
+        elif gs.state == gs.BUZZ_IN:
             self.audioplayer.play('buzz')
         elif gs.state == gs.ANSWER_INCORRECT:
             self.audioplayer.play('wrong')
@@ -100,5 +105,3 @@ class Controller(object):
             self.audioplayer.wait_until_sound_end(200)
         elif gs.state == gs.ANSWER_NONE:
             self.audioplayer.wait_until_sound_end(350)
-
-    
