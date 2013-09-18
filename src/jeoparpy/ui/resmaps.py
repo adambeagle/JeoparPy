@@ -44,11 +44,11 @@ _cluesPath = path.join(ROOT_PATH, 'res', 'sounds', 'clues', '')
 #
 # 4) Add a line inside the brackets of IMAGES (located immediately below these
 #    instructions) for your image. It should look very similar to the
-#    existing lines, and use this format:
+#    existing line, and use this format:
 #        'descriptive_name' : _imgPath + 'filename.ext',
 #
 #    4a) Replace 'descriptive_name' with an alphanumeric name of your choosing.
-#        Make sure it is surrounded by single quotes like in the other lines.
+#        Make sure it is surrounded by single quotes.
 #
 #    4b) Replace 'filename.ext' with exact filename and extension of the image.
 #        This must also be surrounded by single (or double) quotes.
@@ -59,13 +59,8 @@ _cluesPath = path.join(ROOT_PATH, 'res', 'sounds', 'clues', '')
 #    descriptive name(s) you used for your file(s) as it/they will be required
 #    in config.py to link your file to a clue.
 
-IMAGES = {'introBG'     : _imgPath + 'introbg.png',
-          'rPanelBG'    : _imgPath + 'podiabg.png',
-          'podium'      : _imgPath + 'podium.png',
-          'highlight'   : _imgPath + 'highlight.png',
-          'lamonster'   : _imgPath + 'livvy.png',
-          'test_img'    : _imgPath + 'wivtest.png',
-        }
+IMAGES = {'test_img'    : _imgPath + 'wivtest.png',
+          }
 
 ###############################################################################
 # INSTRUCTIONS TO ADD YOUR OWN RECORDED CLUE READINGS:
@@ -101,6 +96,7 @@ IMAGES = {'introBG'     : _imgPath + 'introbg.png',
 #         (0, 4)  |  (1, 4)  |  (2, 4)  |  (3, 4)  |  (4, 4)
 #
 
+
 # WARNING: If creating your own game, delete the sample lines in this
 #          dictionary. If not using audio clue readings, change the line
 #          below to: CLUE_READS = {}
@@ -126,6 +122,13 @@ FONTS = {'title'    : _fontPath + 'gyparody.ttf',
          'subtitle' : _fontPath + 'impact.ttf',
          'credits'  : _fontPath + 'korinab.ttf'
         }
+
+IMAGES.update({'introBG'     : _imgPath + 'introbg.png',
+               'rPanelBG'    : _imgPath + 'podiabg.png',
+               'podium'      : _imgPath + 'podium.png',
+               'highlight'   : _imgPath + 'highlight.png',
+               'lamonster'   : _imgPath + 'livvy.png'
+               })
 
 SOUNDS = {'intro'     : _sndPath + 'intro.ogg',
           'fill'      : _sndPath + 'fill.ogg',
