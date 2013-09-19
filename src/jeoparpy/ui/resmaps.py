@@ -76,18 +76,25 @@ IMAGES = {(0, 3)   : _imgPath + 'test_img.png',
           }
 
 ###############################################################################
-# INSTRUCTIONS TO ADD YOUR OWN RECORDED CLUE READINGS:
-#=======================================================
+# INSTRUCTIONS TO ADD YOUR OWN RECORDED CLUE READINGS OR AUDIO CLUES:
+#====================================================================
 # To use your own recorded clue readings, their audio files must be added
-# to CLUES_READS below.
+# to CLUES_READS below, using the following instructions.
+#
+# To have an audio clue, add your audio file to SOUNDS below, using the
+# following instructions.
 #
 # 1) Your audio must be at a sample rate of 22050 Hz, and must be
 #    a .wav or .ogg file (the latter is a limitation of Pygame).
 #
-# 2) Place your audio file(s) in the folder <JeoparPy root>/res/sounds/clues
+# 2) Place audio files for clue readings in <jeoparpy root>/res/sounds/clues/
+#    Place audio files for audio clues in <jeoparpy root>/res/sounds/
 #
-# 3) Add a line to CLUE_READS below in the following format:
+# 3) For clue readings, add a line to CLUE_READS below in the following format:
 #        (column, row) : _cluesPath + 'filename.ext',
+#
+#    For audio clues, add a line to SOUNDS below in the following format:
+#        (column, row) : _sndPath + 'filename.ext',
 #
 #    3a) (column, row) is the location on the game board of the desired clue.
 #         Note that both are 0-based, so coordinates of the upper-left clue
@@ -98,7 +105,7 @@ IMAGES = {(0, 3)   : _imgPath + 'test_img.png',
 #        filename and extension of your audio file.
 #
 # 4) Make sure to delete the sample lines below
-#    (those that assign 'sample_read.ogg'). 
+#    (those that assign 'sample_read.ogg' or 'sample_music.ogg'). 
 #
 
 
@@ -112,7 +119,17 @@ CLUE_READS = {(0, 2) : _cluesPath + 'sample_read.ogg',
               (4, 2) : _cluesPath + 'sample_read.ogg',
               }
 
-SOUNDS = {(0, 4) : _sndPath + 'sample_music.ogg'}
+# WARNING: If creating your own game, delete the sample lines in this
+#          dictionary. If not using audio clues, change the line below
+#          to: SOUNDS = {}
+SOUNDS = {(0, 4) : _sndPath + 'sample_music.ogg',
+          (1, 4) : _sndPath + 'sample_music.ogg',
+          (2, 4) : _sndPath + 'sample_music.ogg',
+          (3, 4) : _sndPath + 'sample_music.ogg',
+          (4, 4) : _sndPath + 'sample_music.ogg',
+          }
+
+
 
 ###############################################################################
 # WARNING: Alter anything below at your own risk.
