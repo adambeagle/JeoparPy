@@ -11,3 +11,4 @@ V1.0
 Automatic, customizable timeout on clues
 Final JeoparPy
 "Daily double"-esque functionality
+Font size fix

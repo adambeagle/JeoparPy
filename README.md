@@ -91,6 +91,8 @@ Pressing only 'Q' will trigger the end-of-game animations and credits.
 
 You now have control of the mouse. Click a clue box to display it.
 
+If an audio reading of the clicked clue is available, it is played immediately, and players can not buzz in until it has finished playing.
+
 When a clue box is open, a team is buzzed in by pressing their corresponding number on the keyboard.
 Example: To buzz-in team 2, press '2' on your keyboard.
 It is recommended to map a controller of some kind to these keys.
@@ -133,8 +135,8 @@ to view the example data, and ensure the game runs without issue.
   * Each file has sample data included.
   * Instructions for each are found in /res/text/INSTRUCTIONS.txt
   
-#### Clue Images ####
-  * Follow the instructions in <jeoparpy root>/src/jeoparpy/ui/config.py to add your own images to clues.
+#### Clue Audio/Images ####
+  * Follow the instructions in <jeoparpy root>/src/jeoparpy/ui/config.py to add your own images to clues, or use a recorded reading of the clue.
     
 
 ## KNOWN ISSUES ##
