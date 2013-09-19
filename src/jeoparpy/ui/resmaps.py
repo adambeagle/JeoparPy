@@ -112,6 +112,8 @@ CLUE_READS = {(0, 2) : _cluesPath + 'sample_read.ogg',
               (4, 2) : _cluesPath + 'sample_read.ogg',
               }
 
+SOUNDS = {(0, 4) : _sndPath + 'sample_music.ogg'}
+
 ###############################################################################
 # WARNING: Alter anything below at your own risk.
 FONTS = {'title'    : _fontPath + 'gyparody.ttf',
@@ -135,11 +137,11 @@ IMAGES.update({'introBG'     : _imgPath + 'introbg.png',
                'lamonster'   : _imgPath + 'livvy.png'
                })
 
-SOUNDS = {'intro'     : _sndPath + 'intro.ogg',
+SOUNDS.update({'intro'     : _sndPath + 'intro.ogg',
           'fill'      : _sndPath + 'fill.ogg',
           'buzz'      : _sndPath + 'buzz.wav',
           'wrong'     : _sndPath + 'wrong.wav',
           'outoftime' : _sndPath + 'outoftime.wav',
           'end'       : _sndPath + 'end.ogg',
           'applause'  : _sndPath + 'applause.wav'
-          }
+          })

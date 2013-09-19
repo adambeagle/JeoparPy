@@ -32,6 +32,8 @@ class Controller(object):
       * audioplayer
 
     METHODS:
+      * clue_has_audio_reading
+      * clue_is_audioclue
       * draw
       * draw_all
       * update
@@ -54,6 +56,9 @@ class Controller(object):
         self.audioplayer = JeopAudioPlayer()
 
     def clue_has_audio_reading(self, coords):
+        return coords + ('cr', ) in self.audioplayer.sounds
+
+    def clue_is_audioclue(self, coords):
         return coords in self.audioplayer.sounds
 
     def draw(self, screen):
@@ -94,9 +99,14 @@ class Controller(object):
 
         if gs.state == gs.BOARD_FILL:
             self.audioplayer.play('fill')
-        elif gs.state == gs.CLUE_OPEN and gs.arg in self.audioplayer.sounds:
+        elif gs.state == gs.CLUE_OPEN:
+            key = gs.arg + ('cr', )
+            if key in self.audioplayer.sounds:
+                self.audioplayer.play(key)
+        elif gs.state == gs.PLAY_CLUE_AUDIO:
             self.audioplayer.play(gs.arg)
         elif gs.state == gs.BUZZ_IN:
+            self.audioplayer.stop_all()
             self.audioplayer.play('buzz')
         elif gs.state == gs.ANSWER_INCORRECT:
             self.audioplayer.play('wrong')

@@ -54,7 +54,6 @@ def main():
     pygame.event.set_allowed(None)
     pygame.event.set_allowed(EVENTS_ALLOWED)
     uicontroller.draw(screen)
-
     gs.state = gs.BOARD_FILL
 
     #Primary loop
@@ -79,8 +78,6 @@ def main():
     pygame.mouse.set_visible(0)
     do_congrats(screen, clock, gameData.winners, uicontroller.audioplayer)
     do_credits(screen, clock, uicontroller.audioplayer, FPS_LIMIT)
-
-    return
     
 ###############################################################################
 def handle_events(gameState, gameData, uicontroller):
@@ -115,6 +112,10 @@ def handle_event_key(event, gameState, gameData):
             gs.state = gs.QUIT
         else:
             gs.state = gs.GAME_END
+
+    elif gs.state == gs.WAIT_TRIGGER_AUDIO and event.key == K_m:
+        pygame.event.set_allowed(EVENTS_ALLOWED)
+        gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
     elif gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
         p = event.key - K_1
@@ -155,13 +156,21 @@ def transition_state(gameState, gameData, uicontroller):
         if uicontroller.clue_has_audio_reading(gs.arg):
             gs.state = (gs.WAIT_CLUE_READ, gs.arg)
             pygame.event.set_allowed(None)
+        elif uicontroller.clue_is_audioclue(gs.arg):
+            gs.state = (gs.WAIT_TRIGGER_AUDIO, gs.arg)
         else:
             gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
 
     elif gs.state == gs.WAIT_CLUE_READ:
         if not pygame.mixer.get_busy():
             pygame.event.set_allowed(EVENTS_ALLOWED)
-            gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+            if uicontroller.clue_is_audioclue(gs.arg):
+                gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
+            else:
+                gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+
+    elif gs.state == gs.PLAY_CLUE_AUDIO:
+        gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
         
     elif gs.state == gs.BUZZ_IN:
         gs.state = (gs.WAIT_ANSWER, gs.arg)
