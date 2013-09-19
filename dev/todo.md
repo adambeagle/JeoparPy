@@ -9,7 +9,6 @@
 	Could, but not likely to, effect subtitle amounts, and rules.
 
 ### Low priority ###
-* Add ability to use audio as clue media, like can be done with images.
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
 * Make categoryscroll honor global FPS limit
@@ -17,7 +16,6 @@
 ### Down the Road ###
 * Make intro animation more interesting.
 * Make outro animation (currently do_congrats) more interesting.
-* Add ability to have recorded clue readings for certain clues or every clue.
 * Customizable timeout on clues
 * 'Undo' key command to negate last points given, in case of mistake or disagreement.
 * Accelerate/decelerate category scroll to make it smoother.

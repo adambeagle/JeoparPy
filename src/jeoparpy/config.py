@@ -19,12 +19,16 @@ of source code from this file.
 # DISPLAY SETTINGS
 #=================
 #
-# SET DISPLAY RESOLUTION BELOW. Resolution must be 16:9 aspect ratio.
-# Reccomended common 16:9 resolutions:
-# (640, 360), (854, 480), (960, 540), (1024, 576),
-# (1280, 720), (1366, 768), (1600, 900), (1920, 1080)
+# SET DISPLAY RESOLUTION BELOW. Resolution must have a widescreen
+# (16:9 or 16:10) aspect ratio.
 #
-# It is not recommended to use a resolution higher than (1920, 1080).
+# Common 16:9 resolutions:
+# (1024, 576), (1280, 720), (1366, 768), (1600, 900), (1920, 1080)
+#
+# Common 16:10 resolutions:
+# (1280, 800), (1440, 900), (1680, 1050), (1920, 1200)
+#
+# It is not recommended to use a resolution higher than (1920, 1200).
 SCREEN_W, SCREEN_H = SCREEN_SIZE = (1280, 720)
 
 # It is recommended to run the game with FULLSCREEN = 1

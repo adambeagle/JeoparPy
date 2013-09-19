@@ -1,6 +1,13 @@
 CHANGELIST - JeoparPy
 =====================
 
+### Version 0.9 ###
+* Audio can now be used as clue media. Pressing 'm' in an audio clue will trigger the audio and allow buzz-ins. See /src/jeoparpy/ui/resmaps.py for information on creating audio clues.
+* An "audio reading," a recorded version of the clues text, can be assigned to clues. If an audio reading exists, it plays automatically when a clue is opened, and players are not allowed to buzz in until it has finished playing. See /src/jeoparpy/ui/resmaps.py for information on assigning audio readings.
+* Bug fix: Case-sensitive filename issue was causing problems when running on Linux.
+* Customization made simpler by removing MEDIA in /src/jeoparpy/ui/config.py. Vast majority of customization now done in three places: /res/text, /src/jeoparpy/config.py, and /src/jeoparpy/ui/resmaps.py.
+
+
 ### Version 0.81 ###
 * New setting in root config.py that controls whether money is negated on incorrect answers. Negative scores are drawn as red in-game.
 * Rules are now set in /res/text/rules.txt, and drawn as rendered text, rather than taken from an image. This allows customization of rules.
@@ -13,7 +20,7 @@ This version is the result of a complete and total rebuild of the game.
 The only feature missing from the old version is the ability to play videos in clues. This was removed as it was an ordeal to convert videos to the proper format, and video use was not cross-platform.
 
 At the typical user level, the major changes are:
-* The game will function and look as intended at any 16:9 resolution, fullscreen or not. (Note that resolutions above 1920x1080 may not look ideal due to scaling).
+* The game will function and look as intended at any widescreen (16:9 or 16:10) resolution, fullscreen or not. Resolutions up to 1920x1200 are tested and confirmed to look as intended..
 * Visuals (especially timing of animations) will look much more consistent across systems.
 * The placement of customizable game attributes has changed. All primary attributes (categories, clues, player names, clue amounts, subtitle) are now located in /res/text/ to reduce confusion.
 * There is one file for clues, rather than the old system of unix-style and one windows-style file. The user is responsible for end-of-line characters being formatted for their platform.
