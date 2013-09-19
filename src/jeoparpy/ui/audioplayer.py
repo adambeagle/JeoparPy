@@ -104,7 +104,12 @@ class AudioPlayer(object):
 class JeopAudioPlayer(AudioPlayer):
     """An AudioPlayer with JeoparPy sounds initialized."""
     def __init__(self):
-        super(JeopAudioPlayer, self).__init__(dict(SOUNDS, **CLUE_READS))
+        reads = {}
+        for pos, path in CLUE_READS.items():
+            key = pos + ('cr', )
+            reads[key] = path
+            
+        super(JeopAudioPlayer, self).__init__(dict(SOUNDS, **reads))
 
         
 ###############################################################################
