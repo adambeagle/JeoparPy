@@ -121,6 +121,8 @@ class JeopGameState(GameState):
         self.WAIT_CLUE_OPEN = self._addstate()
         self.CLUE_OPEN = self._addstate()
         self.WAIT_CLUE_READ = self._addstate()
+        self.WAIT_TRIGGER_AUDIO = self._addstate()
+        self.PLAY_CLUE_AUDIO = self._addstate()
         self.WAIT_BUZZ_IN = self._addstate()
         self.BUZZ_IN = self._addstate()
         self.WAIT_ANSWER = self._addstate()
