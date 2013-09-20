@@ -1,6 +1,10 @@
 CHANGELIST - JeoparPy
 =====================
 
+### Next version ###
+* Mouse pointer is now hidden while a clue is open.
+* Images now allowed in credits; credits updated.
+
 ### Version 0.9 ###
 * Audio can now be used as clue media. Pressing 'm' in an audio clue will trigger the audio and allow buzz-ins. See /src/jeoparpy/ui/resmaps.py for information on creating audio clues.
 * An "audio reading," a recorded version of the clues text, can be assigned to clues. If an audio reading exists, it plays automatically when a clue is opened, and players are not allowed to buzz in until it has finished playing. See /src/jeoparpy/ui/resmaps.py for information on assigning audio readings.
