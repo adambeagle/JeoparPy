@@ -240,3 +240,25 @@ class Score(pygame.sprite.DirtySprite):
     @property
     def ID(self):
         return self._id
+
+###############################################################################
+class AnswerTimer(pygame.sprite.DirtySprite):
+    """
+    Defines a timer sprite that counts down to 0.
+
+    ATTRIBUTES:
+      * dirty
+      * image
+      * rect
+
+    METHODS:
+      * update
+      
+    """
+
+    def __init__(self, *groups):
+        """ """
+        super(AnswerTimer, self).__init__(*groups)
+        pass
+        
+        
