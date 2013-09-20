@@ -72,7 +72,7 @@ def main():
 
         #Cleanup
         pygame.event.pump()
-        clock.tick_busy_loop(100)
+        clock.tick_busy_loop(FPS_LIMIT)
 
     #Post game: Congratulations screen and credits
     pygame.mouse.set_visible(0)
