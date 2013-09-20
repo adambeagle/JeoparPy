@@ -141,6 +141,7 @@ def handle_event_mousebuttondown(event, gameState, uicontroller):
         clueCoords = uicontroller.get_clicked_clue(event.pos)
 
         if clueCoords:
+            pygame.mouse.set_visible(0)
             gs.state = (gs.CLICK_CLUE, clueCoords)
 
 def transition_state(gameState, gameData, uicontroller):
@@ -181,6 +182,7 @@ def transition_state(gameState, gameData, uicontroller):
         if gs.state == gs.ANSWER_CORRECT:
             gs.state = gs.DELAY
         else:
+            pygame.mouse.set_visible(1)
             gs.state = gs.WAIT_CHOOSE_CLUE
 
     elif gs.state == gs.ANSWER_INCORRECT:
@@ -192,4 +194,5 @@ def transition_state(gameState, gameData, uicontroller):
             gs.state = (gs.WAIT_BUZZ_IN, gs.arg[1])
 
     elif gs.state == gs.DELAY:
+        pygame.mouse.set_visible(1)
         gs.state = gs.WAIT_CHOOSE_CLUE
