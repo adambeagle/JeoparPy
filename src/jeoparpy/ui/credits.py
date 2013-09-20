@@ -4,7 +4,8 @@ Author: Adam Beagle
 
 DESCRIPTION:
   Contains the classes and functions that implement JeoparPy credits.
-  Includes classes CreditLine, CenteredCreditLine, and MultiCreditLine.
+  Includes classes CreditLine, CreditImage, MultiCreditLine,
+  and SimpleCreditLine.
 
 USAGE:
   Main should call only do_credits.
@@ -25,7 +26,7 @@ import pygame
 from pygame.locals import QUIT, KEYDOWN, K_q
 
 from constants import JEOP_BLUE
-from resmaps import FONTS
+from resmaps import FONTS, IMAGES
 from util import scale, shadow_text
 
 ###############################################################################
@@ -68,32 +69,13 @@ class CreditLine(pygame.sprite.DirtySprite):
             self.dirty = 1
 
 ###############################################################################
-class CenteredCreditLine(CreditLine):
+class CreditImage(CreditLine):
     """
-    Defines a line of text in a credits sequence that is a single
-    string centered on the screen.
+    """
+    def __init__(self, image, *groups):
+        super(CreditImage, self).__init__(*groups)
 
-    Usage: After initialization, set 'rect' to start position then
-      call update() on every frame.
-    
-    """
-    def __init__(self, font, text, color, bgColor, shadowOffset, *groups):
-        """If shadowOffset is 0 or None, no shadow will be drawn."""
-        super(CenteredCreditLine, self).__init__(*groups)
-        
-        if shadowOffset:
-            size = list(font.size(text))
-            size[1] += shadowOffset
-            self.image = pygame.Surface(size)
-            self.image.fill(bgColor)
-            line = font.render(text, 1, color)
-            rect = line.get_rect()
-            shadow, shadRect = shadow_text(text, rect, font, shadowOffset)
-            self.image.blit(shadow, shadRect)
-            self.image.blit(line, (0, 0))
-        else:                        
-            self.image = font.render(text, 1, color, bgColor)
-            
+        self.image = image.convert()
         self.rect = self.image.get_rect()
 
 ###############################################################################
@@ -165,6 +147,35 @@ class MultiCreditLine(CreditLine):
         return sfc
 
 ###############################################################################
+class SimpleCreditLine(CreditLine):
+    """
+    Defines a line of text in a credits sequence that is a single
+    string, all of the same font.
+    
+    Usage: After initialization, set 'rect' to start position then
+      call update() on every frame.
+    
+    """
+    def __init__(self, font, text, color, bgColor, shadowOffset, *groups):
+        """If shadowOffset is 0 or None, no shadow will be drawn."""
+        super(SimpleCreditLine, self).__init__(*groups)
+        
+        if shadowOffset:
+            size = list(font.size(text))
+            size[1] += shadowOffset
+            self.image = pygame.Surface(size)
+            self.image.fill(bgColor)
+            line = font.render(text, 1, color)
+            rect = line.get_rect()
+            shadow, shadRect = shadow_text(text, rect, font, shadowOffset)
+            self.image.blit(shadow, shadRect)
+            self.image.blit(line, (0, 0))
+        else:                        
+            self.image = font.render(text, 1, color, bgColor)
+            
+        self.rect = self.image.get_rect()
+
+###############################################################################
 positions = ('Programmer/Designer',
              'Research',
              'Research Assistant',
@@ -194,7 +205,14 @@ names = ('Adam Beagle',
          )
 
 final = ('Catering by',
-         'Mancinos of Alpena, MI')
+         'Mancinos of Alpena, MI',
+         '',
+         '',
+         '',
+         'Brought to you by',
+         'Lamonster Solutions',
+         pygame.image.load(IMAGES['lamonster']),
+         )
 
 def do_credits(screen, clock, audioPlayer, fpsLimit):
     """Main should call this function to initiate the credit scroll."""
@@ -236,11 +254,14 @@ def _build_final_lines(group, font, startY, lineW, scrRect):
     
     """
     for s in final:
-        line = CenteredCreditLine(font, s, (255, 255, 255),
-                                  JEOP_BLUE, scale(4, lineW, 1024), group)
+        if isinstance(s, pygame.Surface):
+            line = CreditImage(s, group)
+        else:
+            line = SimpleCreditLine(font, s, (255, 255, 255),
+                                      JEOP_BLUE, scale(4, lineW, 1024), group)
+
         line.rect.y = startY
         line.rect.centerx = scrRect.centerx
-        
         finalLineBottom = line.rect.bottom
         startY = line.rect.bottom + scale(5, lineW, 1024)
 
