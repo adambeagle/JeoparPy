@@ -20,9 +20,10 @@ of source code from this file.
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..constants import JEOP_BLUE
+from ..config import ANSWER_TIME_MS
+from ..constants import ANSWER_TIMEOUT, JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
-from ..util import shadow_text
+from ..util import scale, shadow_text
 
 ###############################################################################
 class PodiaPanel(JeopGameSurface):
@@ -67,6 +68,8 @@ class PodiaPanel(JeopGameSurface):
         self._scores = self._init_scores()
         self._scores.draw(self)
 
+        
+
     def update(self, gameState, gameData):
         """
         Draws necessary changes to the panel. Makes changes only as needed
@@ -76,6 +79,8 @@ class PodiaPanel(JeopGameSurface):
         
         """
         gs = gameState
+
+        self._timers.update(gameState, gameData)
         
         if gs.state == gs.BUZZ_IN:
             self._draw_highlight(gs.arg[0])
@@ -178,6 +183,15 @@ class PodiaPanel(JeopGameSurface):
             sprites.append(Score(self._podiaRects[i], i))
 
         return pygame.sprite.OrderedUpdates(*sprites)
+
+    def _init_timers(self):
+        sprites = []
+
+        for i in xrange(3):
+            sprites.append(AnswerTimer(i, self._podiaRects[i],
+                                       ANSWER_TIME_MS))
+
+        return pygame.sprite.OrderedUpdates(*sprites)
         
 
 ###############################################################################
@@ -248,6 +262,7 @@ class AnswerTimer(pygame.sprite.DirtySprite):
 
     ATTRIBUTES:
       * dirty
+      * ID
       * image
       * rect
 
@@ -256,9 +271,71 @@ class AnswerTimer(pygame.sprite.DirtySprite):
       
     """
 
-    def __init__(self, *groups):
-        """ """
+    def __init__(self, id_, podiumRect, timeout, *groups):
+        """'timeout' in ms."""
         super(AnswerTimer, self).__init__(*groups)
-        pass
+        print podiumRect
+        self._offColor = (30, 30, 30)
+        self._onColor = (255, 0, 0)
+        self._startTime = None
+        self._endTime = None
+
+        self.ID = id_
+        self._timerLen = timeout
+
+        self.image = pygame.Surface(self._get_scaled_size(podiumRect))
+        self.image.fill(self._offColor)
+        self.rect = self.image.get_rect()
+        self.rect.topleft = self._get_scaled_pos(podiumRect)
+        print self.rect
+
+    def update(self, gameState, gameData):
+        gs = gameState
+
+        if gs.state == gs.BUZZ_IN:
+            self._endTime = pygame.time.get_ticks() + self._timerLen
+
+        elif gs.state == gs.WAIT_ANSWER:
+            currentTime = pygame.time.get_ticks()
+            self._draw_bar(currentTime)
+            
+            if currentTime >= self._endTime:
+                pygame.event.post(pygame.event.Event(ANSWER_TIMEOUT))
+                self._endTime = None
+
+        elif gs.state in gs.ANSWER:
+            self._reset()
+                           
+
+    def _draw_bar(self, currentTime):
+        et = self._endTime
+        ct = currentTime
+        tl = self._timerLen
+        percDone = et - ct / float(tl)
+
+        if percDone >= 1:
+            self.image.fill(self._offColor)
+            return
+
+        rect = self.rect.copy()
+        rect.w = int(percDone * rect.w)
+        rect.centerx = self.rect.centerx
+
+        self.image.fill(self._onColor, rect)
+
+    def _get_scaled_pos(self, podiumRect):
+        x = podiumRect.left + scale(83, podiumRect.h, 234)
+
+        y = podiumRect.top + scale(6, podiumRect.h, 234)
+        return (x, y)
+
+    def _get_scaled_size(self, podiumRect):
+        w = scale(116, podiumRect.h, 234)
+        h = scale(9, podiumRect.h, 234)
+        return (w, h)
+
+    def _reset(self):
+        self._endTime = 0
+        self.image.fill(self._offColor)
         
         

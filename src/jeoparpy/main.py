@@ -23,7 +23,7 @@ from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
 from game import GameData, JeopGameState
-from ui import (ANIMATIONEND, Controller, do_congrats,
+from ui import (ANIMATIONEND, ANSWER_TIMEOUT, Controller, do_congrats,
                 do_credits, do_intro, do_scroll)
 
 EVENTS_ALLOWED = (ANIMATIONEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)
@@ -46,8 +46,8 @@ def main():
 
     #Intro sequence (control passed completely to functions)
     pygame.mouse.set_visible(False)
-    do_intro(screen, clock, uicontroller.audioplayer)
-    do_scroll(screen, clock, gameData.categories)
+    #do_intro(screen, clock, uicontroller.audioplayer)
+    #do_scroll(screen, clock, gameData.categories)
     pygame.mouse.set_visible(True)
 
     #Prep for primary loop
@@ -94,6 +94,9 @@ def handle_events(gameState, gameData, uicontroller):
 
         elif event.type == ANIMATIONEND:
             handle_event_animationend(event, gameState)
+
+        elif event.type == ANSWER_TIMEOUT:
+            gs.state = (gs.ANSWER_INCORRECT, gs.arg)
 
 def handle_event_animationend(event, gameState):
     gs = gameState

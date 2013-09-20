@@ -20,3 +20,4 @@ of source code from this file.
 # category name during the category scroll at the start of the game.
 CATEGORY_HOLD_TIME = 2500 #In miliseconds
 
+ANSWER_TIME_MS = 5000
