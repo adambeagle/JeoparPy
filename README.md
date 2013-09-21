@@ -25,14 +25,14 @@ user creates.
 
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
-Generally, the questions posed to the teams are phrased
-as 'answers,' to which the team must provide the correct
+Generally, the questions posed to the players are phrased
+as 'answers,' to which the player must provide the correct
 'question,' using terminology such as "What is \_\_\_?" or "Who is \_\_\_?".
 
 Users can customize category names, clues, player names, and dollar amounts.
 An image can be used to accompany a clue.
 
-By mapping controllers to the buzz-in keys, teams can buzz themselves in.
+By mapping controllers to the buzz-in keys, players can buzz themselves in.
 For example, the author used Bluetooth to sync Wiimotes 
 to the PC. Doing this is up to the user, as instructions to 
 do so are beyond the scope of this document.
@@ -67,7 +67,7 @@ For more detailed instructions on how/when to use these controls,
 see the Instructions section below.
 
 * LEFT-CLICK: Opens a clue if a clue box is clicked on the main game board.
-* 1/2/3:      These keys are used to buzz in the corresponding team.
+* 1/2/3:      These keys are used to buzz in the corresponding player.
 * SPACEBAR:   Press when a clue is answered correctly
 * BACKSPACE:  Press when a clue is answered incorrectly
 * END:        Press when time runs out on a clue to close it
@@ -102,29 +102,31 @@ You now have control of the mouse. Click a clue box to display it.
 If an audio reading of the clicked clue is available, it is played 
 immediately, and players can not buzz in until it has finished playing.
 
-When a clue box is open, a team is buzzed in by pressing their corresponding
-number on the keyboard. Example: To buzz-in team 2, press '2' on your 
+When a clue box is open, a player is buzzed in by pressing their corresponding
+number on the keyboard. Example: To buzz-in player 2, press '2' on your 
 keyboard. It is recommended to map a controller of some kind to these keys.
 
-When a team is buzzed in, you have 2 options:
-  *Press spacebar if the team answers correctly. The clue will be closed and
-   the game board will return.
-  *Press 'Backspace' if the team answers incorrectly. Another team can now 
-   buzz in. The team that answered incorrectly can not buzz in again on the 
+When a player is buzzed in, one of three things can happen:
+  * Press spacebar if the player answers correctly. The clue will be closed and
+    the game board will return.
+  * Press 'Backspace' if the player answers incorrectly. Another player can now 
+    buzz in. The player that answered incorrectly can not buzz in again on the 
    same question.
+  * A player fails to answer within the time limit (note the timer at the top
+    of a podium after a player buzzes in). This has the same end result as
+    pressing 'backspace' above.
 
 If no one answers correctly and time runs out, press 'End' to close a clue 
 and return to the game board.
-    -Please note there is no timer implemented in the game at this point. 
-	 A clue will not close until one of the preceding keys is pressed.
-
-If all teams answer incorrectly, the clue will close automatically.
+    -Please note there is no clue timer implemented in the game at this point.
+	 A clue only closes automatically when a player answers correctly, or
+	 all players answer incorrectly.
 
 Any clue previously opened can be reopened. 
 So, if a clue is clicked by mistake, press 'End.' Its dollar amount will be 
-cleared off the board, but it can be reopened and a team can win its amount 
+cleared off the board, but it can be reopened and a player can win its amount 
 as normal. This method can be used to correct mistakes in scoring, though 
-money can not be subtracted from a team's total at this point.
+money can not be subtracted from a player's total at this point.
 
 When you wish to end the game (usually when all clues have been completed), 
 press 'Q.' This will trigger a 'Congratulations' message to the winner(s), 
@@ -145,7 +147,7 @@ to view the example data, and ensure the game runs without issue.
 #### Display/General game settings: ####
   * Located in <jeoparpy root>/src/jeoparpy/config.py are settings for screen 
     resolution and toggling fullscreen display, as well as general game 
-	settings.
+	settings such as the answer time limit.
 
 #### Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules: ####
   * The files for these are all located in <jeoparpy root>/res/text/
