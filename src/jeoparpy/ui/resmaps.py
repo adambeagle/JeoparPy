@@ -151,7 +151,8 @@ IMAGES.update({'introBG'     : _imgPath + 'introbg.png',
                'rPanelBG'    : _imgPath + 'podiabg.png',
                'podium'      : _imgPath + 'podium.png',
                'highlight'   : _imgPath + 'highlight.png',
-               'lamonster'   : _imgPath + 'livvy.png'
+               'lamonster'   : _imgPath + 'livvy.png',
+               'podtimer'    : _imgPath + 'timer.png'
                })
 
 SOUNDS.update({'intro'     : _sndPath + 'intro.ogg',
