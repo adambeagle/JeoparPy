@@ -2,9 +2,10 @@ CHANGELIST - JeoparPy
 =====================
 
 ### Version 0.91 ###
+* Customizable timeout on answers added. See /src/jeoparpy/config.py to set.
 * Mouse pointer is now hidden while a clue is open.
 * Images now allowed in credits; credits updated.
-* Customizable timeout on answers added. See /src/jeoparpy/ui/config.py to set.
+* Cleaned up a few sound clips (noise removal, EQ).
 
 
 ### Version 0.9 ###
