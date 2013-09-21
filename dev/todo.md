@@ -7,6 +7,7 @@
     Font sizes are currently scaled for the resolution, but not scaled for length of text.
     Badly effects player names, category names, clues.
 	Could, but not likely to, effect subtitle amounts, and rules.
+* Find a better way to handle state transitions. They have become confusing to follow in main.
 
 ### Low priority ###
 * Logging

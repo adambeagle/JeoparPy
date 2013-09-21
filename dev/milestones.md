@@ -10,7 +10,7 @@ major version changes are allowed.
 
 ### V1.0 ###
 * Automatic, customizable timeout on clues
-* Automatic, customizable timeout on buzz in (i.e. how long player has to answer).
+* Automatic, customizable timeout on buzz-in (complete)
 * Final JeoparPy
 * "Daily double"-esque functionality
 * Font size fix

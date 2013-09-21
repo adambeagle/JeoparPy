@@ -1,9 +1,11 @@
 CHANGELIST - JeoparPy
 =====================
 
-### Next version ###
+### Version 0.91 ###
 * Mouse pointer is now hidden while a clue is open.
 * Images now allowed in credits; credits updated.
+* Customizable timeout on answers added. See /src/jeoparpy/ui/config.py to set.
+
 
 ### Version 0.9 ###
 * Audio can now be used as clue media. Pressing 'm' in an audio clue will trigger the audio and allow buzz-ins. See /src/jeoparpy/ui/resmaps.py for information on creating audio clues.
