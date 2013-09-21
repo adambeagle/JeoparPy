@@ -157,7 +157,7 @@ IMAGES.update({'introBG'     : _imgPath + 'introbg.png',
 
 SOUNDS.update({'intro'     : _sndPath + 'intro.ogg',
           'fill'      : _sndPath + 'fill.ogg',
-          'buzz'      : _sndPath + 'buzz.wav',
+          'buzz'      : _sndPath + 'buzz.ogg',
           'wrong'     : _sndPath + 'wrong.wav',
           'outoftime' : _sndPath + 'outoftime.wav',
           'end'       : _sndPath + 'end.ogg',
