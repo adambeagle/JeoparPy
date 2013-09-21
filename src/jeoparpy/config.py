@@ -42,7 +42,11 @@ FPS_LIMIT = 100
 ###############################################################################
 # GAME SETTINGS
 #==============
-#
+
+# This is the time in miliseconds that players have to answer a clue
+# after buzzing in. This field must be an integer.
+ANSWER_TIME_MS = 5000
+
 # If this is set to True, money is taken away when a player answers
 # incorrectly. If set to False, money remains the same on a wrong answer.
 SUBTRACT_ON_INCORRECT = True

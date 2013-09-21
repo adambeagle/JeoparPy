@@ -20,7 +20,7 @@ of source code from this file.
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ..config import ANSWER_TIME_MS
+from ...config import ANSWER_TIME_MS
 from ..constants import ANSWER_TIMEOUT, JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
 from ..util import draw_centered_textline, shadow_text
