@@ -26,7 +26,8 @@ from game import GameData, JeopGameState
 from ui import (ANIMATIONEND, ANSWER_TIMEOUT, Controller, do_congrats,
                 do_credits, do_intro, do_scroll)
 
-EVENTS_ALLOWED = (ANIMATIONEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)
+EVENTS_ALLOWED = (ANIMATIONEND, ANSWER_TIMEOUT,
+                  KEYDOWN, MOUSEBUTTONDOWN, QUIT)
 
 ###############################################################################
 def main():
@@ -97,6 +98,8 @@ def handle_events(gameState, gameData, uicontroller):
 
         elif event.type == ANSWER_TIMEOUT:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+            if SUBTRACT_ON_INCORRECT:
+                gameData.players[gs.arg[0]].score -= gs.arg[1]
 
 def handle_event_animationend(event, gameState):
     gs = gameState
