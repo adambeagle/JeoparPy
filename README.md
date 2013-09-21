@@ -154,7 +154,7 @@ to view the example data, and ensure the game runs without issue.
   
 #### Clue Audio/Images ####
   * Follow the instructions in <jeoparpy root>/src/jeoparpy/ui/resmaps.py to 
-    add your own images/audio to clues, or use a audio reading for a clue.
+    add your own images/audio to clues, or use an audio reading for a clue.
     
 
 	
