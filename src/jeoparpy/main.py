@@ -55,7 +55,6 @@ def main():
     pygame.event.set_allowed(None)
     pygame.event.set_allowed(EVENTS_ALLOWED)
     uicontroller.draw(screen)
-    gs.state = gs.BOARD_FILL
 
     #Primary loop
     while not gs.state == gs.GAME_END:

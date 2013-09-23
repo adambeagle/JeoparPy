@@ -49,6 +49,7 @@ class GameState(object):
         Returns the next available integer to which a state can be set,
         and updates self._numStates. Always use this when creating a new
         state to assign its value.
+        
         """
         self._numStates += 1
 
@@ -110,10 +111,12 @@ class JeopGameState(GameState):
 
     This also serves as a centralized means of communication
     between main and the UI modules.
+    
     """
     def __init__(self):
         super(JeopGameState, self).__init__()
-        
+
+        #Define states
         self.BOARD_FILL = self._addstate()
         self.WAIT_BOARD_FILL = self._addstate()
         self.WAIT_CHOOSE_CLUE = self._addstate()
@@ -134,13 +137,17 @@ class JeopGameState(GameState):
         self.GAME_END = self._addstate()        
         self.QUIT = self._addstate()
 
-        #State ranges
+        #Define state ranges
         self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
+
+        #Set initial state
+        self.state = self.BOARD_FILL
 
 ##############################################################################
 class StateError(Exception):
     """
     Exception raised when a problem occurs setting State in GameState.
+    
     """
     def __init__(self, msg='', errVal=None):
         if msg:
