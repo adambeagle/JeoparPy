@@ -22,9 +22,9 @@ import pygame
 from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
+from constants import ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND
 from game import GameData, JeopGameState
-from ui import (ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND, Controller,
-                do_congrats, do_credits, do_intro, do_scroll)
+from ui import Controller, do_congrats, do_credits, do_intro, do_scroll
 
 EVENTS_ALLOWED = (ANIMATIONEND, ANSWER_TIMEOUT,
                   AUDIOEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)

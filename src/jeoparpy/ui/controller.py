@@ -18,8 +18,8 @@ of source code from this file.
 import pygame
 
 from audioplayer import JeopAudioPlayer
-from constants import AUDIOEND
 from maingame import Clue, GameBoard, OpenClueAnimation, PodiaPanel
+from ..constants import AUDIOEND
 
 ###############################################################################
 class Controller(object):

@@ -18,4 +18,12 @@ of source code from this file.
 
 from os import pardir, path
 
+from pygame.locals import USEREVENT
+
+
 ROOT_PATH = path.abspath(path.join(path.dirname(__file__), pardir, pardir))
+
+#Custom events
+ANIMATIONEND = USEREVENT
+ANSWER_TIMEOUT = USEREVENT + 1
+AUDIOEND = USEREVENT + 2

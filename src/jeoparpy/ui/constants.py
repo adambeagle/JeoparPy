@@ -19,17 +19,11 @@ of source code from this file.
 """
 from os import path
 
-from pygame.locals import USEREVENT
-
 from ..constants import ROOT_PATH
 from ..util import get_first_textline, get_stripped_nonempty_file_lines
 
 _rulesPath = path.join(ROOT_PATH, 'res', 'text', 'rules.txt')
 _subPath = path.join(ROOT_PATH, 'res', 'text', 'subtitle.txt')
-
-ANIMATIONEND = USEREVENT
-ANSWER_TIMEOUT = USEREVENT + 1
-AUDIOEND = USEREVENT + 2
 
 JEOP_BLUE = (16, 26, 124) #RGB color
 SUBTITLE = get_first_textline(_subPath)
