@@ -18,6 +18,7 @@ from sys import stderr
 
 from constants import AMOUNTS_PATH, CATEGORIES_PATH, CLUES_PATH, PLAYERS_PATH
 from jeop_player import JeopPlayer
+from ..config import SUBTRACT_ON_INCORRECT
 from ..util import get_stripped_nonempty_file_lines, to_numeric
 
 ###############################################################################
@@ -39,15 +40,15 @@ class GameData(object):
       * winners (read-only)
 
     METHODS:
-      * clear_players_answered
+      * update
       
     """
     def __init__(self):
         """
-        Constructor.
+        Set categories, clues, amounts, and players by reading from
+        files, whose paths are defined in constants module.
+        
         """
-        
-        
         self.categories = get_stripped_nonempty_file_lines(CATEGORIES_PATH)
         
         self.clues = self._build_clues_from_file(CLUES_PATH,
@@ -57,11 +58,22 @@ class GameData(object):
 
         self.players = self._build_players_from_file(PLAYERS_PATH)
 
-    def clear_players_answered(self):
-        """Sets all players' hasAnswered attribute to False."""
-        for p in self.players:
-            p.hasAnswered = False
+    def update(self, gameState):
+        """Update class attributes based on GameState."""
+        gs = gameState
 
+        if gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
+            self._clear_players_answered()
+
+            if gs.state == gs.ANSWER_CORRECT:
+                player, amount = gs.arg
+                self.players[player].score += amount
+            
+        elif gs.state == gs.ANSWER_INCORRECT and SUBTRACT_ON_INCORRECT:
+            player, amount = gs.arg
+            self.players[player].hasAnswered = True
+            self.players[player].score -= amount
+        
     def _build_amounts_from_file(self, path):
         """ """
         try:
@@ -111,6 +123,11 @@ class GameData(object):
                                  for i in xrange(missing))
         
         return tuple(JeopPlayer(name) for name in playerNames)
+
+    def _clear_players_answered(self):
+        """Set all players' hasAnswered attribute to False."""
+        for p in self.players:
+            p.hasAnswered = False
 
     def _map_clues(self, clues, numCategories):
         """

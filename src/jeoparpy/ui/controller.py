@@ -104,7 +104,8 @@ class Controller(object):
             if key in self.audioplayer.sounds:
                 self.audioplayer.play(key)
         elif gs.state == gs.PLAY_CLUE_AUDIO:
-            self.audioplayer.play(gs.arg)
+            if gs.arg in self.audioplayer.sounds:
+                self.audioplayer.play(gs.arg)
         elif gs.state == gs.BUZZ_IN:
             self.audioplayer.stop_all()
             self.audioplayer.play('buzz')

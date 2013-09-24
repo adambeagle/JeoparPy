@@ -64,6 +64,7 @@ def main():
             return
 
         #Update
+        gameData.update(gs)
         uicontroller.update(gs, gameData)
         transition_state(gs, gameData, uicontroller)
 
@@ -97,8 +98,6 @@ def handle_events(gameState, gameData, uicontroller):
 
         elif event.type == ANSWER_TIMEOUT:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
-            if SUBTRACT_ON_INCORRECT:
-                gameData.players[gs.arg[0]].score -= gs.arg[1]
 
 def handle_event_animationend(event, gameState):
     gs = gameState
@@ -133,11 +132,8 @@ def handle_event_key(event, gameState, gameData):
     elif gs.state == gs.WAIT_ANSWER:
         if event.key == K_SPACE:
             gs.state = (gs.ANSWER_CORRECT, gs.arg)
-            gameData.players[gs.arg[0]].score += gs.arg[1]
         elif event.key == K_BACKSPACE:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
-            if SUBTRACT_ON_INCORRECT:
-                gameData.players[gs.arg[0]].score -= gs.arg[1]
 
 def handle_event_mousebuttondown(event, gameState, uicontroller):
     gs = gameState
@@ -170,10 +166,7 @@ def transition_state(gameState, gameData, uicontroller):
     elif gs.state == gs.WAIT_CLUE_READ:
         if not pygame.mixer.get_busy():
             pygame.event.set_allowed(EVENTS_ALLOWED)
-            if uicontroller.clue_is_audioclue(gs.arg):
-                gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
-            else:
-                gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+            gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
     elif gs.state == gs.PLAY_CLUE_AUDIO:
         gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
@@ -181,18 +174,13 @@ def transition_state(gameState, gameData, uicontroller):
     elif gs.state == gs.BUZZ_IN:
         gs.state = (gs.WAIT_ANSWER, gs.arg)
 
-    elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
-        gameData.clear_players_answered()
-        
-        if gs.state == gs.ANSWER_CORRECT:
-            gs.state = gs.DELAY
-        else:
-            pygame.mouse.set_visible(1)
-            gs.state = gs.WAIT_CHOOSE_CLUE
+    elif gs.state == gs.ANSWER_CORRECT:
+        gs.state = gs.DELAY
+    elif gs.state in (gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
+        pygame.mouse.set_visible(1)
+        gs.state = gs.WAIT_CHOOSE_CLUE
 
     elif gs.state == gs.ANSWER_INCORRECT:
-        gameData.players[gs.arg[0]].hasAnswered = True
-
         if gameData.allPlayersAnswered:
             gs.state = gs.ANSWER_NONE
         else:
