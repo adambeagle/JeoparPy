@@ -88,9 +88,17 @@ class Controller(object):
         return self._sfcs[0].get_clicked_clue(clickPos)
         
     def update(self, gameState, gameData):
-        """Updates the ui modules based on game state and data."""
+        """Update the ui modules based on game state and data."""
+        gs = gameState
+
+        if gs.state == gs.CLICK_CLUE:
+            pygame.mouse.set_visible(0)
+        elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_NONE,
+                          gs.ANSWER_TIMEOUT):
+            pygame.mouse.set_visible(1)
+        
         for sfc in self._sfcs:
-            sfc.update(gameState, gameData)
+            sfc.update(gs, gameData)
 
         self._play_update_sounds(gameState)
 
