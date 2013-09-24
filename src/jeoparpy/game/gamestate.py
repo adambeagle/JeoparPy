@@ -15,7 +15,7 @@ of source code from this file.
 
 """
 
-##############################################################################
+###############################################################################
 class GameState(object):
     """
     The state of a game can be accessed and set from this object.
@@ -101,7 +101,7 @@ class GameState(object):
         if __debug__:
             print "State change: %s" % self.state
 
-##############################################################################
+###############################################################################
 class JeopGameState(GameState):
     """
     Defines the states for a JeoparPy game.
@@ -111,6 +111,9 @@ class JeopGameState(GameState):
 
     This also serves as a centralized means of communication
     between main and the UI modules.
+
+    METHODS:
+      * transition_state_immediate_linear
     
     """
     def __init__(self):
@@ -143,7 +146,37 @@ class JeopGameState(GameState):
         #Set initial state
         self.state = self.BOARD_FILL
 
-##############################################################################
+    def transition_state_immediate_linear(self, gameData):
+        """
+        Handle any simple state transitions; i.e. those that always
+        occur immediately and have a single next state (no branching).
+
+        State transitions triggered by events, or whose
+        next state branches on conditions occur elsewhere.
+        
+        """
+        s = self
+        
+        if s.state == s.BOARD_FILL:
+            s.state = s.WAIT_BOARD_FILL
+            
+        elif s.state == s.CLICK_CLUE:
+            s.state = (s.WAIT_CLUE_OPEN, s.arg)
+
+        elif s.state == s.PLAY_CLUE_AUDIO:
+            column = s.arg[1]
+            s.state = (s.WAIT_BUZZ_IN, gameData.amounts[column])
+
+        elif s.state == s.BUZZ_IN:
+            s.state = (s.WAIT_ANSWER, s.arg)
+
+        elif s.state == s.ANSWER_CORRECT:
+            s.state = s.DELAY
+
+        elif s.state in (s.ANSWER_NONE, s.ANSWER_TIMEOUT, s.DELAY):
+            s.state = s.WAIT_CHOOSE_CLUE
+
+###############################################################################
 class StateError(Exception):
     """
     Exception raised when a problem occurs setting State in GameState.

@@ -66,7 +66,8 @@ def main():
         #Update
         gameData.update(gs)
         uicontroller.update(gs, gameData)
-        transition_state(gs, gameData, uicontroller)
+        gs.transition_state_immediate_linear(gameData)
+        transition_state_branching(gs, gameData, uicontroller)
 
         #Draw
         uicontroller.draw(screen)
@@ -143,16 +144,11 @@ def handle_event_mousebuttondown(event, gameState, uicontroller):
         if clueCoords:
             gs.state = (gs.CLICK_CLUE, clueCoords)
 
-def transition_state(gameState, gameData, uicontroller):
+def transition_state_branching(gameState, gameData, uicontroller):
+    """ """
     gs = gameState
-
-    if gs.state == gs.BOARD_FILL:
-        gs.state = gs.WAIT_BOARD_FILL
-
-    elif gs.state == gs.CLICK_CLUE:
-        gs.state = (gs.WAIT_CLUE_OPEN, gs.arg)
         
-    elif gs.state == gs.CLUE_OPEN:
+    if gs.state == gs.CLUE_OPEN:
         if uicontroller.clue_has_audio_reading(gs.arg):
             gs.state = (gs.WAIT_CLUE_READ, gs.arg)
             
@@ -165,23 +161,8 @@ def transition_state(gameState, gameData, uicontroller):
         if not pygame.mixer.get_busy():
             gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
-    elif gs.state == gs.PLAY_CLUE_AUDIO:
-        gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
-        
-    elif gs.state == gs.BUZZ_IN:
-        gs.state = (gs.WAIT_ANSWER, gs.arg)
-
-    elif gs.state == gs.ANSWER_CORRECT:
-        gs.state = gs.DELAY
-        
-    elif gs.state in (gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
-        gs.state = gs.WAIT_CHOOSE_CLUE
-
     elif gs.state == gs.ANSWER_INCORRECT:
         if gameData.allPlayersAnswered:
             gs.state = gs.ANSWER_NONE
         else:
             gs.state = (gs.WAIT_BUZZ_IN, gs.arg[1])
-
-    elif gs.state == gs.DELAY:
-        gs.state = gs.WAIT_CHOOSE_CLUE
