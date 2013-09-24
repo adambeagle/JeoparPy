@@ -4,9 +4,8 @@ Milestones - Jeoparpy
 These are features required to be fully implemented before
 major version changes are allowed.
 
-### V0.9 ###
-* Audio clue readings (complete)
-* Audio as clue media (compelte)
+### V0.92 ###
+* Refactor state transitions
 
 ### V1.0 ###
 * Automatic, customizable timeout on clues
