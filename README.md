@@ -1,4 +1,4 @@
-JEOPARPY! v0.911
+JEOPARPY! v0.9.2
 ================
 ###### Written by Adam Beagle ######
 
