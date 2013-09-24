@@ -7,8 +7,6 @@
     Font sizes are currently scaled for the resolution, but not scaled for length of text.
     Badly effects player names, category names, clues.
 	Could, but not likely to, effect subtitle amounts, and rules.
-* Refactor state transitions in main. Update methods in GameData and Controller should handle 
-  state transitions of their respective attributes.
 
 ### Low priority ###
 * Logging

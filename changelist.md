@@ -1,6 +1,9 @@
 CHANGELIST - JeoparPy
 =====================
 
+### Version 0.911 ###
+* Refactored the state transition handling code in main.py. Transitions now broken explicitly into those triggered by events, those that are immediate and follow a linear flow, and those that branch to differing next states based on UI and GameData conditions. Maybe more importantly, the state transition functions in main now only set states; related code triggered by state changes, previously in main, refactored to controller and gamedata modules.
+
 ### Version 0.91 ###
 * Customizable timeout on answers added. See /src/jeoparpy/config.py to set.
 * Mouse pointer is now hidden while a clue is open.

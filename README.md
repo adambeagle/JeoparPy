@@ -1,5 +1,5 @@
-JEOPARPY! v0.91
-===============
+JEOPARPY! v0.911
+================
 ###### Written by Adam Beagle ######
 
 ## GENERAL INFO ##
@@ -78,10 +78,13 @@ see the Instructions section below.
 
 ## INSTRUCTIONS ##
 
-**WARNING:** *It is important that a game host read these instructions. The game is designed to have a seamless presentation to the players, thus instructions for its use do not appear onscreen.*
+**WARNING:** *It is important that a game host read these instructions. 
+The game is designed to have a seamless presentation to the players, 
+thus instructions for its use do not appear onscreen.*
 
 ### HOW TO HOST A GAME ###
-To start game, double-click 'Main.pyw' in '/src' folder
+To start the game, run start.py in the /src folder. On Windows, run 
+Start_JeoparPy.bat, located in the same folder as this readme.
 
 Upon starting, an introduction will be played. 
 When the subtitle appears, press any key to display the rules screen.
