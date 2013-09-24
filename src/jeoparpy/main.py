@@ -46,10 +46,10 @@ def main():
     clock = pygame.time.Clock()
 
     #Intro sequence (control passed completely to functions)
-    pygame.mouse.set_visible(False)
+    pygame.mouse.set_visible(0)
     do_intro(screen, clock, uicontroller.audioplayer)
     do_scroll(screen, clock, gameData.categories)
-    pygame.mouse.set_visible(True)
+    pygame.mouse.set_visible(1)
 
     #Prep for primary loop
     pygame.event.set_allowed(None)
