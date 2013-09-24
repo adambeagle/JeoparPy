@@ -118,7 +118,6 @@ def handle_event_key(event, gameState, gameData):
             gs.state = gs.GAME_END
 
     elif gs.state == gs.WAIT_TRIGGER_AUDIO and event.key == K_m:
-        pygame.event.set_allowed(EVENTS_ALLOWED) #TODO move?
         gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
     elif gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
@@ -156,7 +155,7 @@ def transition_state(gameState, gameData, uicontroller):
     elif gs.state == gs.CLUE_OPEN:
         if uicontroller.clue_has_audio_reading(gs.arg):
             gs.state = (gs.WAIT_CLUE_READ, gs.arg)
-            pygame.event.set_allowed(None) #TODO move?
+            
         elif uicontroller.clue_is_audioclue(gs.arg):
             gs.state = (gs.WAIT_TRIGGER_AUDIO, gs.arg)
         else:
@@ -164,7 +163,6 @@ def transition_state(gameState, gameData, uicontroller):
 
     elif gs.state == gs.WAIT_CLUE_READ:
         if not pygame.mixer.get_busy():
-            pygame.event.set_allowed(EVENTS_ALLOWED) #TODO move?
             gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
     elif gs.state == gs.PLAY_CLUE_AUDIO:
@@ -175,6 +173,7 @@ def transition_state(gameState, gameData, uicontroller):
 
     elif gs.state == gs.ANSWER_CORRECT:
         gs.state = gs.DELAY
+        
     elif gs.state in (gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
         gs.state = gs.WAIT_CHOOSE_CLUE
 
