@@ -23,11 +23,11 @@ from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
 from game import GameData, JeopGameState
-from ui import (ANIMATIONEND, ANSWER_TIMEOUT, Controller, do_congrats,
-                do_credits, do_intro, do_scroll)
+from ui import (ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND, Controller,
+                do_congrats, do_credits, do_intro, do_scroll)
 
 EVENTS_ALLOWED = (ANIMATIONEND, ANSWER_TIMEOUT,
-                  KEYDOWN, MOUSEBUTTONDOWN, QUIT)
+                  AUDIOEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)
 
 ###############################################################################
 def main():
@@ -97,8 +97,11 @@ def handle_events(gameState, gameData, uicontroller):
         elif event.type == ANIMATIONEND:
             handle_event_animationend(event, gameState)
 
-        elif event.type == ANSWER_TIMEOUT:
+        elif event.type == ANSWER_TIMEOUT and gs.state == gs.WAIT_ANSWER:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+
+        elif event.type == AUDIOEND and gs.state == gs.WAIT_CLUE_READ:
+            gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
 def handle_event_animationend(event, gameState):
     gs = gameState
@@ -145,7 +148,10 @@ def handle_event_mousebuttondown(event, gameState, uicontroller):
             gs.state = (gs.CLICK_CLUE, clueCoords)
 
 def transition_state_branching(gameState, gameData, uicontroller):
-    """ """
+    """
+    Handle any state transitions whose next state is determined
+    by branching on UI or data conditions.
+    """
     gs = gameState
         
     if gs.state == gs.CLUE_OPEN:
@@ -156,10 +162,6 @@ def transition_state_branching(gameState, gameData, uicontroller):
             gs.state = (gs.WAIT_TRIGGER_AUDIO, gs.arg)
         else:
             gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
-
-    elif gs.state == gs.WAIT_CLUE_READ:
-        if not pygame.mixer.get_busy():
-            gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
 
     elif gs.state == gs.ANSWER_INCORRECT:
         if gameData.allPlayersAnswered:

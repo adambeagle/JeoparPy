@@ -16,9 +16,9 @@ of source code from this file.
 """
 
 import pygame
-from pygame.locals import USEREVENT
 
 from audioplayer import JeopAudioPlayer
+from constants import AUDIOEND
 from maingame import Clue, GameBoard, OpenClueAnimation, PodiaPanel
 
 ###############################################################################
@@ -85,6 +85,11 @@ class Controller(object):
         pygame.display.update(dirtyRects)
 
     def get_clicked_clue(self, clickPos):
+        """
+        Returns 2-tuple (row, column) of clicked clue
+        if the click position is inside a clue's rect,
+        otherwise returns None.
+        """
         return self._sfcs[0].get_clicked_clue(clickPos)
         
     def update(self, gameState, gameData):
@@ -96,6 +101,8 @@ class Controller(object):
         elif gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_NONE,
                           gs.ANSWER_TIMEOUT):
             pygame.mouse.set_visible(1)
+        elif gs.state == gs.WAIT_CLUE_READ and not pygame.mixer.get_busy():
+            pygame.event.post(pygame.event.Event(AUDIOEND))
         
         for sfc in self._sfcs:
             sfc.update(gs, gameData)
