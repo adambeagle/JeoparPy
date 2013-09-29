@@ -3,7 +3,8 @@ gamestate.py
 Author: Adam Beagle
 
 DESCRIPTION:
-  Inclues JeopGameState, GameState and StateError classes, described below.
+  Includes Enum, GameState, JeopGameState, and StateError classes,
+  described below.
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -16,15 +17,29 @@ of source code from this file.
 """
 
 ###############################################################################
-class GameState(object):
+class Enum(object):
+    """
+    Defines an enum-like object.
+    A list of names is given which become the enum's elements.
+    Elements' integer values assigned in order in which names are passed.
+
+    Ex: days = Enum(('SUNDAY', 'MONDAY', 'TUESDAY'), 1)
+        print days.SUNDAY -> '1'
+        print days.MONDAY -> '2'
+        print days.TUESDAY -> 3
+    
+    """
+    def __init__(self, names, start=0):
+        ns = range(start, start + len(names))
+        self.__dict__ = dict(zip(names, ns))
+
+class GameState(Enum):
     """
     The state of a game can be accessed and set from this object.
     Only one state is allowed at any time.
 
     An optional 'arg' can be set to provide additional
     information about the state.
-
-    Inheriting classes should create states by calling _addstate().
 
     ATTRIBUTES:
       * arg
@@ -37,23 +52,17 @@ class GameState(object):
         ex: gamestate.state = (gamestate.QUIT, "arg")
         
     """
-    def __init__(self):
-        """Constructor."""
-        self._numStates = 0
+    def __init__(self, stateNames):
+        """
+        Constructor. The names contained in 'stateNames' become the
+        objects attribute names that define states (see Enum).
+        
+        """
+        super(GameState, self).__init__(stateNames)
+        self._numStates = len(set(stateNames))
         self._state = -1
         self._previous = -1
         self.arg = None
-
-    def _addstate(self):
-        """
-        Returns the next available integer to which a state can be set,
-        and updates self._numStates. Always use this when creating a new
-        state to assign its value.
-        
-        """
-        self._numStates += 1
-
-        return self._numStates - 1
 
     def __repr__(self):
         if self.arg is None:
@@ -117,28 +126,29 @@ class JeopGameState(GameState):
     
     """
     def __init__(self):
-        super(JeopGameState, self).__init__()
-
         #Define states
-        self.BOARD_FILL = self._addstate()
-        self.WAIT_BOARD_FILL = self._addstate()
-        self.WAIT_CHOOSE_CLUE = self._addstate()
-        self.CLICK_CLUE = self._addstate()
-        self.WAIT_CLUE_OPEN = self._addstate()
-        self.CLUE_OPEN = self._addstate()
-        self.WAIT_CLUE_READ = self._addstate()
-        self.WAIT_TRIGGER_AUDIO = self._addstate()
-        self.PLAY_CLUE_AUDIO = self._addstate()
-        self.WAIT_BUZZ_IN = self._addstate()
-        self.BUZZ_IN = self._addstate()
-        self.WAIT_ANSWER = self._addstate()
-        self.ANSWER_CORRECT = self._addstate()
-        self.ANSWER_INCORRECT = self._addstate()
-        self.ANSWER_TIMEOUT = self._addstate()
-        self.ANSWER_NONE = self._addstate()
-        self.DELAY = self._addstate()
-        self.GAME_END = self._addstate()        
-        self.QUIT = self._addstate()
+        states = (
+            'BOARD_FILL',
+            'WAIT_BOARD_FILL',
+            'WAIT_CHOOSE_CLUE',
+            'CLICK_CLUE',
+            'WAIT_CLUE_OPEN',
+            'CLUE_OPEN',
+            'WAIT_CLUE_READ',
+            'WAIT_TRIGGER_AUDIO',
+            'PLAY_CLUE_AUDIO',
+            'WAIT_BUZZ_IN',
+            'BUZZ_IN',
+            'WAIT_ANSWER',
+            'ANSWER_CORRECT',
+            'ANSWER_INCORRECT',
+            'ANSWER_TIMEOUT',
+            'ANSWER_NONE',
+            'DELAY',
+            'GAME_END',
+            'QUIT')
+        
+        super(JeopGameState, self).__init__(states)
 
         #Define state ranges
         self.ANSWER = range(self.ANSWER_CORRECT, self.ANSWER_INCORRECT + 1)
@@ -151,8 +161,8 @@ class JeopGameState(GameState):
         Handle any simple state transitions; i.e. those that always
         occur immediately and have a single next state (no branching).
 
-        State transitions triggered by events, or whose
-        next state branches on conditions occur elsewhere.
+        State transitions triggered by events, or whose next state
+        branches on conditions occur elsewhere.
         
         """
         s = self

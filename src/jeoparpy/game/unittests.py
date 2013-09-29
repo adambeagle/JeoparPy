@@ -19,7 +19,7 @@ import unittest
 
 from jeop_player import JeopPlayer, ScoreError
 from gamedata import GameData
-from gamestate import GameState, StateError
+from gamestate import JeopGameState, StateError
 
 ###############################################################################
 class TestJeopPlayer(unittest.TestCase):
@@ -62,7 +62,7 @@ class TestJeopPlayer(unittest.TestCase):
 ###############################################################################
 class TestGameState(unittest.TestCase):
     def setUp(self):
-        self.gs = GameState()
+        self.gs = JeopGameState()
 
     def test_outOfRangeState(self):
         with self.assertRaises(StateError):
