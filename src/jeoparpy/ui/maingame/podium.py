@@ -50,6 +50,7 @@ class Podium(pygame.sprite.DirtySprite):
         """
         Upon initialization, name and a score of '$0' will be drawn. 
         'nameOffset' is the y-offset of a name on the original podium image.
+        
         """
 
         scaledSize = tuple(int(scalar*x) for x in img.get_size())
@@ -72,6 +73,7 @@ class Podium(pygame.sprite.DirtySprite):
         """
         Update all visuals on the image attribute.
         Should be called once per frame.
+        
         """
         gs = gameState
 
@@ -141,7 +143,6 @@ class AnswerTimer(JeopGameSurface):
       * start
       * update
       
-
     """
     def __init__(self, img, scalar, time, onColor=(230, 0, 0),
                  offColor=(30, 30, 30)):
@@ -170,7 +171,8 @@ class AnswerTimer(JeopGameSurface):
     def update(self, gameState):
         """
         Update the timer image. Note this has no effect if
-        timer is not turned on. 
+        timer is not turned on.
+        
         """
         gs = gameState
 
@@ -224,6 +226,7 @@ class AnswerTimer(JeopGameSurface):
 class Highlight(pygame.sprite.Sprite):
     """
     Defines an alpha-masked highlight sprite.
+    
     """
     def __init__(self, size):
         super(Highlight, self).__init__()
@@ -238,6 +241,7 @@ class Score(JeopGameSurface):
     Defines a rectangular surface with an updatable score written on it.
 
     Call update() to change the score and redraw the surface.
+    
     """
     def __init__(self, pos, size, font, bgColor, shadowOffset, initial='$0'):
         """
@@ -269,8 +273,9 @@ class Score(JeopGameSurface):
 ###############################################################################
 class JeopScore(Score):
     """
-    A Score specialized for a Jeoparpy game. Automatically
+    A Score sprite specialized for a Jeoparpy game. Automatically
     sets font and positions rect.
+    
     """
     def __init__(self, podiumRect, scalar):
         bgColor = JEOP_BLUE
