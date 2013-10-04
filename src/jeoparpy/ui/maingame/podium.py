@@ -23,7 +23,8 @@ from jeopgamesfc import JeopGameSurface
 from ...config import ANSWER_TIME_MS
 from ..constants import JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
-from ..util import draw_centered_textline, shadow_text
+from ..util import (autofit_text, draw_centered_textblock,
+                    draw_centered_textline, shadow_text)
 from ...constants import ANSWER_TIMEOUT
 
 ###############################################################################
@@ -46,10 +47,12 @@ class Podium(pygame.sprite.DirtySprite):
       * update
       
     """
-    def __init__(self, id_, img, scalar, name, nameFont, nameOffset, *groups):
+    def __init__(self, id_, img, scalar, name, nameFont, nameRect,
+                 *groups):
         """
         Upon initialization, name and a score of '$0' will be drawn. 
         'nameOffset' is the y-offset of a name on the original podium image.
+        'nameFont' is 2-tuple (fontPath, fontSize).
         
         """
 
@@ -65,7 +68,8 @@ class Podium(pygame.sprite.DirtySprite):
         self._score = JeopScore(self.rect, scalar)
         self._timer = self._init_timer(scalar)
 
-        self._draw_name(name, nameFont, int(scalar*nameOffset))
+        self._draw_name(name, nameFont[0], int(scalar*nameFont[1]),
+                        pygame.Rect(*(int(scalar*x) for x in nameRect)))
         self.image.blit(self._score, self._score.rect)
         self.dirty = 1
 
@@ -104,14 +108,15 @@ class Podium(pygame.sprite.DirtySprite):
         self._baseImg = self.image.copy()
         self._highlight.draw(self.image)
 
-    def _draw_name(self, name, font, nameOffset):
-        text = font.render(name, 1, (255, 255, 255))
-        
-        rect = text.get_rect()
-        rect.centerx = self.rect.centerx
-        rect.y = nameOffset
+    def _draw_name(self, name, fontPath, fontSize, nameBoundsRect):
+        sfc = pygame.Surface(nameBoundsRect.size)
+        sfc.fill(JEOP_BLUE)
+        lines, font = autofit_text(fontPath, fontSize, name,
+                                   nameBoundsRect.size)
 
-        self.image.blit(text, rect)
+        draw_centered_textblock(sfc, lines, font, (255, 255, 255))
+        
+        self.image.blit(sfc, nameBoundsRect)
 
     def _init_timer(self, scalar):
         pos = tuple(int(scalar*x) for x in (80, 3))
@@ -123,7 +128,6 @@ class Podium(pygame.sprite.DirtySprite):
         self.image.blit(timer, timer.rect)
 
         return timer
-        
 
 ###############################################################################
 class AnswerTimer(JeopGameSurface):

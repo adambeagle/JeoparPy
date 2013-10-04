@@ -87,13 +87,13 @@ class PodiaPanel(JeopGameSurface):
     def _init_podia(self, gameData, scalar):
         podia = pygame.sprite.OrderedUpdates()
         img = pygame.image.load(IMAGES['podium']).convert_alpha()
+        nameBounds = pygame.Rect(90, 107, 102, 105)
         fonts = (('team1', 42), ('team2', 33), ('team3', 40))
-        fonts = tuple((FONTS[n], int(scalar*s)) for n,s in fonts)
+        fonts = tuple((FONTS[n], s) for n,s in fonts)
 
         for i in xrange(3):
-            font = pygame.font.Font(*fonts[i])
             p = Podium(i, img, scalar, gameData.players[i].name,
-                       font, 132, podia)
+                       fonts[i], nameBounds, podia)
 
         return self._position_podia(podia)
 
