@@ -26,7 +26,7 @@ from pygame.locals import KEYDOWN, QUIT
 
 from constants import JEOP_BLUE, RULES, SUBTITLE
 from resmaps import FONTS, IMAGES
-from util import (draw_centered_textblock, draw_textline,
+from util import (draw_centered_textblock, draw_textline, restrict_fontsize,
                   scale, shadow_text, wait_for_keypress)
 
 ###############################################################################
@@ -136,7 +136,10 @@ def _build_rules(scrRect):
                   headerRect, scale(6, scrRect.h, 768))
 
     #Draw rules
-    font = pygame.font.Font(FONTS['rules'], scale(50, scrRect.h, 768))
+    bounds = tuple(.9*x for x in scrRect.size)
+    fsize = restrict_fontsize(FONTS['rules'], scale(50, scrRect.h, 768),
+                              RULES, bounds)
+    font = pygame.font.Font(FONTS['rules'], fsize)
     draw_centered_textblock(sfc, RULES, font, (255, 255, 255), 0,
                             scale(4, scrRect.h, 768), False)
     sfc.set_alpha(240)
