@@ -91,7 +91,22 @@ class GameData(object):
         'Path' is the path (including name) to the file containing the clues.
         Ex: returnedClues[2][4] would return the 5th clue in the 3rd category.
         """
-        clues = get_stripped_nonempty_file_lines(path)
+        clues = []
+        clue = []
+
+        #Read all clues from file into clues
+        with open(path, 'r') as f:
+            for line in f:
+                stripped = line.strip()
+                if stripped:
+                    clue.append(stripped)
+                elif clue:
+                    clues.append(tuple(clue))
+                    clue = []
+
+        #Last clue could be leftover beacuse EOF reached
+        if clue:
+            clues.append(tuple(clue))
 
         return self._map_clues(clues, numCategories)
 
