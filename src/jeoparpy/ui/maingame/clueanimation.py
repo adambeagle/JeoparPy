@@ -5,8 +5,6 @@ Author: Adam Beagle
 DESCRIPTION:
     Contains the OpenClueAnimation class, described in detail below.
 
-TODO:
-
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under

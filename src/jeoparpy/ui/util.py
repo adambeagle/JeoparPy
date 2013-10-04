@@ -147,6 +147,23 @@ def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
 
     sfc.blit(text, rect)
 
+def fit_image(img, bounds):
+    """
+    Return img smoothscaled to be within size given by 'bounds.'
+    'img' is unchanged if it is not larger than bounds in either dimension.
+    
+    """
+    rect = img.get_rect()
+    wscalar = float(bounds[0]) / rect.w
+    hscalar = float(bounds[1]) / rect.h
+
+    scalar = min(wscalar, hscalar)
+    if scalar < 1:
+        scaledSize = tuple(int(scalar*x) for x in rect.size)
+        img = pygame.transform.smoothscale(img, scaledSize)
+
+    return img
+
 def get_anim_data(goalTime, distance, globalFPSLimit):
     """
     Return number of frames, step size (in pixels), and FPS limit that will
