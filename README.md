@@ -1,4 +1,4 @@
-JEOPARPY! v0.9.2
+JEOPARPY! v0.9.3
 ================
 ###### Written by Adam Beagle ######
 
@@ -169,11 +169,6 @@ to view the example data, and ensure the game runs without issue.
      (primarily during poritions of the intro sequences) may cause the game 
 	 to freeze momentarily.
 	 
-  2. Font sizes are scaled for resolution, but fixed. This means clues, 
-     category names, and player names that are too long will not be rendered 
-	 properly. This is a high-priority issue and its fix is a goal for version
-	 1.0.
-
 
 	 
 ## LEGAL ##

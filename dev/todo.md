@@ -3,28 +3,22 @@
 ### Immediate ###
 
 ### High priority ###
-* Fix fixed font-size issue.
-    Font sizes are currently scaled for the resolution, but not scaled for length of text.
-    
-	Badly affects player names, category names, clues.
-	Could, but not likely to, affect subtitle, amounts, and rules.
-	
-	UPDATE:
-	  Fixed in gameboard and categoryscroll, for rules, and for player names.
 
 ### Low priority ###
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
 * GameState arg should be kwargs-like-dict to clarify code that gets/sets the state args.
+* Command line arguments to disable intro/scroll (for debugging purposes); possibly to set resolution/fullscreen.
 
 ### Down the Road ###
-* Make intro animation more interesting.
-* Make outro animation (currently do_congrats) more interesting.
 * Customizable timeout on clues
-* 'Undo' key command to negate last points given, in case of mistake or disagreement.
 * Accelerate/decelerate category scroll to make it smoother.
 * Daily doubles
 * Final JeoparPy
 
 ### Blue Sky ###
+* User-friendly customization GUI; could allow save/load of custom game data.
+* 'Undo' key command to negate last points given, in case of mistake or disagreement.
+* Make intro animation more interesting.
+* Make outro animation (currently do_congrats) more interesting.
 * 4:3 mode

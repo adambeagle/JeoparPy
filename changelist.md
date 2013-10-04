@@ -1,11 +1,16 @@
 CHANGELIST - JeoparPy
 =====================
 ### Version 0.9.3 ###
+* Bug fix: The fixed font-size issue has been resolved. Clues, player names, categories, amounts, and the rules can now be arbitrary lengths, and their font size will be scaled accordingly and their text properly fit.
+* The line breaks in clues.txt no longer need to be manually entered. If a clue is written on a single line, it will automatically be fit when drawn; if manual line breaks are done, they will be honored, though the font size may be scaled to ensure the entire clue fits on the screen.
+* Improvements to image clues. Images are now automatically scaled if too large, and are guaranteed at least the bottom third of the clue screen for display area. Like in other clues, text in image clues is scaled to fit as well.
 * Bug fix: A crash could occur during the credits sequence if the global FPS limit was particularly low (less than approx. 30 FPS). This has been fixed.
 * The category scroll sequence is now animated relative to the global FPS limit.
 
+
 ### Version 0.9.2 ###
 * Refactored the state transition handling code in main.py. Transitions now broken explicitly into those triggered by events, those that are immediate and follow a linear flow, and those that branch to differing next states based on UI and GameData conditions. Maybe more importantly, the state transition functions in main now only set states; related code triggered by state changes, previously in main, refactored to controller and gamedata modules.
+
 
 ### Version 0.9.1 ###
 * Customizable timeout on answers added. See /src/jeoparpy/config.py to set.
@@ -29,7 +34,7 @@ CHANGELIST - JeoparPy
 
 ### Version 0.8 ###
 
-This version is the result of a complete and total rebuild of the game.
+This version is the result of a complete and total rewrite of the game.
 The only feature missing from the old version is the ability to play videos in clues. This was removed as it was an ordeal to convert videos to the proper format, and video use was not cross-platform.
 
 At the typical user level, the major changes are:

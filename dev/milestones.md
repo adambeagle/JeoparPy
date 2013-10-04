@@ -9,4 +9,4 @@ major version changes are allowed.
 * Automatic, customizable timeout on buzz-in (complete)
 * Final JeoparPy
 * "Daily double"-esque functionality
-* Font size fix
+* Font size fix (complete)

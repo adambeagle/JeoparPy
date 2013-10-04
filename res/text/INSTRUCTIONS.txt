@@ -19,16 +19,18 @@ CLUES |
     To create your own clues, replace the sample data with your own text, 
     taking note of the following:
       
-      -Clues are written starting from the top left clue box, then by column.
-         ~Example: On a 5x5 board, the first 5 clues will be the clues for 
-          the leftmost category, starting at the top. The next 5 will be for 
-          the column to the right, starting at the top.
+      - Clues are written starting from the top left clue box, then by column.
+         ~ Example: On a 5x5 board, the first 5 clues will be the clues for 
+           the leftmost category, starting at the top. The next 5 will be for 
+           the column to the right, starting at the top.
       
-      -The line breaks in the text file dictate where the line breaks will be 
-       when the clue is printed.
-         ~So, a long clue written on a single line will not display properly.
-         ~There is a long example clue in the file that serves as a guide for 
-          how to format multi-line clues
+      - Clues can be any length, but abnormally long clues may be too small
+        to be easily read.
+
+      - As can be seen in the sample clues, you may choose to write an
+        entire clue on a single line or dictate the line breaks
+        yourself. The simplest method is to write each clue on a single
+        line.
 
 
 ============
