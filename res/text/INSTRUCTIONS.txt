@@ -45,6 +45,9 @@ CATEGORIES |
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
+  * Category names can be any length/any number of words, but shorter
+    is better for readability.
+
 
 ==============
 PLAYER NAMES |
@@ -61,6 +64,9 @@ PLAYER NAMES |
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
+  * Names can be any length and any number of words, but keep in mind very
+    long names may be drawn so small as to be essentially unreadable.
+
 
 =========
 AMOUNTS |
@@ -74,6 +80,10 @@ AMOUNTS |
   * Do not include a dollar sign, decimal or any other non-numeric character.
 
   * Make sure the number of amounts matches the number of clues per category.
+
+  * Amounts can be arbitrarily high, but note that scores of 10 million or higher 
+    will not fit properly on the podia. There are no plans to change this behavior 
+    as it is considered an extreme edge case.
 
 
 =======
@@ -89,8 +99,8 @@ RULES |
 
   * Leading or trailing whitespace (spaces, tabs, returns) is ignored.
 
-  * It is recommended to start each rule with a character such as an 
-    asterisk (*).
+  * It is recommended to start each rule with a bullet-like character, such as 
+    an asterisk (*).
 
 
 ==========

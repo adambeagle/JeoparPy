@@ -5,11 +5,12 @@
 ### High priority ###
 * Fix fixed font-size issue.
     Font sizes are currently scaled for the resolution, but not scaled for length of text.
-    Badly effects player names, category names, clues.
-	Could, but not likely to, effect subtitle amounts, and rules.
+    
+	Badly affects player names, category names, clues.
+	Could, but not likely to, affect subtitle, amounts, and rules.
 	
 	UPDATE:
-	  Fixed in gameboard and categoryscroll, fixed for rules in intro.
+	  Fixed in gameboard and categoryscroll, for rules, and for player names.
 
 ### Low priority ###
 * Logging
