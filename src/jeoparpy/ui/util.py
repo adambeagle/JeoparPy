@@ -51,6 +51,39 @@ class _Size(tuple):
         return True
 
 ###############################################################################
+def autofit_text(fontPath, fontSize, text, bounds, spacing=0):
+    """
+    Fit a length of text into a block whose size is defined by 'bounds'.
+    Lines of text will contain as many words as will fit the width of
+    'bounds' when rendered with font defined by fontPath and fontSize.
+    The font size of the entire block is then scaled to guarantee the block's
+    height fits within that of bounds.
+
+    Returns lines of text to render and the pygame.font.Font object with
+    which to render them. It is recommended to then call one of the
+    draw_textblock functions in this module with the returned values.
+    
+    """
+    lines = []
+    words = text.split(' ')
+    font = pygame.font.Font(fontPath, fontSize)
+
+    #Create lines; lines contain as many words as will fit within width
+    #of bounds.
+    while words:
+        line = words.pop(0)
+        while (words and
+               font.size(line)[0] + font.size(' ' + words[0])[0] <= bounds[0]):
+            line += ' ' + words.pop(0)
+            
+        lines.append(line)
+
+    #Call restrict_fontsize again to guarantee height of textblock defined
+    #by lines does not exceed height of bounds.
+    fontSize = restrict_fontsize(fontPath, fontSize, lines, bounds, spacing)
+
+    return (lines, pygame.font.Font(fontPath, fontSize))
+
 def draw_centered_textblock(sfc, lines, font, color, spacing=0,
                             shadowOffset=None, textAlignCenter=True):
     """
