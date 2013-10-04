@@ -1,5 +1,8 @@
 CHANGELIST - JeoparPy
 =====================
+### Version 0.9.3 ###
+* Bug fix: A crash could occur during the credits sequence if the global FPS limit was particularly low (less than approx. 30 FPS). This has been fixed.
+* The category scroll sequence is now animated relative to the global FPS limit.
 
 ### Version 0.9.2 ###
 * Refactored the state transition handling code in main.py. Transitions now broken explicitly into those triggered by events, those that are immediate and follow a linear flow, and those that branch to differing next states based on UI and GameData conditions. Maybe more importantly, the state transition functions in main now only set states; related code triggered by state changes, previously in main, refactored to controller and gamedata modules.

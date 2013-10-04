@@ -24,32 +24,45 @@ import pygame
 from config import CATEGORY_HOLD_TIME
 from constants import JEOP_BLUE
 from resmaps import FONTS
-from util import BorderedBox, draw_centered_textblock, shadow_text
+from util import (BorderedBox, draw_centered_textblock, get_anim_data,
+                  shadow_text)
+from ..config import FPS_LIMIT
 from ..util import chunker
 
 ###############################################################################
 def do_scroll(screen, clock, categories):
+    """
+    Draws a bordered box with a category name inside, holds for an amount
+    of time (defined by CATEGORY_HOLD_TIME), and scrolls to next category.
+    This process is repeated until all categories have been shown.
+
+    'categories' expects container of category name strings.
+    'screen' must be the primary pygame display surface.
+    
+    """
     scrSize = screen.get_size()
     boxes = tuple(_build_box(scrSize, c) for c in categories)
-    step = _scale(6, scrSize[1])
+    numFrames, step, fpsLimit = get_anim_data(1.0, scrSize[0], FPS_LIMIT)
+    print fpsLimit
 
     #Hold on each box, then scroll
     for box, nextBox in chunker(boxes, 2, True):
         _blit_to_screen_and_update(screen, box)
         pygame.time.delay(CATEGORY_HOLD_TIME)
-        _animate_scroll(screen, scrSize, clock, box, nextBox, step)
+        _animate_scroll(screen, scrSize, clock, box, nextBox, step, fpsLimit)
 
     #Draw final box and hold
     _blit_to_screen_and_update(screen, boxes[-1])
     pygame.time.delay(CATEGORY_HOLD_TIME)
                         
 ###############################################################################
-def _animate_scroll(screen, scrSize, clock, box1, box2, step):
+def _animate_scroll(screen, scrSize, clock, box1, box2, step, fpsLimit):
     """
     Scrolls box to the left, filling in space with box2 until
     box2 fills the screen. The boxes must be surfaces.
     'step' is the amount in pixels to shift the boxes on
     each animation step.
+    
     """
     w, h = scrSize
     offset = step
@@ -66,7 +79,7 @@ def _animate_scroll(screen, scrSize, clock, box1, box2, step):
 
         #Increment offset and tick clock/fps limiter
         offset += step
-        clock.tick_busy_loop(250) 
+        clock.tick_busy_loop(fpsLimit) 
 
 def _blit_to_screen_and_update(screen, sfc):
     screen.blit(sfc, (0, 0))
@@ -76,6 +89,7 @@ def _build_box(size, category):
     """
     Returns surface containing centered category text and a black border.
     'size' is size of surface to create.
+    
     """
     borderW = _scale(33, size[1])
     box = BorderedBox(size, JEOP_BLUE, borderW, (0, 0, 0))

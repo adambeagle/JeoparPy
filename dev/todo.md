@@ -11,7 +11,6 @@
 ### Low priority ###
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
-* Make categoryscroll honor global FPS limit
 
 ### Down the Road ###
 * Make intro animation more interesting.
