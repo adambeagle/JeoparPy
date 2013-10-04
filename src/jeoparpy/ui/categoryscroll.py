@@ -24,8 +24,8 @@ import pygame
 from config import CATEGORY_HOLD_TIME
 from constants import JEOP_BLUE
 from resmaps import FONTS
-from util import (BorderedBox, draw_centered_textblock, get_anim_data,
-                  shadow_text)
+from util import (autofit_text, BorderedBox, draw_centered_textblock,
+                  get_anim_data, shadow_text)
 from ..config import FPS_LIMIT
 from ..util import chunker
 
@@ -43,7 +43,6 @@ def do_scroll(screen, clock, categories):
     scrSize = screen.get_size()
     boxes = tuple(_build_box(scrSize, c) for c in categories)
     numFrames, step, fpsLimit = get_anim_data(1.0, scrSize[0], FPS_LIMIT)
-    print fpsLimit
 
     #Hold on each box, then scroll
     for box, nextBox in chunker(boxes, 2, True):
@@ -94,9 +93,10 @@ def _build_box(size, category):
     borderW = _scale(33, size[1])
     box = BorderedBox(size, JEOP_BLUE, borderW, (0, 0, 0))
     
-    font = pygame.font.Font(FONTS['category'], _scale(150, size[1]))
+    lines, font = autofit_text(FONTS['category'], _scale(150, size[1]),
+                               category, tuple(.8*x for x in size))
 
-    draw_centered_textblock(box, category.split(' '), font,
+    draw_centered_textblock(box, lines, font,
                             (255, 255, 255), 0, _scale(7, size[1]))
 
     return box
