@@ -6,6 +6,51 @@ from pygame.locals import *
 from ..util import to_numeric
 
 ###############################################################################
+class _Size(tuple):
+    """
+    WARNING: Designed for use only in this module.
+
+    A subclass of tuple that redefines the default comparison operators of
+    tuple; The given comparison between EVERY element and its corresponding
+    element in the compared tuple must return True for the comparison on
+    the Size objects to return True.
+
+    Examples (assume all are _Size objects):
+      (1, 1) < (2, 2) --> True
+      (1, 2) < (2, 2) --> False
+      (1, 2) <= (2, 2) --> True
+      (3, 1) < (2, 2) --> False
+
+    """
+    def __ge__(self, other):
+        for i, n in enumerate(self):
+            if n < other[i]:
+                return False
+
+        return True
+
+    def __le__(self, other):
+        for i, n in enumerate(self):
+            if n > other[i]:
+                return False
+
+        return True
+
+    def __gt__(self, other):
+        for i, n in enumerate(self):
+            if n <= other[i]:
+                return False
+
+        return True
+    
+    def __lt__(self, other):
+        for i, n in enumerate(self):
+            if n >= other[i]:
+                return False
+
+        return True
+
+###############################################################################
 def draw_centered_textblock(sfc, lines, font, color, spacing=0,
                             shadowOffset=None, textAlignCenter=True):
     """
@@ -103,6 +148,23 @@ def get_size_textblock(lines, font, spacing):
 
     return (blockW, blockH)
 
+def restrict_fontsize(fontPath, size, lines, bounds, spacing=0):
+    """
+    Returns largest font size <= 'size' for which a block of text given by
+    'lines,' rendered with font given by 'fontName,' is guaranteed to not
+    exceed size given by 'bounds' in either dimension.
+
+    'spacing' is the amount of space in pixels between each line.
+    
+    """
+    bounds = _Size(bounds)
+    while not _Size(get_size_textblock(lines,
+                                       pygame.font.Font(fontPath, size),
+                                       spacing)) < bounds:
+        size -= 1
+
+    return size
+
 def scale(n, rel, comp):
     """ """
     return int(n * (rel / float(comp)))
@@ -142,7 +204,7 @@ def wait_for_keypress(key=None):
                 sys.exit()
 
         pygame.event.pump()
-
+        
 ###############################################################################
 class BorderedBox(pygame.Surface):
     """
@@ -225,4 +287,3 @@ class BorderedBox(pygame.Surface):
 ###############################################################################
 class BorderError(Exception):
     pass
-
