@@ -27,7 +27,7 @@ from pygame.locals import QUIT, KEYDOWN, K_q
 
 from constants import JEOP_BLUE
 from resmaps import FONTS, IMAGES
-from util import scale, shadow_text
+from util import get_anim_data, scale, shadow_text
 
 ###############################################################################
 class CreditLine(pygame.sprite.DirtySprite):
@@ -228,8 +228,9 @@ def do_credits(screen, clock, audioPlayer, fpsLimit):
                                          startY + scale(100, lineW, 1024),
                                          lineW,scrRect)
     
-    numFrames, step, fpsLimit = _get_anim_data(33.2, finalLineBottom, fpsLimit)
-
+    numFrames, step, fpsLimit = get_anim_data(33.2, -1*finalLineBottom,
+                                              fpsLimit)
+    
     pygame.event.clear()
     audioPlayer.play('end')
     _scroll_credits(screen, scrRect, clock, lines, numFrames, step, fpsLimit)
@@ -283,17 +284,6 @@ def _build_multi_lines(group, font, startY, spacer, lineW, scrRect):
         startY = line.rect.bottom + spacer
 
     return startY
-
-def _get_anim_data(goalTime, bottomLineBottomY, globalFPSLimit):
-    """Returns number of frames, step size, and fps limit."""
-    step = 1
-    dist = bottomLineBottomY
-    maxNumFrames = int(goalTime * globalFPSLimit)
-
-    if dist < maxNumFrames:
-        return dist, -step, int(round(dist / goalTime))
-    elif dist > maxNumFrames:
-        pass
 
 def _scroll_credits(screen, scrRect, clock, lines, numFrames, step, fpsLimit):
     screen.fill(JEOP_BLUE)

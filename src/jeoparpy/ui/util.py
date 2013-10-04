@@ -64,6 +64,29 @@ def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
         sfc.blit(shadow, shadRect)
 
     sfc.blit(text, rect)
+
+def get_anim_data(goalTime, distance, globalFPSLimit):
+    """
+    Returns number of frames, step size (in pixels), and FPS limit that will
+    translate a surface 'distance' pixels in as close to 'goalTime' seconds
+    as possible.
+    
+    Returned FPS limit guaranteed to not exceed globalFPSLimit.
+    A negative 'distance' will result in a negative step size.
+    
+    """
+    step = 1
+    maxNumFrames = int(goalTime * globalFPSLimit)
+
+    while abs(distance / step) > maxNumFrames:
+        step += 1
+
+    if distance < 0:
+        step = -step
+        
+    numFrames = distance / step
+
+    return numFrames, step, int(round(numFrames / goalTime))
     
 def get_size_textblock(lines, font, spacing):
     """
