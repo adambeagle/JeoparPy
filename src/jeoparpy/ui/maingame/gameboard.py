@@ -23,7 +23,7 @@ import pygame
 from jeopgamesfc import JeopGameSurface
 from ..constants import JEOP_BLUE
 from ..resmaps import FONTS
-from ..util import (BorderedBox, draw_centered_textblock,
+from ..util import (autofit_text, BorderedBox, draw_centered_textblock,
                     draw_centered_textline, scale)
 from ...constants import ANIMATIONEND
 
@@ -36,6 +36,7 @@ class GameBoard(JeopGameSurface):
         * baseImg
         * dirty
         * rect
+        
     """
     def __init__(self, size, gameData):
         super(GameBoard, self).__init__(size)
@@ -51,9 +52,10 @@ class GameBoard(JeopGameSurface):
 
     def get_clicked_clue(self, clickPos):
         """
-        Returns 2-tuple (row, column) of clicked clue
+        Return 2-tuple (row, column) of clicked clue
         if the click position is inside a clue's rect,
         otherwise returns None.
+        
         """
         for c, col in enumerate(self._boxes):
             for r, box in enumerate(col[1:]):
@@ -93,15 +95,21 @@ class GameBoard(JeopGameSurface):
             self.dirty = True
 
     def _blit_amount(self, box, amount):
+        bounds = tuple(.8*x for x in box.size)
+        font = autofit_text(FONTS['amount'], self._scale(48),
+                            str(amount), bounds)[1]
+        
         draw_centered_textline(box, '$' + str(amount),
-                               self._amtFont, (217, 164, 31), 4)
+                               font, (217, 164, 31), 4)
 
     def _blit_categories(self, categories):
-        font = pygame.font.Font(FONTS['category'], self._scale(32))
         shadowOffset = self._scale(3)
+        bounds = tuple(.9*x for x in self._boxes[0][0].size)
         
         for i, c in enumerate(categories):
-            lines = c.split(' ')
+            lines, font = autofit_text(FONTS['category'], self._scale(32),
+                                           c, bounds)
+                                       
             draw_centered_textblock(self._boxes[i][0], lines, font,
                                     (255, 255, 255), 0, shadowOffset)
 

@@ -87,8 +87,9 @@ def autofit_text(fontPath, fontSize, text, bounds, spacing=0):
 def draw_centered_textblock(sfc, lines, font, color, spacing=0,
                             shadowOffset=None, textAlignCenter=True):
     """
-    Blits lines of text in 'lines' argument centered onto surface 'sfc.'
+    Blit lines of text in 'lines' argument centered onto surface 'sfc.'
     Returns pygame.Rect of drawn block relative to sfc.
+    
     """
     blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
     blockRect.center = sfc.get_rect().center
@@ -98,8 +99,9 @@ def draw_centered_textblock(sfc, lines, font, color, spacing=0,
         
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     """
-    Blits line of text in 'text' argument centered onto surface 'sfc.'
+    Blit line of text in 'text' argument centered onto surface 'sfc.'
     Returns pygame.Rect of drawn line relative to sfc.
+    
     """
     rect = pygame.Rect((0, 0), font.size(text))
     rect.center = sfc.get_rect().center
@@ -110,8 +112,9 @@ def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
 def draw_textblock(sfc, lines, font, color, pos, centerx=False,
                    spacing=0, shadowOffset=None):
     """
-    Blits lines of text in 'lines' argument centered onto surface 'sfc.'
+    Blit lines of text in 'lines' argument centered onto surface 'sfc.'
     Returns pygame.Rect of drawn block relative to sfc.
+    
     """
     blockRect = pygame.Rect(pos, get_size_textblock(lines, font, spacing))
     lineH = font.get_linesize()
@@ -130,8 +133,9 @@ def draw_textblock(sfc, lines, font, color, pos, centerx=False,
 
 def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
     """
-    Blits text in 'text' onto surface 'sfc.'
+    Blit text in 'text' onto surface 'sfc.'
     Uses position of 'rect' (top left) to position blit.
+    
     """
     s = text
     doShadow = shadowOffset is not None
@@ -145,7 +149,7 @@ def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
 
 def get_anim_data(goalTime, distance, globalFPSLimit):
     """
-    Returns number of frames, step size (in pixels), and FPS limit that will
+    Return number of frames, step size (in pixels), and FPS limit that will
     translate a surface 'distance' pixels in as close to 'goalTime' seconds
     as possible.
     
@@ -168,11 +172,15 @@ def get_anim_data(goalTime, distance, globalFPSLimit):
     
 def get_size_textblock(lines, font, spacing):
     """
-    Returns dimensions needed to render 'lines' of text
+    Return dimensions needed to render 'lines' of text
     in passed font, with 'spacing' pixels between each line.
+    
     """
     blockW = 0
     blockH = 0
+
+    if isinstance(lines, basestring):
+        lines = [lines]
 
     for line in lines:
         w, h = font.size(line)
@@ -183,7 +191,7 @@ def get_size_textblock(lines, font, spacing):
 
 def restrict_fontsize(fontPath, size, lines, bounds, spacing=0):
     """
-    Returns largest font size <= 'size' for which a block of text given by
+    Return largest font size <= 'size' for which a block of text given by
     'lines,' rendered with font given by 'fontName,' is guaranteed to not
     exceed size given by 'bounds' in either dimension.
 
@@ -204,9 +212,10 @@ def scale(n, rel, comp):
 
 def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
     """
-    Returns surface and rect of shadowed text.
+    Return surface and rect of shadowed text.
     Shadow is positioned 'offset' pixels right and down from srcRect.
     'msg' is string to shadow.
+    
     """
     shadText = font.render(msg, 1, color)
     rect = shadText.get_rect()
@@ -221,6 +230,7 @@ def wait_for_keypress(key=None):
     By default, return control when any key is pressed.
     If one key constant or list is passed, return only when 
     one of those keys is pressed.
+    
     """
     if not key == None and not isinstance(key, collections.Iterable):
         key = [key]
@@ -253,11 +263,13 @@ class BorderedBox(pygame.Surface):
     METHODS:
       * draw_centered_text
       * redraw
+      
     """
     def __init__(self, size, fillColor, borderW, borderColor):
         """
         'borderW' can be an int for equal borders,
         or a 4-tuple defining widths for (top, right, bottom, left).
+        
         """
         super(BorderedBox, self).__init__(size)
         
@@ -278,10 +290,11 @@ class BorderedBox(pygame.Surface):
 
     def redraw(self):
         """
-        Redraws box. Must be called after altering any attributes
+        Redraw box. Must be called after altering any attributes
         for changes to be reflected on surface.
         If there was any text on the box, it will be erased;
         call draw_centered_text again to redraw it.
+        
         """
         tb, rb, bb, lb = self.borderWidths
         w, h = self.size
