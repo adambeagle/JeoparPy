@@ -114,7 +114,7 @@ QUICK START
 OPTIONAL ARGUMENTS
 ******************
 
-There are several optional arguments that can be passed to ``start.py``.
+There are several optional arguments that can be passed to ``start.py``:
 
 * ``-f`` or ``--fullscreen`` will force the game to run in fullscreen mode.
   This overrides the ``FULLSCREEN`` setting in ``src/jeoparpy/config.py``.
@@ -129,7 +129,8 @@ There are several optional arguments that can be passed to ``start.py``.
   board. This may be useful when testing customized games.
 
 * ``-d`` or ``--debug`` will turn debug mode on. Typical users should not need 
-  this option.
+  this option. This overrides the ``DEBUG`` option in 
+  ``src/jeoparpy/config.py``.
 
 
 
