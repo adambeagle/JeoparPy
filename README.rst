@@ -1,10 +1,13 @@
+================
 JEOPARPY! v0.9.3
 ================
-###### Written by Adam Beagle ######
 
-## GENERAL INFO ##
+************
+GENERAL INFO
+************
 
-### WHAT JEOPARPY IS ###
+WHAT JEOPARPY IS
+================
 
 JeoparPy allows users to customize and host a game 
 that includes all the sights, sounds, and excitement
@@ -13,7 +16,8 @@ from any such show).
 
 It is ideal for use in a classroom setting, or as a party/shower game.
 
-### WHAT JEOPARPY IS NOT ###
+WHAT JEOPARPY IS NOT
+====================
 
 JeoparPy does NOT include any pre-made sets of categories and clues,
 except for placeholders to aid in formatting your own.
@@ -21,7 +25,8 @@ It is instead only designed to be used to host custom games that the
 user creates.
 
 
-### DESCRIPTION ###
+DESCRIPTION
+===========
 
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
@@ -42,7 +47,9 @@ players answered correctly or incorrectly.
 
 
 
-## SETUP ##
+*****
+SETUP
+*****
 
 The following are required to run JeoparPy:
   * Python (http://www.python.org/download/)
@@ -56,12 +63,15 @@ JeoparPy has been tested on the following platforms:
   * Windows 7 64-bit
   * Ubuntu 10.10
   
-### PRIOR TO FIRST RUN ###
+PRIOR TO FIRST RUN
+==================
   * Open file <jeoparpy root>/src/jeoparpy/config.py and set your preferred
     display resolution. Follow the instructions in the file.
   
 
-## CONTROLS ##
+********
+CONTROLS
+********
 
 For more detailed instructions on how/when to use these controls, 
 see the Instructions section below.
@@ -76,13 +86,16 @@ see the Instructions section below.
 
 
 
-## INSTRUCTIONS ##
+************
+INSTRUCTIONS
+************
 
 **WARNING:** *It is important that a game host read these instructions. 
 The game is designed to have a seamless presentation to the players, 
 thus instructions for its use do not appear onscreen.*
 
-### HOW TO HOST A GAME ###
+HOW TO HOST A GAME
+==================
 To start the game, run start.py in the /src folder. On Windows, run 
 Start_JeoparPy.bat, located in the same folder as this readme.
 
@@ -114,16 +127,13 @@ When a player is buzzed in, one of three things can happen:
     the game board will return.
   * Press 'Backspace' if the player answers incorrectly. Another player can now 
     buzz in. The player that answered incorrectly can not buzz in again on the 
-   same question.
+    same question.
   * A player fails to answer within the time limit (note the timer at the top
     of a podium after a player buzzes in). This has the same end result as
     pressing 'backspace' above.
 
 If no one answers correctly and time runs out, press 'End' to close a clue 
 and return to the game board.
-    -Please note there is no clue timer implemented in the game at this point.
-	 A clue only closes automatically when a player answers correctly, or
-	 all players answer incorrectly.
 
 Any clue previously opened can be reopened. 
 So, if a clue is clicked by mistake, press 'End.' Its dollar amount will be 
@@ -141,37 +151,43 @@ you wish to quit the game during the credits, you can press 'Q.' The game will
 close automatically after the credits.
 
 
+CUSTOMIZATION
+=============
 
-## CUSTOMIZATION ##
+*Note: It is recommended that the game be run once as-is 
+to view the example data, and ensure the game runs without issue.*
 
-Note: It is recommended that the game be run once as-is 
-to view the example data, and ensure the game runs without issue. 
-
-#### Display/General game settings: ####
+Display/General game settings:
+------------------------------
   * Located in <jeoparpy root>/src/jeoparpy/config.py are settings for screen 
     resolution and toggling fullscreen display, as well as general game 
 	settings such as the answer time limit.
 
-#### Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules: ####
+Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules:
+---------------------------------------------------------------
   * The files for these are all located in <jeoparpy root>/res/text/
   * Each file has sample data included.
   * Instructions for each are found in /res/text/INSTRUCTIONS.txt
   
-#### Clue Audio/Images ####
+Clue Audio/Images
+-----------------
   * Follow the instructions in <jeoparpy root>/src/jeoparpy/ui/resmaps.py to 
     add your own images/audio to clues, or use an audio reading for a clue.
     
 
 	
-## KNOWN ISSUES ##
-
-  1. When not in fullscreen mode, moving the game window at certain times 
-     (primarily during poritions of the intro sequences) may cause the game 
-	 to freeze momentarily.
+************
+KNOWN ISSUES
+************
+1. When in windowed mode, moving the game window at certain times 
+   (primarily during portions of the intro sequences) may cause the game 
+   to freeze momentarily.
 	 
 
 	 
-## LEGAL ##
+*****
+LEGAL
+*****
 
 All code contained in this package
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
