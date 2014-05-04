@@ -178,20 +178,20 @@ example questions and to ensure the game runs without any problems.*
 
 Display/General game settings:
 ------------------------------
-  * Located in <jeoparpy root>/src/jeoparpy/config.py are settings for screen 
-    resolution and toggling fullscreen display, as well as general game 
-    settings such as the answer time limit.
+  * Located in ``<jeoparpy root>/src/jeoparpy/config.py`` are settings for 
+    screen resolution and toggling fullscreen display, as well as general 
+    game settings such as the answer time limit.
 
 Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules:
 ---------------------------------------------------------------
-  * The files for these are all located in <jeoparpy root>/res/text/
+  * The files for these are all located in ``<jeoparpy root>/res/text/``
   * Each file has sample data included.
-  * Instructions for each are found in /res/text/INSTRUCTIONS.txt
+  * Instructions for each are found in ``/res/text/INSTRUCTIONS.txt``
   
 Clue Audio/Images
 -----------------
-  * Follow the instructions in <jeoparpy root>/src/jeoparpy/ui/resmaps.py to 
-    add your own images/audio to clues, or use an audio reading for a clue.
+  * Follow the instructions in ``<jeoparpy root>/src/jeoparpy/ui/resmaps.py``
+    to add your own images/audio to clues, or use an audio reading for a clue.
     
 
 	

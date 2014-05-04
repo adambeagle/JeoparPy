@@ -3,9 +3,11 @@ The following are required to run JeoparPy:
   -Pygame (http://www.pygame.org/download.shtml)
 
 Please note that the game has only been tested with:
-  Python 2.7.3 32-bit
-  Pygame 1.9.2 32-bit
+  -Python 2.7.3 32-bit
+  -Pygame 1.9.2 32-bit
+JeoparPy can not be run with Python 3.x.
 
 JeoparPy has been tested on the following platforms:
-  Windows 7 64-bit
-  Ubuntu 10.10
+  -Windows 7 64-bit
+  -Ubuntu 10.10
+  -Xubuntu 13.10
