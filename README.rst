@@ -31,8 +31,8 @@ DESCRIPTION
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
 Generally, the questions posed to the players are phrased
-as 'answers,' to which the player must provide the correct
-'question,' using terminology such as "What is \_\_\_?" or "Who is \_\_\_?".
+as "answers," to which the player must provide the correct
+"question," using terminology such as "What is \_\_\_?" or "Who is \_\_\_?".
 
 Users can customize category names, clues, player names, and dollar amounts.
 An image can be used to accompany a clue.
@@ -62,11 +62,12 @@ Please note that the game has only been tested with:
 JeoparPy has been tested on the following platforms:
   * Windows 7 64-bit
   * Ubuntu 10.10
+  * Xubuntu 13.10
   
 PRIOR TO FIRST RUN
 ==================
-  * Open file <jeoparpy root>/src/jeoparpy/config.py and set your preferred
-    display resolution. Follow the instructions in the file.
+Open file ``<jeoparpy root>/src/jeoparpy/config.py`` and set your preferred 
+display resolution. Follow the instructions in the file.
   
 
 ********
@@ -84,6 +85,24 @@ see the Instructions section below.
 * Q:          Press to trigger the end of the game and the credits.
 * SHIFT+Q:    Press to close the game immediately. 
 
+***********
+QUICK START
+***********
+
+0. Read the "Setup" and "Controls" sections of this document.
+
+1. Clone the JeoparPy repository 
+   (``git clone git://github.com/adambeagle/jeoparpy.git`` at the command 
+   line) or click "Download ZIP" at 
+   `JeoparPy's Github page <http://github.com/adambeagle/jeoparpy>`_ and 
+   unzip the downloaded .zip file.
+
+2. On Windows, double-click ``Start_JeoparPy.bat`` to run the game. 
+   On Linux, run ``start.py`` in the ``src`` folder. Ideally, run it 
+   optimized using ``python -OO start.py``.
+
+3. If the runs without issue, you may wish to set ``FULLSCREEN = 1`` in 
+   ``/src/jeoparpy/config,py`` to run the game in fullscreen mode.
 
 
 ************
@@ -97,7 +116,7 @@ thus instructions for its use do not appear onscreen.*
 HOW TO HOST A GAME
 ==================
 To start the game, run start.py in the /src folder. On Windows, run 
-Start_JeoparPy.bat, located in the same folder as this readme.
+``Start_JeoparPy.bat``, located in the same folder as this document.
 
 Upon starting, an introduction will be played. 
 When the subtitle appears, press any key to display the rules screen.
@@ -154,14 +173,14 @@ close automatically after the credits.
 CUSTOMIZATION
 =============
 
-*Note: It is recommended that the game be run once as-is 
-to view the example data, and ensure the game runs without issue.*
+*Note: It is recommended that the game be run once as-is to view the 
+example questions and to ensure the game runs without any problems.*
 
 Display/General game settings:
 ------------------------------
   * Located in <jeoparpy root>/src/jeoparpy/config.py are settings for screen 
     resolution and toggling fullscreen display, as well as general game 
-	settings such as the answer time limit.
+    settings such as the answer time limit.
 
 Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules:
 ---------------------------------------------------------------
