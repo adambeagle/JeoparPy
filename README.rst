@@ -88,8 +88,8 @@ JeoparPy has been tested on the following platforms:
 * Ubuntu 10.10
 * Xubuntu 13.10
   
-PRIOR TO FIRST RUN
-==================
+Prior to first run:
+===================
 Open file ``<jeoparpy root>/src/jeoparpy/config.py`` and set your preferred 
 display resolution. Follow the instructions in the file.
 
@@ -260,6 +260,7 @@ Clue Audio/Images
 ************
 KNOWN ISSUES
 ************
+
 1. When in windowed mode, moving the game window at certain times 
    (primarily during portions of the intro sequences) may cause the game 
    to freeze momentarily.
