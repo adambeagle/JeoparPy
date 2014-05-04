@@ -11,7 +11,6 @@
 * Command line arguments to disable intro/scroll (for debugging purposes); possibly to set resolution/fullscreen.
 
 ### Down the Road ###
-* Customizable timeout on clues
 * Accelerate/decelerate category scroll to make it smoother.
 * Daily doubles
 * Final JeoparPy

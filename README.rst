@@ -1,5 +1,5 @@
 ================
-JeoparPy! v0.9.3
+JeoparPy! v0.9.4
 ================
 
 ********
@@ -211,8 +211,12 @@ When a player is buzzed in, one of three things can happen:
   of a podium after a player buzzes in). This has the same end result as
   pressing 'backspace' above.
 
-If no one answers correctly and time runs out, press 'End' to close a clue 
-and return to the game board.
+If the ``CLUE_TIMEOUT_MS`` option is set the clue will automatically close 
+after the amount of time set if no player has buzzed in. If no timeout time is
+provided, press 'End' to close the clue and return to the game board if no one
+is going to answer. See the instructions in ``src/jeoparpy/config.py`` for
+information about how the clue timer works, as it has specific behavior for
+audio clues or clues with audio readings.
 
 Any clue previously opened can be reopened. 
 So, if a clue is clicked by mistake, press 'End.' Its dollar amount will be 

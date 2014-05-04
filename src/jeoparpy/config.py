@@ -53,8 +53,8 @@ FPS_LIMIT = 100
 # The default value is 20 seconds.
 #
 # If a clue has an audio reading, the timer begins immediately after
-# the reading finishes. If the clue has attached audio, the timer is not
-# triggered at all. This is to prevent problems with audio being longer
+# the reading finishes. If the clue has other attached audio, the timer is 
+# not triggered at all. This is to prevent problems with audio being longer
 # than the time provided.
 #
 # If the value is 0, negative, or None, the timer will be disabled for the
