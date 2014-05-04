@@ -52,17 +52,20 @@ SETUP
 *****
 
 The following are required to run JeoparPy:
-  * Python (http://www.python.org/download/)
-  * Pygame (http://www.pygame.org/download.shtml)
+
+* Python (http://www.python.org/download/)
+* Pygame (http://www.pygame.org/download.shtml)
 
 Please note that the game has only been tested with:
-  * Python 2.7.3 32-bit
-  * Pygame 1.9.2 32-bit
+
+* Python 2.7.3 32-bit
+* Pygame 1.9.2 32-bit
 
 JeoparPy has been tested on the following platforms:
-  * Windows 7 64-bit
-  * Ubuntu 10.10
-  * Xubuntu 13.10
+
+* Windows 7 64-bit
+* Ubuntu 10.10
+* Xubuntu 13.10
   
 PRIOR TO FIRST RUN
 ==================
@@ -85,6 +88,8 @@ see the Instructions section below.
 * Q:          Press to trigger the end of the game and the credits.
 * SHIFT+Q:    Press to close the game immediately. 
 
+
+
 ***********
 QUICK START
 ***********
@@ -103,6 +108,29 @@ QUICK START
 
 3. If the runs without issue, you may wish to set ``FULLSCREEN = 1`` in 
    ``/src/jeoparpy/config,py`` to run the game in fullscreen mode.
+
+
+******************
+OPTIONAL ARGUMENTS
+******************
+
+There are several optional arguments that can be passed to ``start.py``.
+
+* ``-f`` or ``--fullscreen`` will force the game to run in fullscreen mode.
+  This overrides the ``FULLSCREEN`` setting in ``src/jeoparpy/config.py``.
+    
+* ``-w`` or ``-windowed`` will force the game to run in windowed mode.
+  This overrides both the ``FULLSCREEN`` setting in 
+  ``src/jeoparpy/config.py`` and the ``-f`` or ``-fullscreen`` arguments
+  if either is also passed.
+    
+* ``-s`` or ``--skip-intro`` will skip the intro sequences (title sequence,
+  rules screen, and category scroll) and open the game at the main game
+  board. This may be useful when testing customized games.
+
+* ``-d`` or ``--debug`` will turn debug mode on. Typical users should not need 
+  this option.
+
 
 
 ************
@@ -142,14 +170,15 @@ number on the keyboard. Example: To buzz-in player 2, press '2' on your
 keyboard. It is recommended to map a controller of some kind to these keys.
 
 When a player is buzzed in, one of three things can happen:
-  * Press spacebar if the player answers correctly. The clue will be closed and
-    the game board will return.
-  * Press 'Backspace' if the player answers incorrectly. Another player can now 
-    buzz in. The player that answered incorrectly can not buzz in again on the 
-    same question.
-  * A player fails to answer within the time limit (note the timer at the top
-    of a podium after a player buzzes in). This has the same end result as
-    pressing 'backspace' above.
+
+* Press spacebar if the player answers correctly. The clue will be closed and
+  the game board will return.
+* Press 'Backspace' if the player answers incorrectly. Another player can now 
+  buzz in. The player that answered incorrectly can not buzz in again on the 
+  same question.
+* A player fails to answer within the time limit (note the timer at the top
+  of a podium after a player buzzes in). This has the same end result as
+  pressing 'backspace' above.
 
 If no one answers correctly and time runs out, press 'End' to close a clue 
 and return to the game board.
@@ -178,20 +207,20 @@ example questions and to ensure the game runs without any problems.*
 
 Display/General game settings:
 ------------------------------
-  * Located in ``<jeoparpy root>/src/jeoparpy/config.py`` are settings for 
-    screen resolution and toggling fullscreen display, as well as general 
-    game settings such as the answer time limit.
+* Located in ``<jeoparpy root>/src/jeoparpy/config.py`` are settings for 
+  screen resolution and toggling fullscreen display, as well as general 
+  game settings such as the answer time limit.
 
 Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules:
 ---------------------------------------------------------------
-  * The files for these are all located in ``<jeoparpy root>/res/text/``
-  * Each file has sample data included.
-  * Instructions for each are found in ``/res/text/INSTRUCTIONS.txt``
+* The files for these are all located in ``<jeoparpy root>/res/text/``
+* Each file has sample data included.
+* Instructions for each are found in ``/res/text/INSTRUCTIONS.txt``
   
 Clue Audio/Images
 -----------------
-  * Follow the instructions in ``<jeoparpy root>/src/jeoparpy/ui/resmaps.py``
-    to add your own images/audio to clues, or use an audio reading for a clue.
+* Follow the instructions in ``<jeoparpy root>/src/jeoparpy/ui/resmaps.py``
+  to add your own images/audio to clues, or use an audio reading for a clue.
     
 
 	

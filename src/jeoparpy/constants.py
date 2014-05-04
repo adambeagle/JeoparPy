@@ -21,7 +21,16 @@ from pygame.locals import USEREVENT
 
 ROOT_PATH = path.abspath(path.join(path.dirname(__file__), pardir, pardir))
 
-#Custom events
+# Flags corresponding to args that can be provided to start.py
+FULLSCREEN_FLAG = 0
+WINDOWED_FLAG = 1
+DEBUG_FLAG = 2
+
+# Flags that can provided to main.
+# Note the values of these must remain distinct to the flags above.
+SKIP_INTRO_FLAG = 3
+
+# Custom events
 ANIMATIONEND = USEREVENT
 ANSWER_TIMEOUT = USEREVENT + 1
 AUDIOEND = USEREVENT + 2

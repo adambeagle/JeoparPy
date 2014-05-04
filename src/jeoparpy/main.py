@@ -22,7 +22,7 @@ import pygame
 from pygame.locals import *
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
-from constants import ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND
+from constants import ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND, SKIP_INTRO_FLAG
 from game import GameData, JeopGameState
 from ui import Controller, do_congrats, do_credits, do_intro, do_scroll
 
@@ -30,53 +30,54 @@ EVENTS_ALLOWED = (ANIMATIONEND, ANSWER_TIMEOUT,
                   AUDIOEND, KEYDOWN, MOUSEBUTTONDOWN, QUIT)
 
 ###############################################################################
-def main():
+def main(*flags):
     """Entry point."""
-
-    #Initialization
+   
+    # Initialization
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE,
                                      pygame.FULLSCREEN if FULLSCREEN else 0)
     pygame.display.set_caption('JeoparPy!')
 
-    #Declarations
+    # Declarations
     gameData = GameData()
     gs = JeopGameState()
     uicontroller = Controller(screen, gameData, FPS_LIMIT)
     clock = pygame.time.Clock()
 
-    #Intro sequence (control passed completely to functions)
-    pygame.mouse.set_visible(0)
-    do_intro(screen, clock, uicontroller.audioplayer)
-    do_scroll(screen, clock, gameData.categories)
-    pygame.mouse.set_visible(1)
+    # Intro sequence (control passed completely to functions)
+    if SKIP_INTRO_FLAG not in flags:
+        pygame.mouse.set_visible(0)
+        do_intro(screen, clock, uicontroller.audioplayer)
+        do_scroll(screen, clock, gameData.categories)
+        pygame.mouse.set_visible(1)
 
-    #Prep for primary loop
+    # Prep for primary loop
     pygame.event.set_allowed(None)
     pygame.event.set_allowed(EVENTS_ALLOWED)
     uicontroller.draw(screen)
 
-    #Primary loop
+    # Primary loop
     while not gs.state == gs.GAME_END:
-        #Events
+        # Events
         handle_events(gs, gameData, uicontroller)
         if gs.state == gs.QUIT:
             return
 
-        #Update
+        # Update
         gameData.update(gs)
         uicontroller.update(gs, gameData)
         gs.transition_state_immediate_linear(gameData)
         transition_state_branching(gs, gameData, uicontroller)
 
-        #Draw
+        # Draw
         uicontroller.draw(screen)
 
-        #Cleanup
+        # Cleanup
         pygame.event.pump()
         clock.tick_busy_loop(FPS_LIMIT)
 
-    #Post game: Congratulations screen and credits
+    # Post game: Congratulations screen and credits
     pygame.mouse.set_visible(0)
     do_congrats(screen, clock, gameData.winners, uicontroller.audioplayer)
     do_credits(screen, clock, uicontroller.audioplayer, FPS_LIMIT)

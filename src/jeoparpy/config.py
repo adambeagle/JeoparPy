@@ -32,6 +32,9 @@ SCREEN_W, SCREEN_H = SCREEN_SIZE = (1280, 720)
 
 # It is recommended to run the game with FULLSCREEN = 1
 # FULLSCREEN is 0 by default in case the default resolution is not supported.
+#
+# Invoking start.py with a -f, --fullscreen, -w, or --windowed option
+# will override this setting.
 FULLSCREEN = 0
 
 # It is not recommended to change this field unless there are
@@ -52,4 +55,7 @@ SUBTRACT_ON_INCORRECT = True
 
 # When True, debugging statements are printed to stdout.
 # Typical users should not need to change this setting.
+#
+# Note this setting, if False here, can be overridden py passing 
+# a -d or --debug option to start.py
 DEBUG = False
