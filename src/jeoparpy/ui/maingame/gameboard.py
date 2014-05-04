@@ -36,7 +36,6 @@ class GameBoard(JeopGameSurface):
         * baseImg
         * dirty
         * rect
-        
     """
     def __init__(self, size, gameData):
         super(GameBoard, self).__init__(size)

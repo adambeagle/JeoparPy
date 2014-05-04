@@ -97,6 +97,9 @@ def handle_events(gameState, gameData, uicontroller):
 
         elif event.type == ANIMATIONEND:
             handle_event_animationend(event, gameState)
+            
+        elif event.type == ANSWER_TIMEOUT and gs.state == gs.WAIT_BUZZ_IN:
+            gs.state = gs.ANSWER_TIMEOUT
 
         elif event.type == ANSWER_TIMEOUT and gs.state == gs.WAIT_ANSWER:
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
@@ -162,10 +165,10 @@ def transition_state_branching(gameState, gameData, uicontroller):
         elif uicontroller.clue_is_audioclue(gs.arg):
             gs.state = (gs.WAIT_TRIGGER_AUDIO, gs.arg)
         else:
-            gs.state = (gs.WAIT_BUZZ_IN, gameData.amounts[gs.arg[1]])
+            gs.state = (gs.START_CLUE_TIMER, gameData.amounts[gs.arg[1]])
 
     elif gs.state == gs.ANSWER_INCORRECT:
         if gameData.allPlayersAnswered:
             gs.state = gs.ANSWER_NONE
         else:
-            gs.state = (gs.WAIT_BUZZ_IN, gs.arg[1])
+            gs.state = (gs.START_CLUE_TIMER, gs.arg[1])

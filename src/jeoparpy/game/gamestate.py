@@ -137,6 +137,7 @@ class JeopGameState(GameState):
             'WAIT_CLUE_READ',
             'WAIT_TRIGGER_AUDIO',
             'PLAY_CLUE_AUDIO',
+            'START_CLUE_TIMER',
             'WAIT_BUZZ_IN',
             'BUZZ_IN',
             'WAIT_ANSWER',
@@ -172,6 +173,9 @@ class JeopGameState(GameState):
             
         elif s.state == s.CLICK_CLUE:
             s.state = (s.WAIT_CLUE_OPEN, s.arg)
+            
+        elif s.state == s.START_CLUE_TIMER:
+            s.state = (s.WAIT_BUZZ_IN, s.arg)
 
         elif s.state == s.PLAY_CLUE_AUDIO:
             column = s.arg[1]

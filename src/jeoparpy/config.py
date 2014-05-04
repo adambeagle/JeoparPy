@@ -30,6 +30,9 @@ of source code from this file.
 # It is not recommended to use a resolution higher than (1920, 1200).
 SCREEN_W, SCREEN_H = SCREEN_SIZE = (1280, 720)
 
+# This setting controls whether the game is run in fullscreen or windowed
+# mode. (1 for fullscreen, 0 for windowed).
+#
 # It is recommended to run the game with FULLSCREEN = 1
 # FULLSCREEN is 0 by default in case the default resolution is not supported.
 #
@@ -44,6 +47,18 @@ FPS_LIMIT = 100
 ###############################################################################
 # GAME SETTINGS
 #==============
+
+# This is the time in miliseconds after which a clue will timeout
+# if no player has buzzed in. This field should be an integer.
+#
+# If a clue has an audio reading, the timer begins immediately after
+# the reading finishes. If the clue has attached audio, the timer is not
+# triggered at all. This is to prevent problems with audio being longer
+# than the time provided.
+#
+# If the value is 0, negative, or None, the timer will be disabled for the
+# entire game.
+CLUE_TIMEOUT_MS = 5000
 
 # This is the time in miliseconds that players have to answer a clue
 # after buzzing in. This field must be an integer.

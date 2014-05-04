@@ -18,10 +18,34 @@ of source code from this file.
 import pygame
 
 from jeopgamesfc import JeopGameSurface
+from util import Timer
 from ..constants import JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
 from ..util import (autofit_text, draw_centered_textblock, draw_textblock,
                     fit_image, get_size_textblock, restrict_fontsize, scale)
+from ...config import CLUE_TIMEOUT_MS
+from ...constants import ANSWER_TIMEOUT
+
+##############################################################################
+class ClueTimer(Timer):
+    """
+    Automatically posts ANSWER_TIMEOUT to the event queue if CLUE_TIMEOUT_MS
+    pass since the START_CLUE_TIMER state was reached.
+    
+    Clue should call update() on every frame from its update() method.
+    """
+    def __init__(self):
+        super(ClueTimer, self).__init__(CLUE_TIMEOUT_MS, ANSWER_TIMEOUT)
+    
+    def update(self, gameState):
+        gs = gameState
+        
+        if gs.state == gs.START_CLUE_TIMER:
+            self.start()
+        elif gs.state == gs.BUZZ_IN:
+            self.reset()
+            
+        super(ClueTimer, self).update()
 
 ###############################################################################
 class Clue(JeopGameSurface):
@@ -34,12 +58,12 @@ class Clue(JeopGameSurface):
     METHODS:
       * draw_clue
       * update
-    
     """
     def __init__(self, size):
         super(Clue, self).__init__(size)
         self._maxFontSize = scale(51, size[1], 720)
         self._defaultFont = pygame.font.Font(FONTS['clue'], self._maxFontSize)
+        self._timer = ClueTimer()
         self.dirty = False
 
     def draw_clue(self, clueLines, img=None):
@@ -57,6 +81,8 @@ class Clue(JeopGameSurface):
             
     def update(self, gameState, gameData):
         gs = gameState
+        
+        self._timer.update(gameState)
 
         if gs.state == gs.CLUE_OPEN:
             cat, clue = gs.arg
@@ -114,3 +140,4 @@ class Clue(JeopGameSurface):
             return pygame.transform.smoothscale(img, tuple(scaledSize))
 
         return None
+        

@@ -178,6 +178,8 @@ class AnswerTimer(Timer, JeopGameSurface):
         gs = gameState
         
         # This call is to Timer.update because it is first in MRO
+        # Note Timer.update will post ANSWER_TIMEOUT if the timer
+        # has expired.
         time = super(AnswerTimer, self).update()
 
         if self.isOn and gs.state == gs.WAIT_ANSWER:
