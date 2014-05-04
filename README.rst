@@ -115,8 +115,8 @@ thus instructions for its use do not appear onscreen.*
 
 HOW TO HOST A GAME
 ==================
-To start the game, run start.py in the /src folder. On Windows, run 
-``Start_JeoparPy.bat``, located in the same folder as this document.
+To start the game, run ``start.py`` in the ``/src`` folder. On Windows, 
+run ``Start_JeoparPy.bat``, located in the same folder as this document.
 
 Upon starting, an introduction will be played. 
 When the subtitle appears, press any key to display the rules screen.
