@@ -14,17 +14,17 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 
 import pygame
 
 from jeopgamesfc import JeopGameSurface
-from ...config import ANSWER_TIME_MS
+from util import Timer
 from ..constants import JEOP_BLUE
 from ..resmaps import FONTS, IMAGES
 from ..util import (autofit_text, draw_centered_textblock,
                     draw_centered_textline, shadow_text)
+from ...config import ANSWER_TIME_MS
 from ...constants import ANSWER_TIMEOUT
 
 ###############################################################################
@@ -130,86 +130,65 @@ class Podium(pygame.sprite.DirtySprite):
         return timer
 
 ###############################################################################
-class AnswerTimer(JeopGameSurface):
+class AnswerTimer(Timer, JeopGameSurface):
     """
     Defines a rectangular timer, with a different colored block that
     smoothly counts down from both sides, meeting in the middle when
     specified length of time reached.
 
     ATTRIBUTES:
+      * dirty
       * offColor
-      * on
       * onColor
-      * timerLen (in ms)
 
     METHODS:
       * reset
       * start
       * update
-      
     """
     def __init__(self, img, scalar, time, onColor=(230, 0, 0),
                  offColor=(30, 30, 30)):
         """'time' in ms."""
         size = tuple(int(scalar*x) for x in img.get_size())
-        super(AnswerTimer, self).__init__(size)
+        Timer.__init__(self, time, ANSWER_TIMEOUT)
+        JeopGameSurface.__init__(self, size)
         
         self._front = pygame.transform.smoothscale(img, size)
         self.offColor = offColor
         self.onColor = onColor
-        self._startTime = None
-        self._endTime = None
         self.dirty = 0
-        
-        self.timerLen = time
-        self.on = False
 
         self._draw_off()
-
+    
+    # Overrides Timer.reset
     def reset(self):
-        """Reset and redraws the timer in its initial state."""
-        self._endTime = None
-        self.on = False
+        super(AnswerTimer, self).reset()
         self._draw_off()
-
+        
+    # Overrides Timer.start
+    def start(self):
+        time = super(AnswerTimer, self).start()
+        self._draw(time)
+        
     def update(self, gameState):
         """
         Update the timer image. Note this has no effect if
         timer is not turned on.
-        
         """
         gs = gameState
+        
+        # This call is to Timer.update because it is first in MRO
+        time = super(AnswerTimer, self).update()
 
-        if self.on and gs.state == gs.WAIT_ANSWER:
-            currentTime = pygame.time.get_ticks()
-
-            if currentTime >= self._endTime:
-                pygame.event.post(pygame.event.Event(ANSWER_TIMEOUT))
-                self.reset()
-            else:
-                self._draw(currentTime)
+        if self.isOn and gs.state == gs.WAIT_ANSWER:
+            self._draw(time)
                 
-        elif self.on and gs.state in gs.ANSWER:
+        elif self.isOn and gs.state in gs.ANSWER:
             self.reset()
-
-    def start(self):
-        """Start and redraw the timer."""
-        self.on = True
-        time = pygame.time.get_ticks()
-        self._endTime = time + self.timerLen
-        self._draw(time)
-
-    def _draw_off(self):
-        self.fill(self.offColor)
-        self.blit(self._front, (0, 0))
-        self.dirty = 1
-
+        
     def _draw(self, currentTime):
-        et = self._endTime
-        ct = currentTime
-        tl = self.timerLen
         centerx = self.rect.w / 2
-        percDone = (et - ct) / float(tl)
+        percDone = (self.endTime - currentTime) / float(self.length)
 
         self.fill(self.offColor)
 
@@ -223,6 +202,11 @@ class AnswerTimer(JeopGameSurface):
             rect.left = centerx
             self.fill(self.onColor, rect)
 
+        self.blit(self._front, (0, 0))
+        self.dirty = 1
+        
+    def _draw_off(self):
+        self.fill(self.offColor)
         self.blit(self._front, (0, 0))
         self.dirty = 1
 
