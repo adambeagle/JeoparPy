@@ -74,7 +74,7 @@ SETUP
 
 The following are required to run JeoparPy:
 
-* Python (http://www.python.org/download/)
+* Python 2.7 (http://www.python.org/download/)
 * Pygame (http://www.pygame.org/download.shtml)
 
 Please note that the game has only been tested with:
@@ -128,10 +128,9 @@ QUICK START
 
 2. On Windows, double-click ``Start_JeoparPy.bat`` to run the game. 
    On Linux, run ``start.py`` in the ``src`` folder. Ideally, run it 
-   optimized using ``python -OO start.py``.
-
-3. If the runs without issue, you may wish to set ``FULLSCREEN = 1`` in 
-   ``/src/jeoparpy/config,py`` to run the game in fullscreen mode.
+   optimized using ``python -OO start.py``. Assuming no changes have
+   been made to the files in ``res/`` the game will run with sample
+   questions showcasing the available clue types.
 
 
 .. _Optional Arguments:
@@ -140,7 +139,7 @@ QUICK START
 OPTIONAL ARGUMENTS
 ******************
 
-There are several optional arguments that can be passed to ``start.py``.
+There are several optional arguments that can be passed to ``start.py``:
 
 * ``-f`` or ``--fullscreen`` will force the game to run in fullscreen mode.
   This overrides the ``FULLSCREEN`` setting in ``src/jeoparpy/config.py``.
@@ -156,6 +155,9 @@ There are several optional arguments that can be passed to ``start.py``.
 
 * ``-d`` or ``--debug`` will turn debug mode on. Typical users should not need 
   this option.
+  
+Example usage: ``python start.py -f -s`` would run the game in fullscreen,
+skipping the intro sequences.
 
 
 .. _`Detailed Instructions`:
