@@ -1,3 +1,21 @@
+"""
+util.py
+Author: Adam Beagle
+
+DESCRIPTION:
+    Contains utility functions and classes for the jeoparpy.ui.maingame
+    package.
+
+
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
+"""
+
 from pygame import event as pgevent, time as pgtime
 
 class Timer(object):
