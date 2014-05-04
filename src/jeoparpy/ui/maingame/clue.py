@@ -13,7 +13,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 
 import pygame
@@ -28,6 +27,9 @@ from ..util import (autofit_text, draw_centered_textblock, draw_textblock,
 class Clue(JeopGameSurface):
     """
     Defines a surface containing a written JeoparPy clue.
+    
+    ATTRIBUTES:
+      * dirty
 
     METHODS:
       * draw_clue

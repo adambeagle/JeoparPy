@@ -34,7 +34,7 @@ class Controller(object):
       * clue_has_audio_reading
       * clue_is_audioclue
       * draw
-      * draw_all
+      * get_clicked_clue
       * update
       
     """
@@ -50,7 +50,7 @@ class Controller(object):
 
         spr = OpenClueAnimation(board.boxSize, board.rect.copy(), fpsLimit)
 
-        #NOTE Order of self._sfcs is draw order
+        # NOTE Order of self._sfcs is draw order
         self._sfcs = (board, podia, spr, clue) 
         self.audioplayer = JeopAudioPlayer()
 
@@ -103,6 +103,9 @@ class Controller(object):
         elif gs.state == gs.WAIT_CLUE_READ and not pygame.mixer.get_busy():
             pygame.event.post(pygame.event.Event(AUDIOEND))
         
+        # Update all game surfaces
+        # Note these surface's update() method is responsible for updating
+        # any further surfaces they contain.
         for sfc in self._sfcs:
             sfc.update(gs, gameData)
 
