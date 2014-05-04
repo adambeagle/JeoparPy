@@ -1,6 +1,26 @@
 ================
-JEOPARPY! v0.9.3
+JeoparPy! v0.9.3
 ================
+
+********
+CONTENTS
+********
+
+1. `General Info`_
+2. Setup_
+3. Controls_
+4. `Quick Start`_
+5. `Optional Arguments`_
+6. `Detailed Instructions`_
+
+  a. `How to Host a Game`_
+  b. `Customization`_
+
+7. `Known Issues`_
+8. Legal_
+
+
+.. _`General Info`:
 
 ************
 GENERAL INFO
@@ -25,8 +45,8 @@ It is instead only designed to be used to host custom games that the
 user creates.
 
 
-DESCRIPTION
-===========
+GAME DESCRIPTION
+================
 
 Three individuals or teams compete for the highest score,
 attained by correctly answering questions.
@@ -46,6 +66,7 @@ One user must "host" a game by choosing clues and telling the game whether
 players answered correctly or incorrectly.
 
 
+.. _Setup:
 
 *****
 SETUP
@@ -71,7 +92,9 @@ PRIOR TO FIRST RUN
 ==================
 Open file ``<jeoparpy root>/src/jeoparpy/config.py`` and set your preferred 
 display resolution. Follow the instructions in the file.
-  
+
+
+.. _Controls:  
 
 ********
 CONTROLS
@@ -89,6 +112,7 @@ see the Instructions section below.
 * SHIFT+Q:    Press to close the game immediately. 
 
 
+.. _`Quick Start`:
 
 ***********
 QUICK START
@@ -110,11 +134,13 @@ QUICK START
    ``/src/jeoparpy/config,py`` to run the game in fullscreen mode.
 
 
+.. _Optional Arguments:
+
 ******************
 OPTIONAL ARGUMENTS
 ******************
 
-There are several optional arguments that can be passed to ``start.py``:
+There are several optional arguments that can be passed to ``start.py``.
 
 * ``-f`` or ``--fullscreen`` will force the game to run in fullscreen mode.
   This overrides the ``FULLSCREEN`` setting in ``src/jeoparpy/config.py``.
@@ -129,14 +155,16 @@ There are several optional arguments that can be passed to ``start.py``:
   board. This may be useful when testing customized games.
 
 * ``-d`` or ``--debug`` will turn debug mode on. Typical users should not need 
-  this option. This overrides the ``DEBUG`` option in 
-  ``src/jeoparpy/config.py``.
+  this option.
 
 
+.. _`Detailed Instructions`:
 
-************
-INSTRUCTIONS
-************
+*********************
+DETAILED INSTRUCTIONS
+*********************
+
+.. _`How to Host a Game`:
 
 **WARNING:** *It is important that a game host read these instructions. 
 The game is designed to have a seamless presentation to the players, 
@@ -200,6 +228,8 @@ you wish to quit the game during the credits, you can press 'Q.' The game will
 close automatically after the credits.
 
 
+.. _Customization:
+
 CUSTOMIZATION
 =============
 
@@ -225,6 +255,8 @@ Clue Audio/Images
     
 
 	
+.. _`Knownn Issues`:
+
 ************
 KNOWN ISSUES
 ************
@@ -233,7 +265,8 @@ KNOWN ISSUES
    to freeze momentarily.
 	 
 
-	 
+.. _Legal:
+ 
 *****
 LEGAL
 *****
