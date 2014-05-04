@@ -105,7 +105,10 @@ def handle_events(gameState, gameData, uicontroller):
             gs.state = (gs.ANSWER_INCORRECT, gs.arg)
 
         elif event.type == AUDIOEND and gs.state == gs.WAIT_CLUE_READ:
-            gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
+            if uicontroller.clue_is_audioclue(gs.arg):
+                gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
+            else:
+                gs.state = (gs.START_CLUE_TIMER, gameData.amounts[gs.arg[1]])
 
 def handle_event_animationend(event, gameState):
     gs = gameState

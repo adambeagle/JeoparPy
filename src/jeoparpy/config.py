@@ -62,7 +62,7 @@ FPS_LIMIT = 100
 CLUE_TIMEOUT_MS = 20000
 
 # This is the time in miliseconds that players have to answer a clue
-# after buzzing in. This field must be an integer.
+# after buzzing in. This field must be a positive integer.
 ANSWER_TIME_MS = 5000
 
 # If this is set to True, money is taken away when a player answers
