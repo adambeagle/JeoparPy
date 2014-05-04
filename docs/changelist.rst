@@ -57,12 +57,14 @@ This version is the result of a complete and total rewrite of the game.
 The only feature missing from the old version is the ability to play videos in clues. This was removed as it was an ordeal to convert videos to the proper format, and video use was not cross-platform.
 
 At the typical user level, the major changes are:
+
 * The game will function and look as intended at any widescreen (16:9 or 16:10) resolution, fullscreen or not. Resolutions up to 1920x1200 are tested and confirmed to look as intended..
 * Visuals (especially timing of animations) will look much more consistent across systems.
 * The placement of customizable game attributes has changed. All primary attributes (categories, clues, player names, clue amounts, subtitle) are now located in /res/text/ to reduce confusion.
 * There is one file for clues, rather than the old system of unix-style and one windows-style file. The user is responsible for end-of-line characters being formatted for their platform.
 
 Under the hood, major changes are:
+
 * There is now a well-defined package/sub-package structure to the game, separating game logic and presentation.
 * The game now operates as a finite state machine, so the UI modules update based on state and can operate independently of each other, main, and the game logic.
 * All code is formatted using PEP8 standards.
