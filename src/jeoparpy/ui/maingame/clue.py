@@ -63,9 +63,11 @@ class Clue(JeopGameSurface):
         super(Clue, self).__init__(size)
         self._maxFontSize = scale(51, size[1], 720)
         self._defaultFont = pygame.font.Font(FONTS['clue'], self._maxFontSize)
-        self._timer = ClueTimer()
         self.dirty = False
-
+        
+        # Timer will be None if CLUE_TIMEOUT_MS None or <= 0
+        self._timer = ClueTimer() if CLUE_TIMEOUT_MS > 0 else None
+        
     def draw_clue(self, clueLines, img=None):
         self.fill(JEOP_BLUE)
 
@@ -82,7 +84,8 @@ class Clue(JeopGameSurface):
     def update(self, gameState, gameData):
         gs = gameState
         
-        self._timer.update(gameState)
+        if self._timer is not None:
+            self._timer.update(gameState)
 
         if gs.state == gs.CLUE_OPEN:
             cat, clue = gs.arg

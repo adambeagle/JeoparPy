@@ -50,6 +50,7 @@ FPS_LIMIT = 100
 
 # This is the time in miliseconds after which a clue will timeout
 # if no player has buzzed in. This field should be an integer.
+# The default value is 20 seconds.
 #
 # If a clue has an audio reading, the timer begins immediately after
 # the reading finishes. If the clue has attached audio, the timer is not
@@ -58,7 +59,7 @@ FPS_LIMIT = 100
 #
 # If the value is 0, negative, or None, the timer will be disabled for the
 # entire game.
-CLUE_TIMEOUT_MS = 5000
+CLUE_TIMEOUT_MS = 20000
 
 # This is the time in miliseconds that players have to answer a clue
 # after buzzing in. This field must be an integer.
