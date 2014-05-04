@@ -7,6 +7,8 @@ Version 0.9.4
 *************
 
 * Timeouts on clues implemented. The timer length can be changed via the CLUE_TIMEOUT_MS option in /src/jeoparpy/config.py. See the instructions in that file for more information about how the timer works.
+* Optional arguments to start.py added. See "Optional Arguments" section of the readme for details.
+* Major docs rewritten as reStructuredText.
 
 *************
 Version 0.9.3
