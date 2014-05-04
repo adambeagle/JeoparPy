@@ -13,8 +13,8 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
+from ..config import DEBUG
 
 ###############################################################################
 class Enum(object):
@@ -107,7 +107,7 @@ class GameState(Enum):
             raise StateError("Set of 'State' attempted with value " +
                              "that has no assigned state.", val)
 
-        if __debug__:
+        if DEBUG:
             print "State change: %s" % self.state
 
 ###############################################################################

@@ -12,13 +12,12 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 import pygame
 
 from audioplayer import JeopAudioPlayer
 from maingame import Clue, GameBoard, OpenClueAnimation, PodiaPanel
+from ..config import DEBUG
 from ..constants import AUDIOEND
 
 ###############################################################################
@@ -70,7 +69,7 @@ class Controller(object):
 
         for sfc in self._sfcs:
             if sfc.dirty:
-                if __debug__:
+                if DEBUG:
                     print 'draw %s' % type(sfc).__name__
 
                 if isinstance(sfc, pygame.sprite.Sprite):

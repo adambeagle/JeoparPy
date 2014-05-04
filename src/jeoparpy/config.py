@@ -12,7 +12,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 
 ###############################################################################
@@ -50,3 +49,7 @@ ANSWER_TIME_MS = 5000
 # If this is set to True, money is taken away when a player answers
 # incorrectly. If set to False, money remains the same on a wrong answer.
 SUBTRACT_ON_INCORRECT = True
+
+# When True, debugging statements are printed to stdout.
+# Typical users should not need to change this setting.
+DEBUG = False

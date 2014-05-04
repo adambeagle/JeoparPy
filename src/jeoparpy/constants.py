@@ -13,9 +13,7 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from os import pardir, path
 
 from pygame.locals import USEREVENT
