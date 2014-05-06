@@ -3,6 +3,11 @@ VERSION HISTORY - JeoparPy
 ==========================
 
 *************
+Next release
+*************
+* GameState extra arguments now explicitly named via the GameState.kwargs attribute. This makes code using these arguments far more readable without needing to consult the state flow diagram.
+
+*************
 Version 0.9.4
 *************
 

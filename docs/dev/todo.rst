@@ -15,7 +15,6 @@ Low priority
 ************
 * Logging
 * Write a generic fade_in_surface function (similar tasks done in intro and outro)
-* GameState arg should be kwargs-like-dict to clarify code that gets/sets the state args.
 
 *************
 Down the Road
