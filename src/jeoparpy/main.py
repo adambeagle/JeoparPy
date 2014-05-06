@@ -109,13 +109,17 @@ def handle_events(gameState, gameData, uicontroller):
             gs.state = gs.ANSWER_TIMEOUT
 
         elif event.type == ANSWER_TIMEOUT and gs.state == gs.WAIT_ANSWER:
-            gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+            # Re-pass playerI, amount args
+            gs.set(gs.ANSWER_INCORRECT, **gs.kwargs)
 
         elif event.type == AUDIOEND and gs.state == gs.WAIT_CLUE_READ:
-            if uicontroller.clue_is_audioclue(gs.arg):
-                gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
+            coords = gs.kwargs['coords']
+            if uicontroller.clue_is_audioclue(coords):
+                gs.set(gs.PLAY_CLUE_AUDIO, coords=coords)
             else:
-                gs.state = (gs.START_CLUE_TIMER, gameData.amounts[gs.arg[1]])
+                gs.set(gs.START_CLUE_TIMER, 
+                    amount=gameData.amounts[coords[1]]
+                )
 
 def handle_event_animationend(event, gameState):
     gs = gameState
@@ -124,7 +128,7 @@ def handle_event_animationend(event, gameState):
         gs.state = gs.WAIT_CHOOSE_CLUE
 
     elif gs.state == gs.WAIT_CLUE_OPEN:
-        gs.state = (gs.CLUE_OPEN, gs.arg)
+        gs.set(gs.CLUE_OPEN, coords=gs.kwargs['coords'])
         
 def handle_event_key(event, gameState, gameData):
     gs = gameState
@@ -136,21 +140,23 @@ def handle_event_key(event, gameState, gameData):
             gs.state = gs.GAME_END
 
     elif gs.state == gs.WAIT_TRIGGER_AUDIO and event.key == K_m:
-        gs.state = (gs.PLAY_CLUE_AUDIO, gs.arg)
+        gs.set(gs.PLAY_CLUE_AUDIO, coords=gs.kwargs['coords'])
 
     elif gs.state == gs.WAIT_BUZZ_IN and event.key in (K_1, K_2, K_3):
         p = event.key - K_1
         if not gameData.players[p].hasAnswered:
-            gs.state = (gs.BUZZ_IN, (p, gs.arg))
+            gs.set(gs.BUZZ_IN, playerI=p, amount=gs.kwargs['amount'])
             
     elif gs.state == gs.WAIT_BUZZ_IN and event.key == K_END:
         gs.state = gs.ANSWER_TIMEOUT
 
     elif gs.state == gs.WAIT_ANSWER:
         if event.key == K_SPACE:
-            gs.state = (gs.ANSWER_CORRECT, gs.arg)
+            # Re-pass playerI and amount args
+            gs.set(gs.ANSWER_CORRECT, **gs.kwargs)
         elif event.key == K_BACKSPACE:
-            gs.state = (gs.ANSWER_INCORRECT, gs.arg)
+            # Re-pass playerI and amount args
+            gs.set(gs.ANSWER_INCORRECT, **gs.kwargs)
 
 def handle_event_mousebuttondown(event, gameState, uicontroller):
     gs = gameState
@@ -159,7 +165,7 @@ def handle_event_mousebuttondown(event, gameState, uicontroller):
         clueCoords = uicontroller.get_clicked_clue(event.pos)
 
         if clueCoords:
-            gs.state = (gs.CLICK_CLUE, clueCoords)
+            gs.set(gs.CLICK_CLUE, coords=clueCoords)
 
 def transition_state_branching(gameState, gameData, uicontroller):
     """
@@ -169,16 +175,19 @@ def transition_state_branching(gameState, gameData, uicontroller):
     gs = gameState
         
     if gs.state == gs.CLUE_OPEN:
-        if uicontroller.clue_has_audio_reading(gs.arg):
-            gs.state = (gs.WAIT_CLUE_READ, gs.arg)
+        coords = gs.kwargs['coords']
+        if uicontroller.clue_has_audio_reading(coords):
+            gs.set(gs.WAIT_CLUE_READ, coords=coords)
             
-        elif uicontroller.clue_is_audioclue(gs.arg):
-            gs.state = (gs.WAIT_TRIGGER_AUDIO, gs.arg)
+        elif uicontroller.clue_is_audioclue(coords):
+            gs.set(gs.WAIT_TRIGGER_AUDIO, coords=coords)
         else:
-            gs.state = (gs.START_CLUE_TIMER, gameData.amounts[gs.arg[1]])
+            column = coords[1]
+            gs.set(gs.START_CLUE_TIMER, amount=gameData.amounts[column])
 
     elif gs.state == gs.ANSWER_INCORRECT:
         if gameData.allPlayersAnswered:
             gs.state = gs.ANSWER_NONE
         else:
-            gs.state = (gs.START_CLUE_TIMER, gs.arg[1])
+            amount = gs.kwargs['amount']
+            gs.set(gs.START_CLUE_TIMER, amount=amount)

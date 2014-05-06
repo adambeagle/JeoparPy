@@ -62,13 +62,15 @@ class GameData(object):
             self._clear_players_answered()
 
             if gs.state == gs.ANSWER_CORRECT:
-                player, amount = gs.arg
-                self.players[player].score += amount
+                playerI = gs.kwargs['playerI']
+                amount = gs.kwargs['amount']
+                self.players[playerI].score += amount
             
         elif gs.state == gs.ANSWER_INCORRECT and SUBTRACT_ON_INCORRECT:
-            player, amount = gs.arg
-            self.players[player].hasAnswered = True
-            self.players[player].score -= amount
+            playerI = gs.kwargs['playerI']
+            amount = gs.kwargs['amount']
+            self.players[playerI].hasAnswered = True
+            self.players[playerI].score -= amount
         
     def _build_amounts_from_file(self, path):
         """

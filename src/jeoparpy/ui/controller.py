@@ -115,12 +115,13 @@ class Controller(object):
         if gs.state == gs.BOARD_FILL:
             self.audioplayer.play('fill')
         elif gs.state == gs.CLUE_OPEN:
-            key = gs.arg + ('cr', )
+            key = gs.kwargs['coords'] + ('cr', )
             if key in self.audioplayer.sounds:
                 self.audioplayer.play(key)
         elif gs.state == gs.PLAY_CLUE_AUDIO:
-            if gs.arg in self.audioplayer.sounds:
-                self.audioplayer.play(gs.arg)
+            coords = gs.kwargs['coords']
+            if coords in self.audioplayer.sounds:
+                self.audioplayer.play(coords)
         elif gs.state == gs.BUZZ_IN:
             self.audioplayer.stop_all()
             self.audioplayer.play('buzz')

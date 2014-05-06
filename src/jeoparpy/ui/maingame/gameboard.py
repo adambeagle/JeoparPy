@@ -80,7 +80,7 @@ class GameBoard(JeopGameSurface):
                 pygame.event.post(pygame.event.Event(ANIMATIONEND))
 
         elif gs.state == gs.CLUE_OPEN:
-            c, r = gs.arg
+            c, r = gs.kwargs['coords']
             box = self._boxes[c][r + 1]
             box.redraw()
             self.blit(box, box.rect)

@@ -75,12 +75,12 @@ class Podium(pygame.sprite.DirtySprite):
         """
         gs = gameState
 
-        if gs.state == gs.BUZZ_IN and gs.arg[0] == self._id:
+        if gs.state == gs.BUZZ_IN and gs.kwargs['playerI'] == self._id:
             self._timer.start()
             self._draw_highlight()
             self.dirty = 1
 
-        elif gs.state in gs.ANSWER and gs.arg[0] == self._id:
+        elif gs.state in gs.ANSWER and gs.kwargs['playerI'] == self._id:
             p = gameData.players[self._id]
 
             self._score.update(p.score, p.scoref)

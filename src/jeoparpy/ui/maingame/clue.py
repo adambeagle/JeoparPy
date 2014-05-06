@@ -86,8 +86,8 @@ class Clue(JeopGameSurface):
             self._timer.update(gameState)
 
         if gs.state == gs.CLUE_OPEN:
-            cat, clue = gs.arg
-            img = self._get_media(gs.arg)
+            cat, clue = gs.kwargs['coords']
+            img = self._get_media((cat, clue))
             self.draw_clue(gameData.clues[cat][clue], img)
             self.dirty = True
 

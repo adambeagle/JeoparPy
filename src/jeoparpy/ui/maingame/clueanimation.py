@@ -57,7 +57,7 @@ class OpenClueAnimation(pygame.sprite.DirtySprite):
         gs = gameState
 
         if gs.state == gs.CLICK_CLUE:
-            self._init_rects(gs.arg)
+            self._init_rects(gs.kwargs['coords'])
             
         if gs.state == gs.WAIT_CLUE_OPEN:
             if self._is_animation_done():
