@@ -2,10 +2,13 @@
 VERSION HISTORY - JeoparPy
 ==========================
 
-*************
-Next release
-*************
+***************
+Version 0.9.4.1
+***************
+
 * GameState extra arguments now explicitly named via the GameState.kwargs attribute. This makes code using these arguments far more readable without needing to consult the state flow diagram.
+* Directory structure changed. Source moved up one directory from former top-level "src/" directory.
+* Test system changed to Pytest. Tests now located in 'tests' directory at repo root.
 
 *************
 Version 0.9.4
