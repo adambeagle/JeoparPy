@@ -17,7 +17,7 @@ from os import pardir, path
 
 from pygame.locals import USEREVENT
 
-ROOT_PATH = path.abspath(path.join(path.dirname(__file__), pardir, pardir))
+ROOT_PATH = path.abspath(path.join(path.dirname(__file__), pardir))
 
 # Custom events
 ANIMATIONEND = USEREVENT
