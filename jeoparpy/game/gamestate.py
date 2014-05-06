@@ -103,6 +103,9 @@ class GameState(Enum):
         self.state = state  # Note state.setter clears self.kwargs to {} 
         self.kwargs.update(kwargs)
         
+        if DEBUG and self.kwargs:
+            print 'State args set: {0}'.format(self.kwargs)
+        
     def _verify_transition(self, newState):
         """
         state.setter calls this function to verify that a transition is 
@@ -142,7 +145,7 @@ class GameState(Enum):
         self.kwargs = {}
         
         if DEBUG:
-            print "State change: %s" % self.state
+            print "State change: {0}".format(self)
 
 class JeopGameState(GameState):
     """
