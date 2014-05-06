@@ -1,1 +1,1 @@
-python -OO src\start.py
+python -OO start.py

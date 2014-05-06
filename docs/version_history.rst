@@ -11,7 +11,7 @@ Next release
 Version 0.9.4
 *************
 
-* Timeouts on clues implemented. The timer length can be changed via the CLUE_TIMEOUT_MS option in /src/jeoparpy/config.py. See the instructions in that file for more information about how the timer works.
+* Timeouts on clues implemented. The timer length can be changed via the CLUE_TIMEOUT_MS option in jeoparpy/config.py. See the instructions in that file for more information about how the timer works.
 * Optional arguments to start.py added. See "Optional Arguments" section of the readme for details.
 * Major docs rewritten as reStructuredText.
 
@@ -37,7 +37,7 @@ Version 0.9.2
 Version 0.9.1
 *************
 
-* Customizable timeout on answers added. See /src/jeoparpy/config.py to set.
+* Customizable timeout on answers added. See jeoparpy/config.py to set.
 * Mouse pointer is now hidden while a clue is open.
 * Images now allowed in credits; credits updated.
 * Cleaned up a few sound clips (noise removal, EQ).
@@ -47,10 +47,10 @@ Version 0.9.1
 Version 0.9
 ***********
 
-* Audio can now be used as clue media. Pressing 'm' in an audio clue will trigger the audio and allow buzz-ins. See /src/jeoparpy/ui/resmaps.py for information on creating audio clues.
-* An "audio reading," a recorded version of the clues text, can be assigned to clues. If an audio reading exists, it plays automatically when a clue is opened, and players are not allowed to buzz in until it has finished playing. See /src/jeoparpy/ui/resmaps.py for information on assigning audio readings.
+* Audio can now be used as clue media. Pressing 'm' in an audio clue will trigger the audio and allow buzz-ins. See jeoparpy/ui/resmaps.py for information on creating audio clues.
+* An "audio reading," a recorded version of the clues text, can be assigned to clues. If an audio reading exists, it plays automatically when a clue is opened, and players are not allowed to buzz in until it has finished playing. See jeoparpy/ui/resmaps.py for information on assigning audio readings.
 * Bug fix: Case-sensitive filename issue was causing problems when running on Linux.
-* Customization made simpler by removing MEDIA in /src/jeoparpy/ui/config.py. Vast majority of customization now done in three places: /res/text, /src/jeoparpy/config.py, and /src/jeoparpy/ui/resmaps.py.
+* Customization made simpler by removing MEDIA in jeoparpy/ui/config.py. Vast majority of customization now done in three places: res/text, jeoparpy/config.py, and jeoparpy/ui/resmaps.py.
 
 
 *************

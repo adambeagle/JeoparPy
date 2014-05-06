@@ -90,7 +90,7 @@ JeoparPy has been tested on the following platforms:
   
 Prior to first run:
 ===================
-Open file ``<jeoparpy root>/src/jeoparpy/config.py`` and set your preferred 
+Open file ``<jeoparpy root>/jeoparpy/config.py`` and set your preferred 
 display resolution. Follow the instructions in the file.
 
 
@@ -127,7 +127,7 @@ QUICK START
    unzip the downloaded .zip file.
 
 2. On Windows, double-click ``Start_JeoparPy.bat`` to run the game. 
-   On Linux, run ``start.py`` in the ``src`` folder. Ideally, run it 
+   On Linux, run ``start.py`` in the root folder. Ideally, run it 
    optimized using ``python -OO start.py``. Assuming no changes have
    been made to the files in ``res/`` the game will run with sample
    questions showcasing the available clue types.
@@ -142,11 +142,11 @@ OPTIONAL ARGUMENTS
 There are several optional arguments that can be passed to ``start.py``:
 
 * ``-f`` or ``--fullscreen`` will force the game to run in fullscreen mode.
-  This overrides the ``FULLSCREEN`` setting in ``src/jeoparpy/config.py``.
+  This overrides the ``FULLSCREEN`` setting in ``jeoparpy/config.py``.
     
 * ``-w`` or ``-windowed`` will force the game to run in windowed mode.
   This overrides both the ``FULLSCREEN`` setting in 
-  ``src/jeoparpy/config.py`` and the ``-f`` or ``-fullscreen`` arguments
+  ``jeoparpy/config.py`` and the ``-f`` or ``-fullscreen`` arguments
   if either is also passed.
     
 * ``-s`` or ``--skip-intro`` will skip the intro sequences (title sequence,
@@ -174,8 +174,9 @@ thus instructions for its use do not appear onscreen.*
 
 HOW TO HOST A GAME
 ==================
-To start the game, run ``start.py`` in the ``/src`` folder. On Windows, 
-run ``Start_JeoparPy.bat``, located in the same folder as this document.
+To start the game, run ``start.py`` located in the same folder as this
+document. On Windows, run ``Start_JeoparPy.bat``, also located in the 
+root directory.
 
 Upon starting, an introduction will be played. 
 When the subtitle appears, press any key to display the rules screen.
@@ -214,7 +215,7 @@ When a player is buzzed in, one of three things can happen:
 If the ``CLUE_TIMEOUT_MS`` option is set the clue will automatically close 
 after the amount of time set if no player has buzzed in. If no timeout time is
 provided, press 'End' to close the clue and return to the game board if no one
-is going to answer. See the instructions in ``src/jeoparpy/config.py`` for
+is going to answer. See the instructions in ``jeoparpy/config.py`` for
 information about how the clue timer works, as it has specific behavior for
 audio clues or clues with audio readings.
 
@@ -244,7 +245,7 @@ example questions and to ensure the game runs without any problems.*
 
 Display/General game settings:
 ------------------------------
-* Located in ``<jeoparpy root>/src/jeoparpy/config.py`` are settings for 
+* Located in ``<jeoparpy root>/jeoparpy/config.py`` are settings for 
   screen resolution and toggling fullscreen display, as well as general 
   game settings such as the answer time limit.
 
@@ -256,7 +257,7 @@ Clues/Categories/Edition Title/Player Names/Clue Amounts/Rules:
   
 Clue Audio/Images
 -----------------
-* Follow the instructions in ``<jeoparpy root>/src/jeoparpy/ui/resmaps.py``
+* Follow the instructions in ``<jeoparpy root>/jeoparpy/ui/resmaps.py``
   to add your own images/audio to clues, or use an audio reading for a clue.
     
 
