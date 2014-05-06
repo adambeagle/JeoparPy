@@ -1,9 +1,0 @@
-category 1
-Category 2
-
-CATEGORY 3
-
-  
- 
-category 4 (previous lines contain some spaces)
-category 5
