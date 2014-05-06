@@ -1,6 +1,5 @@
 """
 util.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains utility functions and classes for the jeoparpy.ui.maingame
@@ -15,8 +14,8 @@ viewable at http://opensource.org/licenses/GPL-3.0
 This copyright notice must be retained with any use
 of source code from this file.
 """
-
 from pygame import event as pgevent, time as pgtime
+
 
 class Timer(object):
     """
@@ -55,8 +54,8 @@ class Timer(object):
 
     def start(self):
         """
-        Starts the timer. Return the time (via pygame.time.get_ticks()) at which
-        the timer started.
+        Start the timer. Return the time (via pygame.time.get_ticks()) at 
+        which the timer started.
         """
         time = pgtime.get_ticks()
         self._endTime = time + self.length
@@ -65,7 +64,7 @@ class Timer(object):
 
     def update(self):
         """
-        Updates the timer, ending it and rasing self.event if enough
+        Update the timer, ending it and posting self.event if enough
         time has passed.
         
         Return current time (via pygame.time.get_ticks()) if timer running,

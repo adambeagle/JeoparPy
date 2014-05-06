@@ -1,6 +1,5 @@
 """
 categoryscroll.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Functions implementing part of the JeoparPy introduction sequence where
@@ -9,6 +8,7 @@ DESCRIPTION:
 USAGE:
   Main should only need to call do_scroll.
 
+
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
 the terms of the GNU General Public License,
@@ -16,7 +16,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 
 import pygame
@@ -38,7 +37,6 @@ def do_scroll(screen, clock, categories):
 
     'categories' expects container of category name strings.
     'screen' must be the primary pygame display surface.
-    
     """
     scrSize = screen.get_size()
     boxes = tuple(_build_box(scrSize, c) for c in categories)
@@ -61,7 +59,6 @@ def _animate_scroll(screen, scrSize, clock, box1, box2, step, fpsLimit):
     box2 fills the screen. The boxes must be surfaces.
     'step' is the amount in pixels to shift the boxes on
     each animation step.
-    
     """
     w, h = scrSize
     offset = step
@@ -86,9 +83,8 @@ def _blit_to_screen_and_update(screen, sfc):
 
 def _build_box(size, category):
     """
-    Returns surface containing centered category text and a black border.
+    Return surface containing centered category text and a black border.
     'size' is size of surface to create.
-    
     """
     borderW = _scale(33, size[1])
     box = BorderedBox(size, JEOP_BLUE, borderW, (0, 0, 0))
@@ -114,6 +110,3 @@ if __name__ == '__main__':
 
     screen.fill((0, 0, 0))
     do_scroll(screen, clock, categories)
-
-    
-    

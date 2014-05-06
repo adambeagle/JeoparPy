@@ -1,6 +1,5 @@
 """
 credits.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Contains the classes and functions that implement JeoparPy credits.
@@ -18,7 +17,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file..
-
 """
 from sys import exit as sysexit
 
@@ -44,7 +42,6 @@ class CreditLine(pygame.sprite.DirtySprite):
 
     METHODS:
       * update
-    
     """
     def __init__(self, *groups):
         super(CreditLine, self).__init__(*groups)
@@ -54,13 +51,12 @@ class CreditLine(pygame.sprite.DirtySprite):
 
     def update(self, step, scrH):
         """
-        Moves line in y by step. A positive step will move line
+        Move line in y by step. A positive step will move line
         down, a negative will move it up.
 
         The height of the screen, 'scrH' is used to set the dirty
         attribute; if the sprite is outside the bounds of the screen,
         it will not be drawn.
-        
         """
         self.dirty = 0
         self.rect.y += step
@@ -91,7 +87,6 @@ class MultiCreditLine(CreditLine):
 
     Usage: After initialization, set 'rect' to start position then
       call update() on every frame.
-      
     """
     def __init__(self, width, font, position, name, *groups):
         """
@@ -100,7 +95,6 @@ class MultiCreditLine(CreditLine):
 
         If position or name is a string, it will be rendered as
         a single line.
-        
         """
         super(MultiCreditLine, self).__init__(*groups)
         if isinstance(position, basestring):
@@ -114,7 +108,7 @@ class MultiCreditLine(CreditLine):
 
     #TODO This function badly needs refactoring
     def _create_line(self, width, font, position, name):
-        """Returns surface with credit text blitted on it."""
+        """Return surface with credit text blitted on it."""
         spacer = pygame.Rect(0, 0, int(0.08*width), 1)
         spacer.centerx = int(width / 2)
         lineH = font.get_linesize()
@@ -154,7 +148,6 @@ class SimpleCreditLine(CreditLine):
     
     Usage: After initialization, set 'rect' to start position then
       call update() on every frame.
-    
     """
     def __init__(self, font, text, color, bgColor, shadowOffset, *groups):
         """If shadowOffset is 0 or None, no shadow will be drawn."""
@@ -250,9 +243,8 @@ def _blit_thanks(screen, text, font, scrRect, lineW):
 
 def _build_final_lines(group, font, startY, lineW, scrRect):
     """
-    Builds final line sprites and adds them to 'group.'
-    Returns final line's rect.bottom.
-    
+    Build final line sprites and adds them to 'group.'
+    Return final line's rect.bottom.
     """
     for s in final:
         if isinstance(s, pygame.Surface):
@@ -270,11 +262,10 @@ def _build_final_lines(group, font, startY, lineW, scrRect):
     
 def _build_multi_lines(group, font, startY, spacer, lineW, scrRect):
     """
-    Builds credit line sprites (from position and name),
-    and adds them to 'group.'
+    Build credit line sprites (from position and name), and add them to 
+    'group.'
 
-    Returns y-value at which to start placing any further lines.
-    
+    Return y-value at which to start placing any further lines.
     """
     for pos, name in zip(positions, names):
         line = MultiCreditLine(lineW, font, pos, name, group)

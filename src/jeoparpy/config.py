@@ -1,9 +1,9 @@
 """
 config.py
-Author: Adam Beagle
 
 DESCRIPTION:
-  Defines top-level constants designed to be user-customizable.
+  Defines top-level settings intended to be user-customizable.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under

@@ -1,12 +1,12 @@
 """
 util.py
-Author: Adam Beagle
 
 DESCRIPTION:
   General file, sequence, and type utility functions used throughout the
   application. These functions are from my custom library but are
   reproduced here to avoid an annoying dependency for anyone wishing to
   clone JeoparPy.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -15,19 +15,18 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from decimal import Decimal
+
 
 def chunker(sequence, size, overlap=False):
     """
-    Generator; Yields chunks of a sequence of length 'size,' in order.
-    If overlap is set, overlapping chunks (i.e. indices 0 and 1, then 1 and 2)
-    are yielded, otherwise chunks do not overlap.
-    If sequence length is not evenly divisible by size and overlap is False,
-    extra elements at the end of sequence are ignored.
+    Generator; Yield chunks of a sequence of length 'size,' in order.
+    If overlap is set, yield overlapping chunks (i.e. indices 0 and 1, 
+    then 1 and 2), otherwise chunks do not overlap.
     
+    If sequence length is not evenly divisible by size and overlap is False,
+    ignore extra elements at the end of the sequence.
     """
     if size < 1:
         raise ValueError("'size' must exceed 0. Value passed was %r." % size)
@@ -42,9 +41,8 @@ def chunker(sequence, size, overlap=False):
 
 def get_stripped_nonempty_file_lines(path):
     """
-    Returns tuple of all nonempty lines in a file after they have been
+    Return tuple of all nonempty lines in a file after they have been
     stripped of leading and trailing whitespace.
-    
     """
     lines = []
 
@@ -58,16 +56,15 @@ def get_stripped_nonempty_file_lines(path):
 
 def get_first_textline(path, ignore=None):
     """
-    Returns first line with any non-whitespace text from file in passed path,
+    Return first line with any non-whitespace text from file in passed path,
     or an empty string if no line found.
     
     'ignore' can be a single string or sequence of strings (or None).
     If 'ignore' is passed, the first line not beginning with any of the
     elements of ignore will be returned.
 
-    Warning: If ignore is an empty string or contains an empty string,
-    nothing will be returned. This is normal behavior of builtin startswith().
-    
+    WARNING: If ignore contains an empty string, nothing will be returned. 
+    This is normal behavior of builtin startswith().
     """
     retLine = ''
 
@@ -89,12 +86,11 @@ def get_first_textline(path, ignore=None):
 
 def to_numeric(val):
     """
-    Returns 'val' as a numeric type, if possible.
+    Return 'val' as a numeric type, if possible.
     
-    If 'val' already a numeric type, it is returned unchanged.
-    Otherwise, if 'val' cannot be cast to int or float, an exception
-    (TypeError or ValueError) will be raised.
-    
+    If 'val' already a numeric type, return it unchanged.
+    Otherwise, if 'val' cannot be cast to int or float, raise TypeError
+    or ValueError.
     """
     if type(val) in (int, float) or isinstance(val, Decimal):
         return val

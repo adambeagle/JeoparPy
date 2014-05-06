@@ -1,6 +1,5 @@
 """
 clue.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains the Clue class, described below.
@@ -14,7 +13,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 This copyright notice must be retained with any use
 of source code from this file.
 """
-
 import pygame
 
 from jeopgamesfc import JeopGameSurface

@@ -1,9 +1,9 @@
 """
 controller.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains Controller class, described below.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -36,7 +36,6 @@ class Controller(object):
       * draw
       * get_clicked_clue
       * update
-      
     """
     def __init__(self, screen, gameData, fpsLimit):
         w, h  = size = screen.get_size()
@@ -62,8 +61,7 @@ class Controller(object):
 
     def draw(self, screen):
         """
-        Redraws any surface which requires it, and updates
-        the screen.
+        Redraw any surface which requires it, and update the screen.
         """
         dirtyRects = []
 
@@ -85,9 +83,9 @@ class Controller(object):
 
     def get_clicked_clue(self, clickPos):
         """
-        Returns 2-tuple (row, column) of clicked clue
+        Return 2-tuple (row, column) of clicked clue
         if the click position is inside a clue's rect,
-        otherwise returns None.
+        otherwise return None.
         """
         return self._sfcs[0].get_clicked_clue(clickPos)
         

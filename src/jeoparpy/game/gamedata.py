@@ -1,6 +1,5 @@
 """
 gamedata.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Holds GameData class, described below.
@@ -12,7 +11,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 from sys import stderr
 
@@ -24,8 +22,8 @@ from ..util import get_stripped_nonempty_file_lines, to_numeric
 ###############################################################################
 class GameData(object):
     """
-    Holds core data about the game. This and GameState are the primary
-    interfaces between the main module and the game logic.
+    Initializes and holds core data about the game. This and GameState are 
+    the primary interfaces between the main module and the game logic.
 
     The attributes in this class should not need to be changed during a
     single game after being initialized (attribute's attributes, like player
@@ -41,13 +39,11 @@ class GameData(object):
 
     METHODS:
       * update
-      
     """
     def __init__(self):
         """
         Set categories, clues, amounts, and players by reading from
         files, whose paths are defined in constants module.
-        
         """
         self.categories = get_stripped_nonempty_file_lines(CATEGORIES_PATH)
         
@@ -59,7 +55,7 @@ class GameData(object):
         self.players = self._build_players_from_file(PLAYERS_PATH)
 
     def update(self, gameState):
-        """Update class attributes based on GameState."""
+        """Update class attributes based on game state."""
         gs = gameState
 
         if gs.state in (gs.ANSWER_CORRECT, gs.ANSWER_TIMEOUT, gs.ANSWER_NONE):
@@ -75,7 +71,10 @@ class GameData(object):
             self.players[player].score -= amount
         
     def _build_amounts_from_file(self, path):
-        """ """
+        """
+        Return a tuple of ints representing clue dollar amounts found in
+        the file 'path.'
+        """
         try:
             return tuple(int(a) for a in
                          get_stripped_nonempty_file_lines(path))
@@ -86,8 +85,9 @@ class GameData(object):
                             
     def _build_clues_from_file(self, path, numCategories):
         """
-        Returns a tuple containing tuples of each categories clues,
+        Return a tuple containing tuples of each categories clues,
         which can be treated as a 2D array.
+        
         'Path' is the path (including name) to the file containing the clues.
         Ex: returnedClues[2][4] would return the 5th clue in the 3rd category.
         """
@@ -132,8 +132,7 @@ class GameData(object):
     def _map_clues(self, clues, numCategories):
         """
         Map clues from format (clue 0, clue 1, clue 2, ...) to format
-        ((Category 1 clues), (Category 2 clues), ...).
-        
+        ((Category 1 clues), (Category 2 clues), ...))
         """
         mapped = []
         numPerCat = len(clues) / numCategories
@@ -154,7 +153,7 @@ class GameData(object):
     @property
     def winners(self):
         """
-        Returns tuple containing tuple(s) of (player #, name) for
+        Return tuple containing tuple(s) of (player #, name) for
         the player(s) with the highest score at the time of calling.
         """
         high = max((p.score for p in self.players))

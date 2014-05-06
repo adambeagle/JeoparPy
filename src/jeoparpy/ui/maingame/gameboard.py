@@ -1,6 +1,5 @@
 """
 gameboard.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains the GameBoard class, described below.
@@ -13,9 +12,7 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from random import shuffle
 
 import pygame
@@ -27,7 +24,7 @@ from ..util import (autofit_text, BorderedBox, draw_centered_textblock,
                     draw_centered_textline, scale)
 from ...constants import ANIMATIONEND
 
-###############################################################################
+
 class GameBoard(JeopGameSurface):
     """
     The primary JeoparPy game board: categories and clue amounts on a grid.
@@ -51,10 +48,8 @@ class GameBoard(JeopGameSurface):
 
     def get_clicked_clue(self, clickPos):
         """
-        Return 2-tuple (row, column) of clicked clue
-        if the click position is inside a clue's rect,
-        otherwise returns None.
-        
+        Return 2-tuple (row, column) of clicked clue if the click position
+        is inside a clue's rect, otherwise return None.
         """
         for c, col in enumerate(self._boxes):
             for r, box in enumerate(col[1:]):
@@ -156,7 +151,6 @@ class GameBoard(JeopGameSurface):
         return tuple(boxes)
 
     def _init_grid(self, nCols, nRows):
-        """ """
         return tuple(rects)
 
     def _scale(self, n):

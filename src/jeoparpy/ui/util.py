@@ -1,3 +1,17 @@
+"""
+util.py
+
+DESCRIPTION:
+  Functions and classes common to multiple ui modules and subpackages.
+
+Copyright (C) 2013 Adam Beagle - All Rights Reserved
+You may use, distribute, and modify this code under
+the terms of the GNU General Public License,
+viewable at http://opensource.org/licenses/GPL-3.0
+
+This copyright notice must be retained with any use
+of source code from this file.
+"""
 import sys
 
 import pygame
@@ -20,7 +34,6 @@ class _Size(tuple):
       (1, 2) < (2, 2) --> False
       (1, 2) <= (2, 2) --> True
       (3, 1) < (2, 2) --> False
-
     """
     def __ge__(self, other):
         for i, n in enumerate(self):
@@ -59,17 +72,16 @@ def autofit_text(fontPath, fontSize, text, bounds, spacing=0):
     The font size of the entire block is then scaled to guarantee the block's
     height fits within that of bounds.
 
-    Returns lines of text to render and the pygame.font.Font object with
+    Return lines of text to render and the pygame.font.Font object with
     which to render them. It is recommended to then call one of the
     draw_textblock functions in this module with the returned values.
-    
     """
     lines = []
     words = text.split(' ')
     font = pygame.font.Font(fontPath, fontSize)
 
-    #Create lines; lines contain as many words as will fit within width
-    #of bounds.
+    # Create lines; lines contain as many words as will fit within width
+    # of bounds.
     while words:
         line = words.pop(0)
         while (words and
@@ -78,8 +90,8 @@ def autofit_text(fontPath, fontSize, text, bounds, spacing=0):
             
         lines.append(line)
 
-    #Call restrict_fontsize again to guarantee height of textblock defined
-    #by lines does not exceed height of bounds.
+    # Call restrict_fontsize again to guarantee height of textblock defined
+    # by lines does not exceed height of bounds.
     fontSize = restrict_fontsize(fontPath, fontSize, lines, bounds, spacing)
 
     return (lines, pygame.font.Font(fontPath, fontSize))
@@ -88,8 +100,7 @@ def draw_centered_textblock(sfc, lines, font, color, spacing=0,
                             shadowOffset=None, textAlignCenter=True):
     """
     Blit lines of text in 'lines' argument centered onto surface 'sfc.'
-    Returns pygame.Rect of drawn block relative to sfc.
-    
+    Return pygame.Rect of drawn block relative to sfc.
     """
     blockRect = pygame.Rect((0, 0), get_size_textblock(lines, font, spacing))
     blockRect.center = sfc.get_rect().center
@@ -100,8 +111,7 @@ def draw_centered_textblock(sfc, lines, font, color, spacing=0,
 def draw_centered_textline(sfc, text, font, color, shadowOffset=None):
     """
     Blit line of text in 'text' argument centered onto surface 'sfc.'
-    Returns pygame.Rect of drawn line relative to sfc.
-    
+    Return pygame.Rect of drawn line relative to sfc.
     """
     rect = pygame.Rect((0, 0), font.size(text))
     rect.center = sfc.get_rect().center
@@ -113,8 +123,7 @@ def draw_textblock(sfc, lines, font, color, pos, centerx=False,
                    spacing=0, shadowOffset=None):
     """
     Blit lines of text in 'lines' argument centered onto surface 'sfc.'
-    Returns pygame.Rect of drawn block relative to sfc.
-    
+    Return pygame.Rect of drawn block relative to sfc.
     """
     blockRect = pygame.Rect(pos, get_size_textblock(lines, font, spacing))
     lineH = font.get_linesize()
@@ -134,8 +143,7 @@ def draw_textblock(sfc, lines, font, color, pos, centerx=False,
 def draw_textline(sfc, text, font, color, rect, shadowOffset=None):
     """
     Blit text in 'text' onto surface 'sfc.'
-    Uses position of 'rect' (top left) to position blit.
-    
+    Use position of 'rect' (top left) to position blit.
     """
     s = text
     doShadow = shadowOffset is not None
@@ -151,7 +159,6 @@ def fit_image(img, bounds):
     """
     Return img smoothscaled to be within size given by 'bounds.'
     'img' is unchanged if it is not larger than bounds in either dimension.
-    
     """
     rect = img.get_rect()
     wscalar = float(bounds[0]) / rect.w
@@ -172,7 +179,6 @@ def get_anim_data(goalTime, distance, globalFPSLimit):
     
     Returned FPS limit guaranteed to not exceed globalFPSLimit.
     A negative 'distance' will result in a negative step size.
-    
     """
     step = 1
     maxNumFrames = int(goalTime * globalFPSLimit)
@@ -191,7 +197,6 @@ def get_size_textblock(lines, font, spacing):
     """
     Return dimensions needed to render 'lines' of text
     in passed font, with 'spacing' pixels between each line.
-    
     """
     blockW = 0
     blockH = 0
@@ -213,7 +218,6 @@ def restrict_fontsize(fontPath, size, lines, bounds, spacing=0):
     exceed size given by 'bounds' in either dimension.
 
     'spacing' is the amount of space in pixels between each line.
-    
     """
     bounds = _Size(bounds)
     while not _Size(get_size_textblock(lines,
@@ -224,7 +228,6 @@ def restrict_fontsize(fontPath, size, lines, bounds, spacing=0):
     return size
 
 def scale(n, rel, comp):
-    """ """
     return int(n * (rel / float(comp)))
 
 def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
@@ -232,7 +235,6 @@ def shadow_text(msg, srcRect, font, offset, color=(0, 0, 0)):
     Return surface and rect of shadowed text.
     Shadow is positioned 'offset' pixels right and down from srcRect.
     'msg' is string to shadow.
-    
     """
     shadText = font.render(msg, 1, color)
     rect = shadText.get_rect()
@@ -247,7 +249,6 @@ def wait_for_keypress(key=None):
     By default, return control when any key is pressed.
     If one key constant or list is passed, return only when 
     one of those keys is pressed.
-    
     """
     if not key == None and not isinstance(key, collections.Iterable):
         key = [key]
@@ -278,15 +279,13 @@ class BorderedBox(pygame.Surface):
       * size (read-only)
 
     METHODS:
-      * draw_centered_text
+      * copy
       * redraw
-      
     """
     def __init__(self, size, fillColor, borderW, borderColor):
         """
         'borderW' can be an int for equal borders,
         or a 4-tuple defining widths for (top, right, bottom, left).
-        
         """
         super(BorderedBox, self).__init__(size)
         
@@ -311,7 +310,6 @@ class BorderedBox(pygame.Surface):
         for changes to be reflected on surface.
         If there was any text on the box, it will be erased;
         call draw_centered_text again to redraw it.
-        
         """
         tb, rb, bb, lb = self.borderWidths
         w, h = self.size

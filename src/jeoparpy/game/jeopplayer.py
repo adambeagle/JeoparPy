@@ -1,9 +1,9 @@
 """
-jeop_player.py
-Author: Adam Beagle
+jeopplayer.py
 
 DESCRIPTION:
   Holds JeopPlayer and ScoreError classes, described below.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -12,7 +12,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
 
 ###############################################################################

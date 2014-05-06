@@ -1,6 +1,5 @@
 """
 podium.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains the Podium class and its utility classes AnswerTimer,
@@ -15,7 +14,6 @@ viewable at http://opensource.org/licenses/GPL-3.0
 This copyright notice must be retained with any use
 of source code from this file.
 """
-
 import pygame
 
 from jeopgamesfc import JeopGameSurface
@@ -45,7 +43,6 @@ class Podium(pygame.sprite.DirtySprite):
 
     METHODS:
       * update
-      
     """
     def __init__(self, id_, img, scalar, name, nameFont, nameRect,
                  *groups):
@@ -53,9 +50,7 @@ class Podium(pygame.sprite.DirtySprite):
         Upon initialization, name and a score of '$0' will be drawn. 
         'nameOffset' is the y-offset of a name on the original podium image.
         'nameFont' is 2-tuple (fontPath, fontSize).
-        
         """
-
         scaledSize = tuple(int(scalar*x) for x in img.get_size())
         img = pygame.transform.smoothscale(img, scaledSize)
         self.image = img.copy()
@@ -77,7 +72,6 @@ class Podium(pygame.sprite.DirtySprite):
         """
         Update all visuals on the image attribute.
         Should be called once per frame.
-        
         """
         gs = gameState
 
@@ -216,7 +210,6 @@ class AnswerTimer(Timer, JeopGameSurface):
 class Highlight(pygame.sprite.Sprite):
     """
     Defines an alpha-masked highlight sprite.
-    
     """
     def __init__(self, size):
         super(Highlight, self).__init__()
@@ -231,7 +224,6 @@ class Score(JeopGameSurface):
     Defines a rectangular surface with an updatable score written on it.
 
     Call update() to change the score and redraw the surface.
-    
     """
     def __init__(self, pos, size, font, bgColor, shadowOffset, initial='$0'):
         """
@@ -265,7 +257,6 @@ class JeopScore(Score):
     """
     A Score sprite specialized for a Jeoparpy game. Automatically
     sets font and positions rect.
-    
     """
     def __init__(self, podiumRect, scalar):
         bgColor = JEOP_BLUE

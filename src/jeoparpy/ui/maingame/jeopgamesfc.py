@@ -1,9 +1,9 @@
 """
 jeopgamesfc.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains JeopGameSurface class, described below.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -12,12 +12,10 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from pygame import Surface
 
-###############################################################################
+
 class JeopGameSurface(Surface):
     """
     Base class for primary game surfaces. Not to be used directly.
@@ -34,7 +32,6 @@ class JeopGameSurface(Surface):
       * dirtyRects          - List of rects that need to be updated on screen.
       * rect
       * size (read-only)
-      
     """
     def __init__(self, size):
         super(JeopGameSurface, self).__init__(size)

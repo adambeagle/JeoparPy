@@ -1,6 +1,5 @@
 """
 congrats.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Contains the functions that implement the congratulatory
@@ -17,20 +16,17 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file..
-
 """
-
 import pygame
 
 from constants import JEOP_BLUE
 from resmaps import FONTS
 from util import scale
 
-###############################################################################
 def do_congrats(screen, clock, winners, audioPlayer):
     """
-    Fades out the last image on the screen, draws a congratulatory message,
-    then draws the names of the winning players.
+    Fade out the last image on the screen, draw a congratulatory message,
+    then draw the names of the winning players.
     """
     lastScreen = screen.copy()
     w, h = size = lastScreen.get_size()
@@ -47,11 +43,10 @@ def do_congrats(screen, clock, winners, audioPlayer):
     
 def _animate_congrats(screen, sfc):
     """
-    Animates a congratulations message, drawing one character at a time
+    Animate a congratulations message, drawing one character at a time
     and waiting a short time.
 
-    Returns y-value, the bottom of the drawn text string.
-    
+    Return y-value, the bottom of the drawn text string.
     """
     word = 'CONGRATULATIONS!'
     sfcRect = sfc.get_rect()
@@ -74,13 +69,12 @@ def _animate_congrats(screen, sfc):
 
 def _draw_winners(sfc, startY, winners):
     """
-    Blits the names of the winners, in their respective fonts, onto sfc.
+    Blit the names of the winners, in their respective fonts, onto sfc.
     'startY' is the y-value of the position at which the first name
     will be drawn.
-    If there are multiple winners, each will be drawn underneath the previous.
+    If there are multiple winners, draw them in order.
 
-    Returns pygame.Rect representing area in which names were drawn.
-    
+    Return pygame.Rect representing area in which names were drawn.
     """
     sfcRect = sfc.get_rect()
     rect = pygame.Rect(0, startY, sfcRect.w, sfcRect.h - startY)
@@ -99,14 +93,14 @@ def _draw_winners(sfc, startY, winners):
 
     return rect
 
-#TODO Abstract into generic function
+# TODO Abstract into generic function
 def _fade_in_sfc(screen, sfc, clock, time):
     """
-    Fades in 'sfc' over 'time' (in seconds), essentially fading out
+    Fade in 'sfc' over 'time' (in seconds), essentially fading out
     the last image on 'screen.'
     """
     lastScreen = screen.copy()
-    fpsGoal = int(255.0 / time) #frames to draw / time to spend in secs
+    fpsGoal = int(255.0 / time) # frames to draw / time to spend in secs
     sfc.fill(JEOP_BLUE)
     
     for alpha in xrange(256):

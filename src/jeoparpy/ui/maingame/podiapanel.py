@@ -1,6 +1,5 @@
 """
 podiapanel.py
-Author: Adam Beagle
 
 DESCRIPTION:
     Contains the PodiaPanel class and its utility classes,
@@ -14,16 +13,14 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 import pygame
 
 from jeopgamesfc import JeopGameSurface
 from podium import Podium
 from ..resmaps import FONTS, IMAGES
 
-###############################################################################
+
 class PodiaPanel(JeopGameSurface):
     """
     The JeoparPy panel containing the three player podiums.
@@ -45,13 +42,11 @@ class PodiaPanel(JeopGameSurface):
 
     METHODS:
       * update
-      
     """
     def __init__(self, size, gameData):
         """
-        Constructor. Initializes the panel with a background
-        and the three podia with team names and scores of '$0'
-        
+        Initialize the panel with a background and the three podia with 
+        team names and scores of '$0'
         """
         super(PodiaPanel, self).__init__(size)
         scalar = self._init_background()
@@ -62,9 +57,8 @@ class PodiaPanel(JeopGameSurface):
     def update(self, gameState, gameData):
         """
         Update all visuals on the surface. If any changes were made,
-        sets 'dirty' to True. Call this once per frame.
+        set 'dirty' to True. This method should be called once per frame.
         """
-
         self._podia.update(gameState, gameData)
         for p in self._podia:
             if p.dirty:

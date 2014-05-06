@@ -1,12 +1,12 @@
 #!/usr/bin/python
 """
-main.pyw
-Author: Adam Beagle
+main.py
 
 DESCRIPTION:
   Entry point for the JeoparPy application.
   Initialization, primary game loop, and event handlers are here.
-  Serves as interface between 'game' and 'ui' packages.
+  Also serves as interface between 'game' and 'ui' packages.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -15,8 +15,8 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
+from sys import stderr
 
 import pygame
 from pygame.locals import *
@@ -31,8 +31,8 @@ EVENTS_ALLOWED = (ANIMATIONEND, ANSWER_TIMEOUT,
 
 ###############################################################################
 def main(*flags):
-    """Entry point."""
-   
+    """Main game loop and event handling."""
+    
     # Initialization
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE,
@@ -84,7 +84,14 @@ def main(*flags):
     
 ###############################################################################
 def handle_events(gameState, gameData, uicontroller):
+    """
+    Base event handler. This should be called once per frame by main().
+    Branches to more specific functions depending on event type.
+    
+    This function and those it calls can set gameState.state.
+    """
     gs = gameState
+    
     for event in pygame.event.get():
         if event.type == QUIT:
             gs.state = gs.QUIT

@@ -1,6 +1,5 @@
 """
 resmaps.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Provides maps that link descriptive names
@@ -11,6 +10,7 @@ DESCRIPTION:
   assuming the names by which the files are referred are not
   altered in this file.
 
+
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
 the terms of the GNU General Public License,
@@ -18,9 +18,7 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from os import path
 
 from ..constants import ROOT_PATH

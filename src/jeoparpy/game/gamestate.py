@@ -1,10 +1,10 @@
 """
 gamestate.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Includes Enum, GameState, JeopGameState, and StateError classes,
   described below.
+
 
 Copyright (C) 2013 Adam Beagle - All Rights Reserved
 You may use, distribute, and modify this code under
@@ -27,7 +27,6 @@ class Enum(object):
         print days.SUNDAY -> '1'
         print days.MONDAY -> '2'
         print days.TUESDAY -> 3
-    
     """
     def __init__(self, names, start=0):
         ns = range(start, start + len(names))
@@ -50,13 +49,11 @@ class GameState(Enum):
       * Directly, i.e. gamestate.arg = "arg"
       * As 2nd element of an interable when setting 'state'
         ex: gamestate.state = (gamestate.QUIT, "arg")
-        
     """
     def __init__(self, stateNames):
         """
         Constructor. The names contained in 'stateNames' become the
         objects attribute names that define states (see Enum).
-        
         """
         super(GameState, self).__init__(stateNames)
         self._numStates = len(set(stateNames))
@@ -123,7 +120,6 @@ class JeopGameState(GameState):
 
     METHODS:
       * transition_state_immediate_linear
-    
     """
     def __init__(self):
         #Define states
@@ -164,7 +160,6 @@ class JeopGameState(GameState):
 
         State transitions triggered by events, or whose next state
         branches on conditions occur elsewhere.
-        
         """
         s = self
         
@@ -194,7 +189,6 @@ class JeopGameState(GameState):
 class StateError(Exception):
     """
     Exception raised when a problem occurs setting State in GameState.
-    
     """
     def __init__(self, msg='', errVal=None):
         if msg:

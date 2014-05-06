@@ -1,6 +1,5 @@
 """
 constants.py
-Author: Adam Beagle
 
 DESCRIPTION:
   Defines constants required by multiple game modules.
@@ -13,9 +12,7 @@ viewable at http://opensource.org/licenses/GPL-3.0
 
 This copyright notice must be retained with any use
 of source code from this file.
-
 """
-
 from os import path
 
 from ..constants import ROOT_PATH
