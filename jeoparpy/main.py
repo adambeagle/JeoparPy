@@ -20,6 +20,7 @@ from sys import stderr
 
 import pygame
 from pygame.locals import *
+import os
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
 from constants import ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND, SKIP_INTRO_FLAG
@@ -35,6 +36,9 @@ def main(*flags):
     
     # Initialization
     pygame.init()
+    #Put window in center of screen
+    os.environ ['SDL_VIDEO_WINDOW_POS'] = 'center'
+    
     screen = pygame.display.set_mode(SCREEN_SIZE,
                                      pygame.FULLSCREEN if FULLSCREEN else 0)
     pygame.display.set_caption('JeoparPy!')
