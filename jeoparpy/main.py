@@ -21,6 +21,7 @@ from sys import stderr
 import pygame
 from pygame.locals import *
 import os
+import sys
 
 from config import FPS_LIMIT, FULLSCREEN, SUBTRACT_ON_INCORRECT, SCREEN_SIZE
 from constants import ANIMATIONEND, ANSWER_TIMEOUT, AUDIOEND, SKIP_INTRO_FLAG
@@ -66,7 +67,9 @@ def main(*flags):
         # Events
         handle_events(gs, gameData, uicontroller)
         if gs.state == gs.QUIT:
-            return
+            print 'exiting...'
+            pygame.quit()
+            sys.exit()
 
         # Update
         gameData.update(gs)

@@ -230,6 +230,8 @@ def do_credits(screen, clock, audioPlayer, fpsLimit):
 
     _blit_thanks(screen, 'Thanks for playing!', font, scrRect, lineW)
     pygame.time.delay(5000)
+    pygame.quit()
+    exit()
 
 def _blit_thanks(screen, text, font, scrRect, lineW):
     thanks = font.render(text, 1, (255, 255, 255))
